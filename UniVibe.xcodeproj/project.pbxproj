@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		192A8B9C2A8B4214004F6302 /* EventProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8B9B2A8B4214004F6302 /* EventProfileView.swift */; };
 		192A8B9F2A8B4A1B004F6302 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8B9E2A8B4A1B004F6302 /* SettingsView.swift */; };
+		192A8BA22A8B5211004F6302 /* PastEventInGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BA12A8B5211004F6302 /* PastEventInGridView.swift */; };
+		192A8BA42A8B538C004F6302 /* TimeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BA32A8B538C004F6302 /* TimeHelpers.swift */; };
+		192A8BA82A8B556F004F6302 /* MyTimeStringModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BA72A8B556F004F6302 /* MyTimeStringModifier.swift */; };
+		192A8BAB2A8B5BE2004F6302 /* HorizontalEventGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BAA2A8B5BE2004F6302 /* HorizontalEventGridView.swift */; };
 		19B3C2FD2A8A9B8C00BEFB0E /* UniVibeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B3C2FC2A8A9B8C00BEFB0E /* UniVibeApp.swift */; };
 		19B3C2FF2A8A9B8C00BEFB0E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B3C2FE2A8A9B8C00BEFB0E /* ContentView.swift */; };
 		19B3C3012A8A9B8D00BEFB0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B3C3002A8A9B8D00BEFB0E /* Assets.xcassets */; };
@@ -37,6 +41,10 @@
 /* Begin PBXFileReference section */
 		192A8B9B2A8B4214004F6302 /* EventProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventProfileView.swift; sourceTree = "<group>"; };
 		192A8B9E2A8B4A1B004F6302 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		192A8BA12A8B5211004F6302 /* PastEventInGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastEventInGridView.swift; sourceTree = "<group>"; };
+		192A8BA32A8B538C004F6302 /* TimeHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHelpers.swift; sourceTree = "<group>"; };
+		192A8BA72A8B556F004F6302 /* MyTimeStringModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTimeStringModifier.swift; sourceTree = "<group>"; };
+		192A8BAA2A8B5BE2004F6302 /* HorizontalEventGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalEventGridView.swift; sourceTree = "<group>"; };
 		19B3C2F92A8A9B8C00BEFB0E /* UniVibe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniVibe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B3C2FC2A8A9B8C00BEFB0E /* UniVibeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniVibeApp.swift; sourceTree = "<group>"; };
 		19B3C2FE2A8A9B8C00BEFB0E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,6 +88,22 @@
 				192A8B9E2A8B4A1B004F6302 /* SettingsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		192A8BA02A8B51EA004F6302 /* InGrid */ = {
+			isa = PBXGroup;
+			children = (
+				192A8BA12A8B5211004F6302 /* PastEventInGridView.swift */,
+			);
+			path = InGrid;
+			sourceTree = "<group>";
+		};
+		192A8BA92A8B5BCA004F6302 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				192A8BAA2A8B5BE2004F6302 /* HorizontalEventGridView.swift */,
+			);
+			path = Grid;
 			sourceTree = "<group>";
 		};
 		19B3C2F02A8A9B8C00BEFB0E = {
@@ -203,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				19B3C3222A8AA45400BEFB0E /* Objects */,
+				192A8BA32A8B538C004F6302 /* TimeHelpers.swift */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -221,6 +246,8 @@
 		19B3C32E2A8AD51100BEFB0E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				192A8BA92A8B5BCA004F6302 /* Grid */,
+				192A8BA02A8B51EA004F6302 /* InGrid */,
 				19B3C33B2A8AF90500BEFB0E /* List */,
 				19B3C33A2A8AF8FA00BEFB0E /* InList */,
 				19B3C32F2A8AD51B00BEFB0E /* Profile */,
@@ -278,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				19B3C3442A8AFF4E00BEFB0E /* MyNavigationLinkModifier.swift */,
+				192A8BA72A8B556F004F6302 /* MyTimeStringModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -352,16 +380,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				192A8BA82A8B556F004F6302 /* MyTimeStringModifier.swift in Sources */,
 				19B3C3342A8AD5B200BEFB0E /* EditProfileView.swift in Sources */,
 				192A8B9F2A8B4A1B004F6302 /* SettingsView.swift in Sources */,
 				19B3C2FF2A8A9B8C00BEFB0E /* ContentView.swift in Sources */,
 				19B3C3282A8AA48C00BEFB0E /* Event.swift in Sources */,
 				19B3C3182A8A9EBC00BEFB0E /* HomeView.swift in Sources */,
 				19B3C2FD2A8A9B8C00BEFB0E /* UniVibeApp.swift in Sources */,
+				192A8BA22A8B5211004F6302 /* PastEventInGridView.swift in Sources */,
 				19B3C3422A8AFF1700BEFB0E /* UserProfileView.swift in Sources */,
 				19B3C3242A8AA46900BEFB0E /* Community.swift in Sources */,
 				19B3C30C2A8A9BC200BEFB0E /* MainTabView.swift in Sources */,
 				19B3C3452A8AFF4E00BEFB0E /* MyNavigationLinkModifier.swift in Sources */,
+				192A8BAB2A8B5BE2004F6302 /* HorizontalEventGridView.swift in Sources */,
 				19B3C3392A8AF67E00BEFB0E /* CommunityInListView.swift in Sources */,
 				19B3C32A2A8AD37200BEFB0E /* CurrentUserProfile.swift in Sources */,
 				19B3C3202A8AA44100BEFB0E /* User.swift in Sources */,
@@ -372,6 +403,7 @@
 				19B3C31E2A8A9EE200BEFB0E /* ChatView.swift in Sources */,
 				19B3C33D2A8AF92C00BEFB0E /* CommunityListView.swift in Sources */,
 				19B3C3402A8AFF0800BEFB0E /* CommunityProfileView.swift in Sources */,
+				192A8BA42A8B538C004F6302 /* TimeHelpers.swift in Sources */,
 				19B3C31C2A8A9ED600BEFB0E /* FeedView.swift in Sources */,
 				19B3C31A2A8A9EC600BEFB0E /* ExploreView.swift in Sources */,
 				19B3C3262A8AA47100BEFB0E /* Post.swift in Sources */,

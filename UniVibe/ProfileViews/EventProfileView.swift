@@ -13,7 +13,11 @@ struct EventProfileView: View {
 
     var body: some View {
         NavigationView {
+            
             Text("id: \(event.id)")
+            
+            
+            
         }
         .toolbar {
             ToolbarItem(placement: .principal) {

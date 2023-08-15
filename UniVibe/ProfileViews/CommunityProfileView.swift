@@ -13,6 +13,9 @@ struct CommunityProfileView: View {
 
     var body: some View {
         NavigationView {
+            
+            
+            
             Text("id: \(community.id)")
         }
         .toolbar {

@@ -17,26 +17,15 @@ struct HomeView: View {
                     Text(" \(currentUser.fullname)").font(.title3).bold().padding(.bottom)
                     
                     
-                                            
-                    VStack {
-                        Text("My Communities").font(.headline).bold()
-                        
-                        ScrollView(.horizontal) {
-                            
-                            
-                        }.frame(height: 160).background(.gray)
-                        
-                        
-                    }.padding(.bottom)
-                    
                     
                     VStack {
-                        Text("Reserved Events").font(.headline).bold()
-                        
+
+                        Text("Reserved Events").font(.title2).bold()
                         ScrollView(.vertical) {
                             
                             
                             LazyVStack(spacing:12) {
+                                
                                 ForEach(Event.MOCK) { event in
                                     
                                     NavigationLink(destination: EventProfileView(event: event).navigationBarBackButtonHidden(true)) {
@@ -44,40 +33,24 @@ struct HomeView: View {
                                         
                                     }
                                 }
+                                
                             }
-                             
-                            /*
-                            LazyVStack(spacing:12) {
-                                ForEach(Community.MOCK) { community in
-                                    
-                                    NavigationLink(destination: CommunityProfileView(community: community).navigationBarBackButtonHidden(true)) {
-                                        CommunityInListView(membersCount: community.membersIDs.count, communityName: community.fullname)
-                                        
-                                    }
-                                }
-                            }
-                             */
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                        }.frame(height: 160).background(.gray)
+                        }.frame(height: 180)//.background(.gray)
                         
+                        Divider()
                     }.padding(.bottom)
                     
+                    
                     VStack {
-                        Text("Past Events").font(.headline).bold()
-                        
-                        ScrollView(.horizontal) {
-                            
-                            
-                        }.frame(height: 160).background(.gray)
-                        
-                    }
 
+                        Text("Past Events").font(.title2).bold()
+                        HorizontalEventGridView(events: Event.MOCK)//.background(.gray)
+                        
+                        Divider()
+                    }.padding(.bottom)
+                    
+
+                    Spacer()
                     
                 }.padding(.horizontal)
                 

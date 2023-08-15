@@ -9,13 +9,12 @@ import SwiftUI
 
 struct CommunityListView: View {
     var body: some View {
-        NavigationView {
-            
+        VStack {
             ScrollView {
                 LazyVStack(spacing:12) {
                     ForEach(Community.MOCK) { community in
                         
-                        NavigationLink(destination: CommunityProfileView(community: community)) {
+                        NavigationLink(destination: CommunityProfileView(community: community).navigationBarBackButtonHidden(true)) {
                             CommunityInListView(membersCount: community.membersIDs.count, communityName: community.fullname)
                             
                         }

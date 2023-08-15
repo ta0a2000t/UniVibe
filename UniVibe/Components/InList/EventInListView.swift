@@ -7,20 +7,7 @@
 
 import SwiftUI
 
-extension DateFormatter {
-    static var eventDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "E, MMM d | h:mm a"
-        return formatter
-    }()
-}
 
-func formatEventDate(_ date: Date) -> String {
-    let formattedDate = DateFormatter.eventDateFormatter.string(from: date)
-    let timeZone = TimeZone.current
-    let timeZoneAbbreviation = timeZone.abbreviation() ?? ""
-    return "\(formattedDate) \(timeZoneAbbreviation)"
-}
 
 struct EventInListView: View {
     let event: Event
@@ -28,7 +15,7 @@ struct EventInListView: View {
         HStack {
             VStack(alignment: .leading) {
                 
-                Text(formatEventDate(event.date)).font(.subheadline).foregroundColor(.green).padding(.bottom, 1).padding(.top, 2)
+                Text(TimeHelpers.formatEventDate(event.date)).modifier(MyTimeStringModifier()).padding(.bottom, 1).padding(.top, 2)
                 
                 Text(event.title).font(.callout).bold()
                     //.padding(.bottom, 1)
