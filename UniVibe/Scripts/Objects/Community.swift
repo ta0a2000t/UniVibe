@@ -46,6 +46,9 @@ extension Community: Hashable{
 extension Community {
     static func initMock() -> [Community] {
         var result: [Community] = []
+        
+        
+        /*
         for _ in 1...3 {
             let id = UUID().uuidString
             let membersIDs = [UUID().uuidString, UUID().uuidString, UUID().uuidString]
@@ -67,7 +70,11 @@ extension Community {
             } catch {
                 print("Error decoding Community: \(error)")
             }
-        }
+        }*/
+        result.append(Community(id: UUID().uuidString, fullname: "Music Lovers", description: "For those who love music.", profileImageURL: nil, membersIDs: [UUID().uuidString, UUID().uuidString], email: "musiclovers@example.com"))
+        result.append(Community(id: UUID().uuidString, fullname: "Music Lovers", description: "For those who love music.", profileImageURL: nil, membersIDs: [UUID().uuidString, UUID().uuidString], email: "musiclovers@example.com"))
+        result.append(Community(id: UUID().uuidString, fullname: "Music Lovers", description: "For those who love music.", profileImageURL: nil, membersIDs: [UUID().uuidString, UUID().uuidString], email: "musiclovers@example.com"))
+
         return result
     }
     

@@ -16,9 +16,9 @@ class User: Identifiable, Codable {
     var fullname: String
     var bio: String?
     var createdEventsIDs: [String]
-    var attendedEventsIDs: [String]
+    var reservedEventsIDs: [String]
     
-    init(id: String, username: String, profileImageURL: String?, fullname: String, bio: String?, email: String, createdEventsIDs: [String], attendedEventsIDs: [String]) {
+    init(id: String, username: String, profileImageURL: String?, fullname: String, bio: String?, email: String, createdEventsIDs: [String], reservedEventsIDs: [String]) {
         self.id = id
         self.username = username
         self.profileImageURL = profileImageURL
@@ -26,7 +26,7 @@ class User: Identifiable, Codable {
         self.bio = bio
         self.email = email
         self.createdEventsIDs = createdEventsIDs
-        self.attendedEventsIDs = attendedEventsIDs
+        self.reservedEventsIDs = reservedEventsIDs
     }
     
 }
@@ -45,7 +45,8 @@ extension User: Hashable{
 
 extension User {
     static func initMock() -> [User] {
-        var result: [User] = []
+        //var result: [User] = []
+        /*
         for _ in 1...3 {
             
             let id = NSUUID().uuidString
@@ -68,9 +69,20 @@ extension User {
             }
             
         }
-        return result
+         */
+        
+        
+        //return result
+        return []
     }
-    static var MOCK_USERS: [User] = initMock()
+    static var MOCK_USERS: [User] = [User(id: NSUUID().uuidString, username: "john_doe", profileImageURL: "zuckerberg", fullname: "John Doe", bio: "A music enthusiast", email: "john@example.com", createdEventsIDs: ["event1", "event2"], reservedEventsIDs: ["event3", "event4"])
+                                     ,
+                                     User(id: NSUUID().uuidString, username: "john_doe", profileImageURL: "zuckerberg", fullname: "John Doe", bio: "A music enthusiast", email: "john@example.com", createdEventsIDs: ["event1", "event2"], reservedEventsIDs: ["event3", "event4"])
+                                     ,User(id: NSUUID().uuidString, username: "john_doe", profileImageURL: "zuckerberg", fullname: "John Doe", bio: "A music enthusiast", email: "john@example.com", createdEventsIDs: ["event1", "event2"], reservedEventsIDs: ["event3", "event4"])
+    ]
+    
+    
+    //initMock()
     // .init(id: NSUUID().uuidString, username: "zuck999", profileImageURL: "zuckerberg", fullname:"Mark Zuckerberg", bio:"I am a hominoid lizard", email:"zuckzuck@gmail.com")
     
 }

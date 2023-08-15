@@ -28,8 +28,8 @@ class Post: Identifiable, Codable {
         self.content = content
         self.isCommunityPost = isCommunityPost
     }
-    static var MOCK = [Post(id: "123", creatorID: "user123", creationDate: Date(), title: "My Post", content: "Hello, world!", isCommunityPost: false),
-                       Post(id: "123", creatorID: "user123", creationDate: Date(), title: "My Post", content: "Hello, world!", isCommunityPost: false)
+    static var MOCK = [Post(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), title: "My Post", content: "Hello, world!", isCommunityPost: false),
+                       Post(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), title: "My Post", content: "Hello, world!", isCommunityPost: false)
     ]
 }
 

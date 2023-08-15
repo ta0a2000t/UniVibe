@@ -32,9 +32,9 @@ class Event: Identifiable, Codable {
         self.location = location
         self.attendees = attendees
     }
-    static var MOCK = [Event(id: "123", creatorID: "user123", creationDate: Date(), isCommunityEvent: true, title: "Community Event", description: "Join us for fun!", imageURL: nil, date: Date(), location: "Campus Park", attendees: [])
+    static var MOCK = [Event(id:UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "LEVELS Night #6 - Terraforming Mars: Ares Expedition!", description: "Join us for fun!", imageURL: nil, date: Date(), location: "Campus Park", attendees: [])
                        ,
-        Event(id: "123", creatorID: "user123", creationDate: Date(), isCommunityEvent: true, title: "Community Event", description: "Join us for fun!", imageURL: nil, date: Date(), location: "Campus Park", attendees: [])
+        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "Community Event", description: "Join us for fun!", imageURL: nil, date: Date(), location: "Campus Park", attendees: [])
                        ]
 
 }

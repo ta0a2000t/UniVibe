@@ -9,7 +9,10 @@ import SwiftUI
 
 
 struct CurrentUserProfile: View {
-    @State var showEditProfile: Bool = false
+    @State private var showEditProfile: Bool = false
+    @State private var showSettings: Bool = false
+    @State private var settingsDetent = PresentationDetent.medium
+
     let currentUser: User
     @Environment (\.dismiss) var dismiss
     var body: some View {
@@ -108,7 +111,7 @@ struct CurrentUserProfile: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        showEditProfile.toggle()
+                        showSettings.toggle()
                     } label: {
                         Image(systemName: "line.3.horizontal")
                     }
@@ -124,6 +127,12 @@ struct CurrentUserProfile: View {
                     
                 }
                 
+            }.sheet(isPresented: $showSettings) {
+                SettingsView()
+                    .presentationDetents(
+                        [.medium, .large],
+                        selection: $settingsDetent
+                     )
             }
         
         
