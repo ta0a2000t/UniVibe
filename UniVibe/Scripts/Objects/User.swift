@@ -17,19 +17,35 @@ class User: Identifiable, Codable {
     var bio: String?
     var createdEventsIDs: [String]
     var reservedEventsIDs: [String]
+    var interests: [String]
+    var lookingTo: [String]
+    var communitiesIDs: [String]
+    var friendsIDs: [String]
     
-    init(id: String, username: String, profileImageURL: String?, fullname: String, bio: String?, email: String, createdEventsIDs: [String], reservedEventsIDs: [String]) {
+    init(id: String, username: String, profileImageURL: String?, fullname: String, bio: String?, email: String, createdEventsIDs: [String], reservedEventsIDs: [String], interests: [String], lookingTo: [String], communitiesIDs: [String], friendsIDs: [String]) {
         self.id = id
         self.username = username
         self.profileImageURL = profileImageURL
         self.fullname = fullname
         self.bio = bio
         self.email = email
-        self.createdEventsIDs = createdEventsIDs
-        self.reservedEventsIDs = reservedEventsIDs
+        self.createdEventsIDs = createdEventsIDs // events created by the user.
+        
+        self.reservedEventsIDs = reservedEventsIDs // events not created by the user, but the user signed up for.
+        
+        self.interests = interests
+        self.lookingTo = lookingTo
+        
+        self.communitiesIDs = communitiesIDs
+        self.friendsIDs = friendsIDs
     }
     
+    static var MOCK_USERS: [User] = [
+        User(id: NSUUID().uuidString, username: "john_doe", profileImageURL: "zuckerberg", fullname: "John Doe", bio: "A music enthusiast", email: "john@example.com", createdEventsIDs: ["event1", "event2"], reservedEventsIDs: ["event3", "event4"], interests: ["outdoor", "swimming"], lookingTo: ["making friends"], communitiesIDs: [NSUUID().uuidString, NSUUID().uuidString, NSUUID().uuidString], friendsIDs: [NSUUID().uuidString, NSUUID().uuidString, NSUUID().uuidString]),
+        User(id: NSUUID().uuidString, username: "jane_doe2", profileImageURL: "zuckerberg", fullname: "Jane Doe2", bio: "An art lover", email: "jane@example.com", createdEventsIDs: ["event5", "event6"], reservedEventsIDs: ["event7", "event8"], interests: ["art", "painting"], lookingTo: ["finding study partners"], communitiesIDs: [NSUUID().uuidString, NSUUID().uuidString], friendsIDs: [NSUUID().uuidString])
+    ]
 }
+
 
 extension User: Hashable{
     // conform to hashable
@@ -75,11 +91,7 @@ extension User {
         //return result
         return []
     }
-    static var MOCK_USERS: [User] = [User(id: NSUUID().uuidString, username: "john_doe", profileImageURL: "zuckerberg", fullname: "John Doe", bio: "A music enthusiast", email: "john@example.com", createdEventsIDs: ["event1", "event2"], reservedEventsIDs: ["event3", "event4"])
-                                     ,
-                                     User(id: NSUUID().uuidString, username: "john_doe", profileImageURL: "zuckerberg", fullname: "John Doe", bio: "A music enthusiast", email: "john@example.com", createdEventsIDs: ["event1", "event2"], reservedEventsIDs: ["event3", "event4"])
-                                     ,User(id: NSUUID().uuidString, username: "john_doe", profileImageURL: "zuckerberg", fullname: "John Doe", bio: "A music enthusiast", email: "john@example.com", createdEventsIDs: ["event1", "event2"], reservedEventsIDs: ["event3", "event4"])
-    ]
+
     
     
     //initMock()

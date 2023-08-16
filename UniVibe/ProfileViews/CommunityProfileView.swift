@@ -14,15 +14,51 @@ struct CommunityProfileView: View {
     var body: some View {
         NavigationView {
             
+            ScrollView {
+                VStack(alignment: .leading){
+                    
+                    if let imageURL = community.profileImageURL {
+                        Image(imageURL).resizable().frame(width: .infinity, height:200)
+                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 10)
+                                     
+                            ).padding(.horizontal)
+                        
+                    } else {
+                        // nothing?
+                    }
+                    
+                    
+                    
+                    Text(community.fullname).font(.title).bold().padding(.vertical).padding(.horizontal)
+                    
+                    MembersDetailsView(membersCount: community.membersIDs.count).padding(.horizontal).padding(.bottom)
+                    
+                    TitleAndBodyView(title:"Description", textBody: community.description).padding(.horizontal).padding(.bottom)
+                    
+                    SectionAndSelectionsView(title: "Topics", selections: community.interests).padding(.bottom)
+                    
+                    VStack(alignment: .leading) {
+                        Text("Past Events").font(.title2).bold().padding(.leading)
+                        HorizontalEventGridView(events: Event.MOCK)
+                    }
+                    
+                    
+                }
+                
+            }
+            
+
             
             
-            Text("id: \(community.id)")
+            
+            
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text(community.fullname)
-                    .font(.headline)
-                    .accessibilityAddTraits(.isHeader)
+                Image(systemName: "figure.socialdance")
+                    
+                
+                
             }
             
             ToolbarItem(placement: .navigationBarLeading) {

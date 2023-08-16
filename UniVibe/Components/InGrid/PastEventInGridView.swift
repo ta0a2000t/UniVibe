@@ -19,7 +19,11 @@ struct PastEventInGridView: View {
             Spacer()
             
             HStack {
-                Text("\(event.attendees.count) went").bold().padding(.trailing)
+                HStack {
+                    Image(systemName: "person.fill.checkmark").resizable().scaledToFit().frame(width: 18)
+                    Text("\(event.attendees.count)").font(.footnote).bold()
+                }.padding(.trailing)
+                
                 Spacer()
                 Text("LEVELS Game Nights").font(.caption)
 
@@ -27,9 +31,8 @@ struct PastEventInGridView: View {
             
         }.padding(.horizontal, 7).padding(.top, 5)
             .padding(.bottom, 5)
-.foregroundColor(.white)
             .frame(width: 200, height: 150)
-            .background(Color(.black))
+            .background(Color(.gray).opacity(0.85))
             .cornerRadius(10)
 
     }

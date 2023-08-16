@@ -19,7 +19,11 @@ struct CommunityInListView: View {
                 Text("\(membersCount) members")
             }
             Spacer()
-        }//.padding(.leading)
+            
+        }.padding(.horizontal, 7)
+            .frame(width: .infinity, height: 65)
+            .background(Color(.gray).opacity(0.85))
+            .cornerRadius(10)
     }
 }
 

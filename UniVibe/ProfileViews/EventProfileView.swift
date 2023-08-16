@@ -40,13 +40,10 @@ struct EventProfileView: View {
                 EventChatDetailsView().padding(.horizontal)
                 
                 AttendeesDetailsView(attendeesCount: event.attendees.count).padding(.horizontal)
-                VStack(alignment: .leading) {
-                    Text("About").font(.title2).bold()
-                    ScrollView{
-                        Text("Aafdsjifjds iofjadsrori rfjdsr oij re r reefodisajee e e ee  foiadsjf oiasdjfoi jsdafoij sdoifjdsoifjasdoifj adf iasdjf oiasdjf iodsj foiasdjf iods").lineLimit(nil)
-                    }
-                }.padding(.horizontal).padding(.top)
+                TitleAndBodyView(title:"Description", textBody: event.description).padding(.horizontal).padding(.top)
+                
                 Spacer()
+                CommunityInListView(membersCount: 10, communityName: "LEVELS").padding(.horizontal)
                 
                 
                 

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MainTabView: View {
     let currentUser: User
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         TabView {
             HomeView(currentUser: currentUser).tabItem() {
@@ -31,7 +33,7 @@ struct MainTabView: View {
                 //Text("Record")
             }
             
-        }.tint(.black)
+        }.tint(colorScheme == .dark ? Color.white : Color.black)
         
     }
 }

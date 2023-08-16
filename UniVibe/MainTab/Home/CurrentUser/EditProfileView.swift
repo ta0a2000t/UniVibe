@@ -40,7 +40,7 @@ struct EditProfileView: View {
                     }
                     
                     
-                }.padding(.horizontal)
+                }.padding()
                 
                 Divider()
                 

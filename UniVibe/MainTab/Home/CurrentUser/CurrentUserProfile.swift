@@ -39,11 +39,11 @@ struct CurrentUserProfile: View {
                     
                     HStack(spacing: 23) {
                         
-                        ProfileStatView(value: 22, title: "Groups")
+                        ProfileStatView(value: currentUser.communitiesIDs.count, title: "Groups")
                         Divider().frame(height: 40)
-                        ProfileStatView(value: 5, title: "Events")
+                        ProfileStatView(value: currentUser.friendsIDs.count, title: "Friends")
                         Divider().frame(height: 40)
-                        ProfileStatView(value: 5, title: "Friends")
+                        ProfileStatView(value: currentUser.reservedEventsIDs.count + currentUser.createdEventsIDs.count, title: "Events")
                     }.padding(.trailing)
                 }.padding(.horizontal)
                 HStack {
@@ -71,9 +71,9 @@ struct CurrentUserProfile: View {
                 
                 Divider()
                 ScrollView {
-                    SectionAndSelectionsView(title: "Interests", selections: ["Outdoor", "Painting", "Swimming"]).padding(.bottom)
+                    SectionAndSelectionsView(title: "Interests", selections: currentUser.interests).padding(.bottom)
                     
-                    SectionAndSelectionsView(title: "Looking To", selections: ["Outdoor", "Painting", "Swimming"])
+                    SectionAndSelectionsView(title: "Looking To", selections: currentUser.lookingTo)
                     
                     VStack(alignment: .leading) {
                         Text("Communities").font(.title2).bold()
@@ -90,7 +90,7 @@ struct CurrentUserProfile: View {
                         
                         
                         
-                    }.padding(.leading)
+                    }.padding(.horizontal)
                 }
                 
                 
@@ -102,7 +102,6 @@ struct CurrentUserProfile: View {
         }.sheet(isPresented: $showEditProfile) {
             EditProfileView()
         }
-        .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(currentUser.username)

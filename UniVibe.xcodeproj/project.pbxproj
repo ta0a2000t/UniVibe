@@ -18,6 +18,8 @@
 		192A8BB62A8C3CE2004F6302 /* CustomDenets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BB52A8C3CE2004F6302 /* CustomDenets.swift */; };
 		192A8BB82A8C4205004F6302 /* EventChatDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BB72A8C4205004F6302 /* EventChatDetailsView.swift */; };
 		192A8BBB2A8C4820004F6302 /* AttendeesDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BBA2A8C4820004F6302 /* AttendeesDetailsView.swift */; };
+		192A8BBF2A8C8F48004F6302 /* TitleAndBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BBE2A8C8F48004F6302 /* TitleAndBodyView.swift */; };
+		192A8BC22A8C957D004F6302 /* MembersDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BC12A8C957D004F6302 /* MembersDetailsView.swift */; };
 		19B3C2FD2A8A9B8C00BEFB0E /* UniVibeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B3C2FC2A8A9B8C00BEFB0E /* UniVibeApp.swift */; };
 		19B3C2FF2A8A9B8C00BEFB0E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B3C2FE2A8A9B8C00BEFB0E /* ContentView.swift */; };
 		19B3C3012A8A9B8D00BEFB0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B3C3002A8A9B8D00BEFB0E /* Assets.xcassets */; };
@@ -55,6 +57,8 @@
 		192A8BB52A8C3CE2004F6302 /* CustomDenets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDenets.swift; sourceTree = "<group>"; };
 		192A8BB72A8C4205004F6302 /* EventChatDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventChatDetailsView.swift; sourceTree = "<group>"; };
 		192A8BBA2A8C4820004F6302 /* AttendeesDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendeesDetailsView.swift; sourceTree = "<group>"; };
+		192A8BBE2A8C8F48004F6302 /* TitleAndBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndBodyView.swift; sourceTree = "<group>"; };
+		192A8BC12A8C957D004F6302 /* MembersDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersDetailsView.swift; sourceTree = "<group>"; };
 		19B3C2F92A8A9B8C00BEFB0E /* UniVibe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniVibe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B3C2FC2A8A9B8C00BEFB0E /* UniVibeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniVibeApp.swift; sourceTree = "<group>"; };
 		19B3C2FE2A8A9B8C00BEFB0E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -133,6 +137,14 @@
 				192A8BBA2A8C4820004F6302 /* AttendeesDetailsView.swift */,
 			);
 			path = Event;
+			sourceTree = "<group>";
+		};
+		192A8BC02A8C9422004F6302 /* Community */ = {
+			isa = PBXGroup;
+			children = (
+				192A8BC12A8C957D004F6302 /* MembersDetailsView.swift */,
+			);
+			path = Community;
 			sourceTree = "<group>";
 		};
 		19B3C2F02A8A9B8C00BEFB0E = {
@@ -290,6 +302,8 @@
 			children = (
 				19B3C3302A8AD54300BEFB0E /* ProfileStatView.swift */,
 				19B3C3362A8AECD500BEFB0E /* SectionAndSelectionsView.swift */,
+				192A8BBE2A8C8F48004F6302 /* TitleAndBodyView.swift */,
+				192A8BC02A8C9422004F6302 /* Community */,
 				192A8BB92A8C47F6004F6302 /* Event */,
 			);
 			path = Profile;
@@ -418,6 +432,7 @@
 				192A8BB62A8C3CE2004F6302 /* CustomDenets.swift in Sources */,
 				19B3C3282A8AA48C00BEFB0E /* Event.swift in Sources */,
 				19B3C3182A8A9EBC00BEFB0E /* HomeView.swift in Sources */,
+				192A8BBF2A8C8F48004F6302 /* TitleAndBodyView.swift in Sources */,
 				19B3C2FD2A8A9B8C00BEFB0E /* UniVibeApp.swift in Sources */,
 				192A8BAF2A8C304E004F6302 /* EventDateDetailsView.swift in Sources */,
 				192A8BA22A8B5211004F6302 /* PastEventInGridView.swift in Sources */,
@@ -441,6 +456,7 @@
 				192A8BA42A8B538C004F6302 /* TimeHelpers.swift in Sources */,
 				19B3C31C2A8A9ED600BEFB0E /* FeedView.swift in Sources */,
 				19B3C31A2A8A9EC600BEFB0E /* ExploreView.swift in Sources */,
+				192A8BC22A8C957D004F6302 /* MembersDetailsView.swift in Sources */,
 				19B3C3262A8AA47100BEFB0E /* Post.swift in Sources */,
 				192A8BB82A8C4205004F6302 /* EventChatDetailsView.swift in Sources */,
 			);
