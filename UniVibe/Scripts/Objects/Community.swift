@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class Community: Identifiable, Codable {
+class Community: Identifiable, Codable , SearchResultItemProtocol{
     let id: String
     let email: String
     

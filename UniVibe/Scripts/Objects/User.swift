@@ -7,7 +7,7 @@
 
 import Foundation
 
-class User: Identifiable, Codable {
+class User: Identifiable, Codable, SearchResultItemProtocol {
     let id: String
     let email: String
 
@@ -38,6 +38,10 @@ class User: Identifiable, Codable {
         
         self.communitiesIDs = communitiesIDs
         self.friendsIDs = friendsIDs
+    }
+    
+    func getEventsCount() -> Int{
+        return createdEventsIDs.count + reservedEventsIDs.count
     }
     
     static var MOCK_USERS: [User] = [

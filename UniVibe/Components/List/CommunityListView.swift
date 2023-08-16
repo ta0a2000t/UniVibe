@@ -15,7 +15,7 @@ struct CommunityListView: View {
                     ForEach(Community.MOCK) { community in
                         
                         NavigationLink(destination: CommunityProfileView(community: community).navigationBarBackButtonHidden(true)) {
-                            CommunityInListView(membersCount: community.membersIDs.count, communityName: community.fullname)
+                            CommunityInListView(community: community)
                             
                         }
                     }

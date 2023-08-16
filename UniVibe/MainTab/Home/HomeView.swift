@@ -69,9 +69,9 @@ struct HomeView: View {
                 
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        Image("univibe_logo").resizable().scaledToFit().frame(height: 40)
+                        Image("univibe_logo").resizable().scaledToFit().frame(height: 35)
                     }
-                    
+
                     ToolbarItem(placement: .navigationBarTrailing) {
                         NavigationLink {
                             CurrentUserProfile(currentUser: currentUser).navigationBarBackButtonHidden(true)

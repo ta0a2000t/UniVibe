@@ -34,6 +34,7 @@ struct MainTabView: View {
             }
             
         }.tint(colorScheme == .dark ? Color.white : Color.black)
+
         
     }
 }

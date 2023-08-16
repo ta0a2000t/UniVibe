@@ -17,10 +17,13 @@ struct EventProfileView: View {
             ScrollView{
                 VStack(alignment: .leading) {
                     if let imageURL = event.imageURL {
-                        Image(imageURL).resizable().frame(width: .infinity, height:200)
+                        Image(imageURL).resizable().frame(width: UIScreen.main.bounds.width, height:200)
+                            /*
                             .overlay(RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 10)
                                      
-                            ).padding(.horizontal)
+                                .fill(.purple))
+                             */
+                            .padding(.horizontal)
                         
                     } else {
                         // nothing?
@@ -43,7 +46,7 @@ struct EventProfileView: View {
                     TitleAndBodyView(title:"Description", textBody: event.description).padding(.horizontal).padding(.vertical)
                     
                     Spacer()
-                    CommunityInListView(membersCount: 10, communityName: "LEVELS").padding(.horizontal)
+                    CommunityInListView(community: Community.MOCK[0]).padding(.horizontal)
                     
                     
                     
