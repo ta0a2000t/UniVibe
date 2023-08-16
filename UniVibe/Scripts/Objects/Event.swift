@@ -17,10 +17,15 @@ class Event: Identifiable, Codable {
     var description: String
     var imageURL: String?
     var date: Date
-    var location: String
     var attendees: [String] // IDs of users attending the event
+    var numberOfHours: Int // Number of hours for the event
     
-    init(id: String, creatorID: String, creationDate: Date, isCommunityEvent: Bool, title: String, description: String, imageURL: String?, date: Date, location: String, attendees: [String]) {
+    var latitude: Double // Latitude coordinate
+    var longitude: Double // Longitude coordinate
+    var locationName: String // Name of the event location
+    var locationDescription: String // Description of the event location
+
+    init(id: String, creatorID: String, creationDate: Date, isCommunityEvent: Bool, title: String, description: String, imageURL: String?, date: Date, attendees: [String], numberOfHours: Int, latitude: Double, longitude: Double, locationName: String, locationDescription: String) {
         self.id = id
         self.creatorID = creatorID
         self.creationDate = creationDate
@@ -29,12 +34,33 @@ class Event: Identifiable, Codable {
         self.description = description
         self.imageURL = imageURL
         self.date = date
-        self.location = location
         self.attendees = attendees
+        self.numberOfHours = numberOfHours
+        
+        self.latitude = latitude
+        self.longitude = longitude
+        self.locationName = locationName
+        self.locationDescription = locationDescription
     }
-    static var MOCK = [Event(id:UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "LEVELS Night #6 - Terraforming Mars: Ares Expedition!", description: "Join us for fun!", imageURL: nil, date: Date(), location: "Campus Park", attendees: [])
-                       ,
-        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "Community Event", description: "Join us for fun!", imageURL: nil, date: Date(), location: "Campus Park", attendees: [])
-                       ]
+    
+    
+    
+    static var MOCK = [
+        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "LEVELS Night #6 - Terraforming Mars: Ares Expedition!", description: "Join us for fun!", imageURL: "billiard_img", date: Date(), attendees: [], numberOfHours: 3, latitude: 12.3456, longitude: -78.9012, locationName: "Stamp Student Union", locationDescription: "2nd floor next to ballroom 102."),
+        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "Community Event", description: "Join us for fun!", imageURL: nil, date: Date(), attendees: [], numberOfHours: 2, latitude: 12.3456, longitude: -78.9012, locationName: "Campus Park", locationDescription: "First floor next to door.")
+    ]
+    
+    // could be used to transfer user to google maps app
+    func getGoogleMapsURL() -> URL? {
+        let googleMapsBaseURL = URL(string: "https://www.google.com/maps/dir/?api=1")!
 
+        let destinationQuery = "destination=\(latitude),\(longitude)"
+
+        let fullURLString = "\(googleMapsBaseURL)&\(destinationQuery)"
+
+        return URL(string: fullURLString)
+    }
+    
+    
+    
 }

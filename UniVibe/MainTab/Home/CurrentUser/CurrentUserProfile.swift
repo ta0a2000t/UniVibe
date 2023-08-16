@@ -130,7 +130,7 @@ struct CurrentUserProfile: View {
             }.sheet(isPresented: $showSettings) {
                 SettingsView()
                     .presentationDetents(
-                        [.medium, .large],
+                        [.medium],
                         selection: $settingsDetent
                      )
             }

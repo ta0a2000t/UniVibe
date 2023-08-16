@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+// TODO add a Picker view, to choose between community & individual posts.
 struct ExploreView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
