@@ -14,39 +14,40 @@ struct EventProfileView: View {
 
     var body: some View {
         NavigationView {
-            
-            VStack(alignment: .leading) {
-                if let imageURL = event.imageURL {
-                    Image(imageURL).resizable().frame(width: .infinity, height:200)
-                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 10)
-                                 
-                        ).padding(.horizontal)
+            ScrollView{
+                VStack(alignment: .leading) {
+                    if let imageURL = event.imageURL {
+                        Image(imageURL).resizable().frame(width: .infinity, height:200)
+                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 10)
+                                     
+                            ).padding(.horizontal)
+                        
+                    } else {
+                        // nothing?
+                    }
                     
-                } else {
-                    // nothing?
+                    Text(event.title).font(.title).bold().padding(.vertical).padding(.horizontal)
+                    
+                    EventDateDetailsView(date: event.date, numberOfHours: event.numberOfHours).padding(.horizontal)
+                    
+                    Button {
+                        
+                        showLocationButtonSheet.toggle()
+                    } label: {
+                        EventLocDetailsView(locationName: event.locationName, locationDescription: event.locationDescription).padding(.horizontal)
+                    }
+                    
+                    EventChatDetailsView().padding(.horizontal)
+                    
+                    AttendeesDetailsView(attendeesCount: event.attendees.count).padding(.horizontal)
+                    TitleAndBodyView(title:"Description", textBody: event.description).padding(.horizontal).padding(.vertical)
+                    
+                    Spacer()
+                    CommunityInListView(membersCount: 10, communityName: "LEVELS").padding(.horizontal)
+                    
+                    
+                    
                 }
-                
-                Text(event.title).font(.title).bold().padding(.vertical).padding(.horizontal)
-                
-                EventDateDetailsView(date: event.date, numberOfHours: event.numberOfHours).padding(.horizontal)
-                
-                Button {
-
-                    showLocationButtonSheet.toggle()
-                } label: {
-                    EventLocDetailsView(locationName: event.locationName, locationDescription: event.locationDescription).padding(.horizontal)
-                }
-                
-                EventChatDetailsView().padding(.horizontal)
-                
-                AttendeesDetailsView(attendeesCount: event.attendees.count).padding(.horizontal)
-                TitleAndBodyView(title:"Description", textBody: event.description).padding(.horizontal).padding(.top)
-                
-                Spacer()
-                CommunityInListView(membersCount: 10, communityName: "LEVELS").padding(.horizontal)
-                
-                
-                
             }
             
         }
@@ -55,7 +56,7 @@ struct EventProfileView: View {
                 //Text("event.title")
                 //    .font(.headline)
                 //    .accessibilityAddTraits(.isHeader)
-                Image(systemName: "figure.play")
+                Image(systemName: "figure.socialdance")
             }
             
             ToolbarItem(placement: .navigationBarLeading) {
@@ -67,7 +68,7 @@ struct EventProfileView: View {
                 
             }
             
-        }
+        }.toolbarBackground(.visible)
         .confirmationDialog("Go to Google Maps or copy link.", isPresented: $showLocationButtonSheet) {
             Button("Open in Google Maps") { }
             Button("Copy Location Link") {  }

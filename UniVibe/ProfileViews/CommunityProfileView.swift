@@ -55,10 +55,7 @@ struct CommunityProfileView: View {
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Image(systemName: "figure.socialdance")
-                    
-                
-                
+                Image(systemName: "person.3.sequence.fill")
             }
             
             ToolbarItem(placement: .navigationBarLeading) {
@@ -70,7 +67,7 @@ struct CommunityProfileView: View {
                 
             }
             
-        }
+        }.toolbarBackground(.visible)
     }
 }
 

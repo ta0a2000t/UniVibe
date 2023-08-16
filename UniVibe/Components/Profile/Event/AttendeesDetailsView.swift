@@ -16,7 +16,7 @@ struct AttendeesDetailsView: View {
             
             HStack {
                 Image(systemName: "person.fill.checkmark").resizable().scaledToFit().frame(width: 25)
-                Text("\(attendeesCount)").font(.callout).bold()
+                Text("\(attendeesCount)").font(.callout).bold().padding(.leading)
                 Spacer()
                 //Text("View").padding(.leading).bold()
                 Image(systemName: "chevron.right")
