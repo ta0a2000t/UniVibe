@@ -81,7 +81,7 @@ struct EditProfileRowView: View {
     
     var body: some View {
         HStack {
-            Text(title)
+            Text(title).font(.callout).bold()
                 .frame(width: 100, alignment: .leading)
             VStack{
                 TextField(placeholder, text: $text)
@@ -101,7 +101,7 @@ struct EditProfileMultiLineView: View {
     var body: some View {
         HStack {
             
-            Text(title)
+            Text(title).font(.callout).bold()
                 .frame(width: 100, alignment: .leading)
             
             VStack {

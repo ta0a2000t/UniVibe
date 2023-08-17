@@ -46,6 +46,7 @@
 		19D826242A8D42720052AECA /* UserInListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D826232A8D42720052AECA /* UserInListView.swift */; };
 		19D826272A8D4A180052AECA /* SearchResultItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D826262A8D4A180052AECA /* SearchResultItemProtocol.swift */; };
 		19D826292A8D5AFD0052AECA /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D826282A8D5AFD0052AECA /* CreateEventView.swift */; };
+		19D8262C2A8E0DA70052AECA /* CampusMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D8262B2A8E0DA70052AECA /* CampusMapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		19D826232A8D42720052AECA /* UserInListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInListView.swift; sourceTree = "<group>"; };
 		19D826262A8D4A180052AECA /* SearchResultItemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultItemProtocol.swift; sourceTree = "<group>"; };
 		19D826282A8D5AFD0052AECA /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
+		19D8262B2A8E0DA70052AECA /* CampusMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusMapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 				19B3C30B2A8A9BC200BEFB0E /* MainTabView.swift */,
 				19B3C30E2A8A9C5100BEFB0E /* Home */,
 				19B3C3122A8A9CD600BEFB0E /* Explore */,
+				19D8262A2A8E0D9B0052AECA /* CampusMap */,
 				19B3C30F2A8A9C6B00BEFB0E /* Feed */,
 				19B3C3132A8A9D0400BEFB0E /* Chat */,
 			);
@@ -372,6 +375,14 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		19D8262A2A8E0D9B0052AECA /* CampusMap */ = {
+			isa = PBXGroup;
+			children = (
+				19D8262B2A8E0DA70052AECA /* CampusMapView.swift */,
+			);
+			path = CampusMap;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -462,6 +473,7 @@
 				19B3C3452A8AFF4E00BEFB0E /* MyNavigationLinkModifier.swift in Sources */,
 				192A8BAB2A8B5BE2004F6302 /* HorizontalEventGridView.swift in Sources */,
 				19B3C3392A8AF67E00BEFB0E /* CommunityInListView.swift in Sources */,
+				19D8262C2A8E0DA70052AECA /* CampusMapView.swift in Sources */,
 				19B3C32A2A8AD37200BEFB0E /* CurrentUserProfile.swift in Sources */,
 				19B3C3202A8AA44100BEFB0E /* User.swift in Sources */,
 				192A8BBB2A8C4820004F6302 /* AttendeesDetailsView.swift in Sources */,

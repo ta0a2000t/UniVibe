@@ -65,15 +65,12 @@ struct CreateEventView: View {
                     }
 
                     
-                    
-                    Divider()
-                    
                     VStack(alignment: .center, spacing: 20) {
-                        Text("Activity Info").font(.title2).bold().padding(.top, 30)
+                        Text("Activity Info").font(.title2).bold().padding(.top, 10)
                         EditProfileRowView(title: "Title", placeholder: "", text: $title).focused($focusedField, equals: .activity_title)
                         EditProfileMultiLineView(title: "Description", placeholder: "", text: $description).focused($focusedField, equals: .activity_desc)
-                        DatePicker("Date", selection: $date).focused($focusedField, equals: .activity_date)
-                        Stepper("Number of Hours: \(numberOfHours)", value: $numberOfHours, in: 1...24).focused($focusedField, equals: .acitivity_hours)
+                        DatePicker("Date", selection: $date).focused($focusedField, equals: .activity_date).font(.callout).bold()
+                        Stepper("Number of Hours: \(numberOfHours)", value: $numberOfHours, in: 1...24).focused($focusedField, equals: .acitivity_hours).font(.callout).bold()
                         
                         Text("Location Info").font(.title2).bold().padding(.top, 30)
                         EditProfileRowView(title: "Name", placeholder: "", text: $locationName).focused($focusedField, equals: .location_name)

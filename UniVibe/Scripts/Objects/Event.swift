@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class Event: Identifiable, Codable {
     let id: String
@@ -52,15 +53,28 @@ class Event: Identifiable, Codable {
     
     // could be used to transfer user to google maps app
     func getGoogleMapsURL() -> URL? {
-        let googleMapsBaseURL = URL(string: "https://www.google.com/maps/dir/?api=1")!
-
-        let destinationQuery = "destination=\(latitude),\(longitude)"
-
-        let fullURLString = "\(googleMapsBaseURL)&\(destinationQuery)"
-
-        return URL(string: fullURLString)
+        return URL(string: "comgooglemaps://?saddr=&daddr=\(latitude),\(longitude)&directionsmode=driving")
+    }
+    func getAppleMapsURL() -> URL? {
+        return URL(string: "maps://?saddr=&daddr=\(latitude),\(longitude)")
     }
     
-    
+    func copyableLocationLink() -> String {
+        let googleMapsBaseURL = URL(string: "https://www.google.com/maps")!
+
+        let destinationQuery = "q=\(latitude),\(longitude)"
+
+        let fullURLString = "\(googleMapsBaseURL)?\(destinationQuery)"
+        return fullURLString
+    }
+    func copyLocationToClipBoard() {
+        UIPasteboard.general.string = self.copyableLocationLink()
+    }
+    func launchAppleMaps() {
+        let url = self.getAppleMapsURL()
+        if UIApplication.shared.canOpenURL(url!) {
+              UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        }
+    }
     
 }

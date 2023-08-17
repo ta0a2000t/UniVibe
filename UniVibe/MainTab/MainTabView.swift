@@ -22,6 +22,10 @@ struct MainTabView: View {
                 Image(systemName: "magnifyingglass").foregroundColor(.white)
             }
             
+            CampusMapView().tabItem() {
+                Image(systemName: "map").foregroundColor(.white)
+            }
+            
             // acts like a notifications view
             FeedView().tabItem() {
                 Image(systemName: "newspaper").foregroundColor(.white)

@@ -73,8 +73,11 @@ struct EventProfileView: View {
             
         }.toolbarBackground(.visible)
         .confirmationDialog("Go to Google Maps or copy link.", isPresented: $showLocationButtonSheet) {
-            Button("Open in Google Maps") { }
-            Button("Copy Location Link") {  }
+            Button("Open in Maps") { event.launchAppleMaps()}
+            Button("Copy Location Link") {
+                event.copyLocationToClipBoard()
+            }
+            
             Button("Cancel", role: .cancel) { }
         }
         
