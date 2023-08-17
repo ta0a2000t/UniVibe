@@ -9,7 +9,9 @@ import SwiftUI
 
 struct HomeView: View {
     let currentUser: User
-    @State var showEditProfile: Bool = false
+    
+    @State var showCreateEventView: Bool = false
+    
     var body: some View {
         NavigationStack{
             VStack {
@@ -51,6 +53,19 @@ struct HomeView: View {
                     
 
                     Spacer()
+                    
+                    HStack {
+                        Spacer()
+                        NavigationLink(destination: CreateEventView(user: currentUser).navigationBarBackButtonHidden(true)) {
+                            Text("Create Event")
+                                .font(.headline)
+                                .foregroundColor(.red)
+                                .frame(width: 330, height:40)
+                                .overlay(RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 3).foregroundColor(.red)
+                                )
+                        }
+                        Spacer()
+                    }.padding()
                     
                 }.padding(.horizontal)
                 

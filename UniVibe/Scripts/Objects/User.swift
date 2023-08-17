@@ -44,6 +44,43 @@ class User: Identifiable, Codable, SearchResultItemProtocol {
         return createdEventsIDs.count + reservedEventsIDs.count
     }
     
+    
+    func addCreatedEvent(event: Event) {
+        print("created \(event)")
+        
+        self.createdEventsIDs.append(event.id)
+    }
+     
+    
+    /*
+     func addCreatedEvent(event: Event) {
+         do {
+             let db = Firestore.firestore()
+             var eventCopy = event // Create a mutable copy of the event object
+             eventCopy.creatorID = self.id // Set the creator ID to the user's ID
+             
+             // Convert the event to a dictionary
+             if let eventDict = try eventCopy.toDictionary() {
+                 // Store the event data in Firestore using the event's ID as the document ID
+                 db.collection("events").document(event.id).setData(eventDict) { error in
+                     if let error = error {
+                         print("Error adding event: \(error)")
+                     } else {
+                         // Successfully added event to Firestore
+                         print("Event added to Firestore: \(event.id)")
+                         
+                         // Add the event's ID to the user's createdEventsIDs
+                         self.createdEventsIDs.append(event.id)
+                     }
+                 }
+             }
+         } catch {
+             print("Error converting event to dictionary: \(error)")
+         }
+     }
+     */
+     
+    
     static var MOCK_USERS: [User] = [
         User(id: NSUUID().uuidString, username: "john_doe", profileImageURL: "zuckerberg", fullname: "John Doe", bio: "A music enthusiast", email: "john@example.com", createdEventsIDs: ["event1", "event2"], reservedEventsIDs: ["event3", "event4"], interests: ["outdoor", "swimming"], lookingTo: ["making friends"], communitiesIDs: [NSUUID().uuidString, NSUUID().uuidString, NSUUID().uuidString], friendsIDs: [NSUUID().uuidString, NSUUID().uuidString, NSUUID().uuidString]),
         User(id: NSUUID().uuidString, username: "jane_doe2", profileImageURL: "zuckerberg", fullname: "Jane Doe2", bio: "An art lover", email: "jane@example.com", createdEventsIDs: ["event5", "event6"], reservedEventsIDs: ["event7", "event8"], interests: ["art", "painting"], lookingTo: ["finding study partners"], communitiesIDs: [NSUUID().uuidString, NSUUID().uuidString], friendsIDs: [NSUUID().uuidString])

@@ -45,6 +45,7 @@
 		19B3C3472A8B1C2000BEFB0E /* EventInListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B3C3462A8B1C2000BEFB0E /* EventInListView.swift */; };
 		19D826242A8D42720052AECA /* UserInListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D826232A8D42720052AECA /* UserInListView.swift */; };
 		19D826272A8D4A180052AECA /* SearchResultItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D826262A8D4A180052AECA /* SearchResultItemProtocol.swift */; };
+		19D826292A8D5AFD0052AECA /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D826282A8D5AFD0052AECA /* CreateEventView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		19B3C3462A8B1C2000BEFB0E /* EventInListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInListView.swift; sourceTree = "<group>"; };
 		19D826232A8D42720052AECA /* UserInListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInListView.swift; sourceTree = "<group>"; };
 		19D826262A8D4A180052AECA /* SearchResultItemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultItemProtocol.swift; sourceTree = "<group>"; };
+		19D826282A8D5AFD0052AECA /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				19B3C3172A8A9EBC00BEFB0E /* HomeView.swift */,
+				19D826282A8D5AFD0052AECA /* CreateEventView.swift */,
 				19B3C3352A8AD5CC00BEFB0E /* CurrentUser */,
 			);
 			path = Home;
@@ -440,6 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				192A8BA82A8B556F004F6302 /* MyTimeStringModifier.swift in Sources */,
+				19D826292A8D5AFD0052AECA /* CreateEventView.swift in Sources */,
 				19B3C3342A8AD5B200BEFB0E /* EditProfileView.swift in Sources */,
 				19D826272A8D4A180052AECA /* SearchResultItemProtocol.swift in Sources */,
 				192A8B9F2A8B4A1B004F6302 /* SettingsView.swift in Sources */,
