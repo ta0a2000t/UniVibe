@@ -28,10 +28,10 @@ struct HomeView: View {
                             
                             LazyVStack(spacing:12) {
                                 
-                                ForEach(Event.MOCK) { event in
+                                ForEach(currentUser.getReservedEvents()) { event in
                                     
                                     NavigationLink(destination: EventProfileView(event: event).navigationBarBackButtonHidden(true)) {
-                                        EventInListView(event: Event.MOCK[0])
+                                        EventInListView(event: event)
                                         
                                     }
                                 }
@@ -46,7 +46,7 @@ struct HomeView: View {
                     VStack {
 
                         Text("Past Events").font(.title2).bold()
-                        HorizontalEventGridView(events: Event.MOCK)//.background(.gray)
+                        HorizontalEventGridView(events: currentUser.getPastEvents())
                         
                         Divider()
                     }.padding(.bottom)

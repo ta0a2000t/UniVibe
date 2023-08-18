@@ -13,17 +13,18 @@ struct ExploreView: View {
     let searchTypesIndices = [0, 1, 2]
     @State private var selectedSearchTypeIdx : Int
     
-    init() {
-        selectedSearchTypeIdx = searchTypesIndices[0]
-    }
+    @EnvironmentObject private var viewModel: UserViewModel
 
     let communities: [Community] = Community.MOCK
-    let users: [User] = User.MOCK_USERS
 
 
-
+    init() {
+        selectedSearchTypeIdx = searchTypesIndices[0]
+        
+    }
 
     var body: some View {
+        
         NavigationStack {
             VStack {
 
@@ -69,7 +70,11 @@ struct ExploreView: View {
         }
     }
     
+    
+    
     var searchResults: [SearchResultItemProtocol] {
+        let users = viewModel.users
+
         func getItemsInList() -> [SearchResultItemProtocol] {
             if selectedSearchTypeIdx == 0 {
                 return communities + users

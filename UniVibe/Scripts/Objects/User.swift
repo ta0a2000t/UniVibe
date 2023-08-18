@@ -40,6 +40,25 @@ class User: Identifiable, Codable, SearchResultItemProtocol {
         self.friendsIDs = friendsIDs
     }
     
+    
+    init(id: String, data: Dictionary<String, Any>) {
+        self.id = id
+        self.email = data["email"] as? String ?? ""
+        self.username = data["username"] as? String ?? ""
+        self.profileImageURL = data["profileImageURL"] as? String
+        self.fullname = data["fullname"] as? String ?? ""
+        self.bio = data["bio"] as? String
+        self.createdEventsIDs = data["createdEventsIDs"] as? [String] ?? []
+        self.reservedEventsIDs = data["reservedEventsIDs"] as? [String] ?? []
+        self.interests = data["interests"] as? [String] ?? []
+        self.lookingTo = data["lookingTo"] as? [String] ?? []
+        self.communitiesIDs = data["communitiesIDs"] as? [String] ?? []
+        self.friendsIDs = data["friendsIDs"] as? [String] ?? []
+        
+        //super.init() // Call the superclass designated initializer if needed
+    }
+
+    
     func getEventsCount() -> Int{
         return createdEventsIDs.count + reservedEventsIDs.count
     }
@@ -50,7 +69,28 @@ class User: Identifiable, Codable, SearchResultItemProtocol {
         
         self.createdEventsIDs.append(event.id)
     }
-     
+    
+    func getCreatedEvents() -> [Event] {
+        return Event.MOCK
+    }
+    
+    func getReservedEvents() -> [Event] {
+        return Event.MOCK
+    }
+    
+    func getPastEvents() -> [Event] {
+        return Event.MOCK
+    }
+    
+    func getCommunities() -> [Community] {
+        return Community.MOCK
+    }
+    
+    func getOrganizingCommunities() -> [Community] {
+        return Community.MOCK
+    }
+    
+    
     
     /*
      func addCreatedEvent(event: Event) {
@@ -139,4 +179,43 @@ extension User {
     // .init(id: NSUUID().uuidString, username: "zuck999", profileImageURL: "zuckerberg", fullname:"Mark Zuckerberg", bio:"I am a hominoid lizard", email:"zuckzuck@gmail.com")
     
 }
+
+
+
+extension User {
+    func toDictionary() -> [String: Any] {
+        var userDict: [String: Any] = [
+            "id": id,
+            "email": email,
+            "username": username
+        ]
+        
+        if let profileImageURL = profileImageURL {
+            userDict["profileImageURL"] = profileImageURL
+        } else {
+            userDict["profileImageURL"] = ""
+        }
+        
+        
+        userDict["fullname"] = fullname
+        
+    
+        if let bio = bio {
+            userDict["bio"] = bio
+        } else {
+            userDict["bio"] = ""
+        }
+        
+        userDict["createdEventsIDs"] = createdEventsIDs
+        userDict["reservedEventsIDs"] = reservedEventsIDs
+        userDict["interests"] = interests
+        userDict["lookingTo"] = lookingTo
+        userDict["communitiesIDs"] = communitiesIDs
+        userDict["friendsIDs"] = friendsIDs
+        
+        return userDict
+    }
+}
+
+
 

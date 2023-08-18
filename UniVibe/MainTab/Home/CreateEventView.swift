@@ -34,7 +34,7 @@ struct CreateEventView: View {
     @State var locationName: String = ""
     @State var locationDescription: String = ""
     
-    
+    @EnvironmentObject private var viewModel: UserViewModel
 
     var body: some View {
         NavigationView {
@@ -76,8 +76,6 @@ struct CreateEventView: View {
                         EditProfileRowView(title: "Name", placeholder: "", text: $locationName).focused($focusedField, equals: .location_name)
                         EditProfileMultiLineView(title: "Description", placeholder: "", text: $locationDescription).focused($focusedField, equals: .location_desc)
                         
-                        
-                        
                     }.padding(.horizontal, 35)
                     Spacer()
                     
@@ -88,7 +86,9 @@ struct CreateEventView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
                             let event = createEvent()
+                            
                             user.addCreatedEvent(event: event)
+                            //viewModel
                         } label: {
                             Text("Create").bold()
                         }.disabled(title.isEmpty || description.isEmpty || locationName.isEmpty || locationDescription.isEmpty).buttonStyle(GrowingButton())
@@ -132,7 +132,7 @@ struct CreateEventView: View {
     
     func createEvent() -> Event {
         var imageURL: String? = nil
-
+        
         
         return Event(
             id: UUID().uuidString,
@@ -151,8 +151,6 @@ struct CreateEventView: View {
             locationDescription: locationDescription
         )
     }
-
-    
 }
 
 struct Background<Content: View>: View {

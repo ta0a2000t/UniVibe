@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @EnvironmentObject private var viewModel: UserViewModel
+
     var body: some View {
-        MainTabView(currentUser: User.MOCK_USERS[0])
+        MainTabView(currentUser: User.MOCK_USERS[0]).environmentObject(viewModel)
     }
 }
 

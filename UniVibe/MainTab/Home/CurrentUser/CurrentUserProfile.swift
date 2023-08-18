@@ -71,26 +71,37 @@ struct CurrentUserProfile: View {
                 
                 Divider()
                 ScrollView {
-                    SectionAndSelectionsView(title: "Interests", selections: currentUser.interests).padding(.bottom)
-                    
-                    SectionAndSelectionsView(title: "Looking To", selections: currentUser.lookingTo)
-                    
-                    VStack(alignment: .leading) {
-                        Text("Communities").font(.title2).bold()
+                    VStack{
+                        SectionAndSelectionsView(title: "Interests", selections: currentUser.interests).padding(.bottom)
                         
-                        LazyVStack(spacing:12) {
-                            ForEach(Community.MOCK) { community in
-                                
-                                NavigationLink(destination: CommunityProfileView(community: community).navigationBarBackButtonHidden(true)) {
-                                    CommunityInListView(community: community)
+                        SectionAndSelectionsView(title: "Looking To", selections: currentUser.lookingTo)
+                        
+                        VStack {
+                            
+                            Text("Created Events").font(.title2).bold()
+                            HorizontalEventGridView(events: currentUser.getCreatedEvents())//.background(.gray)
+                            
+                            Divider()
+                        }.padding(.bottom)
+                        
+                        
+                        VStack(alignment: .center) {
+                            Text("Communities").font(.title2).bold()
+                            
+                            LazyVStack(spacing:12) {
+                                ForEach(currentUser.getCommunities()) { community in
                                     
+                                    NavigationLink(destination: CommunityProfileView(community: community).navigationBarBackButtonHidden(true)) {
+                                        CommunityInListView(community: community)
+                                        
+                                    }
                                 }
                             }
-                        }
-                        
-                        
-                        
-                    }.padding(.horizontal)
+                            
+                            
+                            
+                        }.padding(.horizontal)
+                    }
                 }
                 
                 
