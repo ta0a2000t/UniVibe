@@ -23,11 +23,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct UniVibeApp: App {
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject var viewModel = UserViewModel()
+    
     
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(viewModel)
+            ContentView()
         }
     }
 }

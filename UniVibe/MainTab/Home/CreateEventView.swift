@@ -15,17 +15,24 @@ struct CreateEventView: View {
         case activity_desc
         case activity_date
         case acitivity_hours
+        case activity_maxAttendeesCount
         
         case location_name
         case location_desc
+        
     }
     
     let user: User
     @Environment (\.dismiss) var dismiss
     @FocusState private var focusedField: Field?
-
+    
     @State var selectedImagePickerItem: PhotosPickerItem?
     @State private var currImage: Image = Image(systemName: "figure.socialdance")
+    
+    @State var showConfirmationAlert: Bool = false
+    
+    @State var showCreationSuccessAlert: Bool = false
+    @State var showCreationFailedAlert: Bool = false
 
     @State var title: String = ""
     @State var description: String = ""
@@ -33,8 +40,12 @@ struct CreateEventView: View {
     @State var numberOfHours: Int = 1
     @State var locationName: String = ""
     @State var locationDescription: String = ""
+    @State var maxAttendeesCount: Int = 0
     
     @EnvironmentObject private var viewModel: UserViewModel
+    
+
+    @ObservedObject var maxAttendeesInput = NumbersOnly()
 
     var body: some View {
         NavigationView {
@@ -72,6 +83,21 @@ struct CreateEventView: View {
                         DatePicker("Date", selection: $date).focused($focusedField, equals: .activity_date).font(.callout).bold()
                         Stepper("Number of Hours: \(numberOfHours)", value: $numberOfHours, in: 1...24).focused($focusedField, equals: .acitivity_hours).font(.callout).bold()
                         
+                        
+                        HStack {
+                            Text("Max Attendees Count:").font(.callout).bold()
+                            Spacer()
+                            //TextField("Enter Count", value: $maxAttendeesCount, formatter: NumberFormatter())
+                            TextField("Enter Count", text: $maxAttendeesInput.value)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .focused($focusedField, equals: .activity_maxAttendeesCount).font(.callout).bold().frame(width: 80)
+                            
+                            Text("curr: \(maxAttendeesInput.value)")
+                        }
+                        
+
+
+                        
                         Text("Location Info").font(.title2).bold().padding(.top, 30)
                         EditProfileRowView(title: "Name", placeholder: "", text: $locationName).focused($focusedField, equals: .location_name)
                         EditProfileMultiLineView(title: "Description", placeholder: "", text: $locationDescription).focused($focusedField, equals: .location_desc)
@@ -85,10 +111,7 @@ struct CreateEventView: View {
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
-                            let event = createEvent()
-                            
-                            user.addCreatedEvent(event: event)
-                            //viewModel
+                            createButtonClicked()
                         } label: {
                             Text("Create").bold()
                         }.disabled(title.isEmpty || description.isEmpty || locationName.isEmpty || locationDescription.isEmpty).buttonStyle(GrowingButton())
@@ -119,7 +142,16 @@ struct CreateEventView: View {
                         }.foregroundColor(.blue)
                     }
                     
+                }.alert("Create Event?", isPresented: $showConfirmationAlert) {
+                    Button("cancel", role: .cancel) {}
+                    Button("Create") { confirmationAlertButtonClicked()}
+
+                }.alert("Event created successfully!", isPresented: $showCreationSuccessAlert) {
+                    Button("OK") {okAlertAfterCreationClicked()}
+                }.alert("Event creation Failed :(", isPresented: $showCreationSuccessAlert) {
+                    Button("OK") {}
                 }
+
                     
             
             
@@ -148,9 +180,31 @@ struct CreateEventView: View {
             latitude: 0.0, // Change this as needed
             longitude: 0.0, // Change this as needed
             locationName: locationName,
-            locationDescription: locationDescription
+            locationDescription: locationDescription,
+            maxAttendeesCount: maxAttendeesCount
         )
     }
+    
+    func createButtonClicked() {
+        showConfirmationAlert = true
+    }
+    
+    
+    func confirmationAlertButtonClicked() {
+        let event = createEvent()
+        
+        user.addCreatedEvent(event: event)
+        if (EventViewModel.addToDB(event: event)) {
+            showCreationSuccessAlert = true
+        } else {
+            showCreationFailedAlert = true
+        }
+    }
+    
+    func okAlertAfterCreationClicked() {
+        dismiss()
+    }
+    
 }
 
 struct Background<Content: View>: View {
@@ -186,5 +240,25 @@ struct GrowingButton: ButtonStyle {
 struct CreateEventView_Previews: PreviewProvider {
     static var previews: some View {
         CreateEventView(user: User.MOCK_USERS[0])
+    }
+}
+
+class NumbersOnly: ObservableObject {
+    let MAX_VALUE = 1000
+    
+    @Published var value = "0" {
+        didSet {
+            let filtered = value.filter { $0.isNumber }
+            
+            if value != filtered {
+                    value = filtered
+            }
+            
+            if let numericValue = Int(filtered), numericValue > MAX_VALUE {
+                value = String(MAX_VALUE)
+            }
+            
+            
+        }
     }
 }

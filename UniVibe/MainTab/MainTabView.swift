@@ -10,11 +10,12 @@ import SwiftUI
 struct MainTabView: View {
     let currentUser: User
     @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject private var viewModel: UserViewModel
+    //@EnvironmentObject private var viewModel: UserViewModel
     @State var idx = 0
     
     @State private var featchedUser: User? = nil
 
+    
     var body: some View {
         VStack{
             
@@ -31,7 +32,7 @@ struct MainTabView: View {
                 } else {
                     Text("Loading user data...")
                         .onAppear {
-                            viewModel.fetchUserByID(id: "abcuser") { fetchedUser in
+                            UserViewModel.fetchByID(id: "abcuser") { fetchedUser in
                                 self.featchedUser = fetchedUser
                             }
                         }
@@ -42,7 +43,7 @@ struct MainTabView: View {
             
             
             Button {
-                //viewModel.addUser(user: User.MOCK_USERS[idx])
+                //UserViewModel.addToDB(user: User.MOCK_USERS[idx])
 
 
                 idx += 1
@@ -51,12 +52,12 @@ struct MainTabView: View {
                 
             }
             TabView {
-                HomeView(currentUser: currentUser).environmentObject(viewModel).tabItem() {
+                HomeView(currentUser: currentUser).tabItem() {
                     Image(systemName: "house").foregroundColor(.white)
                     //Text("Record")
                 }
                 
-                ExploreView().environmentObject(viewModel).tabItem() {
+                ExploreView().tabItem() {
                     Image(systemName: "magnifyingglass").foregroundColor(.white)
                 }
                 

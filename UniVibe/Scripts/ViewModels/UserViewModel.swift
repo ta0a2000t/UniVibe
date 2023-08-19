@@ -12,15 +12,14 @@ class UserViewModel: ObservableObject {
 
     @Published var users = [User]() // initializing empty array
 
-    private var db = Firestore.firestore()
     
     init() {
-        fetchAllUsers() // Initial fetch using MOCK_USERS
+        fetchAll() // Initial fetch using MOCK_USERS
     }
     
-    private func fetchAllUsers() {
+    private func fetchAll() {
         
-        db.collection("users").addSnapshotListener { (querySnapshot, error) in
+        FirestoreManager.shared.db.collection("users").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
                 print("No documents")
                 return
@@ -33,39 +32,25 @@ class UserViewModel: ObservableObject {
         }
     }
 
-    func addUser(user: User) {
-        let data = self.encodeUser(user: user)
-        db.collection("users").document(user.id).setData(data) { error in
+    static func addToDB(user: User) -> Bool{
+        var success = true
+        let data = self.encodeObj(user: user)
+        FirestoreManager.shared.db.collection("users").document(user.id).setData(data) { error in
             if let error = error {
                 print("Error adding user: \(error)")
+                success = false
             }
         }
+        return success
     }
-
-    private func decodeUser(id: String, data: [String: Any]) -> User {
-        return User(id: id, data: data)
-    }
-
-
-    private func encodeUser(user: User) -> [String: Any] {
-        do {
-            var jsonObject = try JSONSerialization.jsonObject(with: JSONEncoder().encode(user)) as! [String: Any]
-            jsonObject["id"] = nil // Exclude the id property
-            return jsonObject
-        } catch {
-            print("Error encoding user: \(error)")
-            return [:]
-        }
-    }
-
     
-    func fetchUserByID(id: String, completion: @escaping (User?) -> Void) {
-        let docRef = db.collection("users").document(id)
+    static func fetchByID(id: String, completion: @escaping (User?) -> Void) {
+        let docRef = FirestoreManager.shared.db.collection("users").document(id)
 
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                if let userData = document.data() {
-                    let user = self.decodeUser(id: document.documentID, data: userData)
+                if let data = document.data() {
+                    let user = self.decodeObj(id: document.documentID, data: data)
                     completion(user)
                 }
 
@@ -77,5 +62,19 @@ class UserViewModel: ObservableObject {
     }
 
     
+    private static func encodeObj(user: User) -> [String: Any] {
+        do {
+            var jsonObject = try JSONSerialization.jsonObject(with: JSONEncoder().encode(user)) as! [String: Any]
+            jsonObject["id"] = nil // Exclude the id property
+            return jsonObject
+        } catch {
+            print("Error encoding user: \(error)")
+            return [:]
+        }
+    }
+
+    private static func decodeObj(id: String, data: [String: Any]) -> User {
+        return User(id: id, data: data)
+    }
     
 }

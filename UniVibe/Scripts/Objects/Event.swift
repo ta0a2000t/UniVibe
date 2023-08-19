@@ -25,8 +25,10 @@ class Event: Identifiable, Codable {
     var longitude: Double // Longitude coordinate
     var locationName: String // Name of the event location
     var locationDescription: String // Description of the event location
+    
+    var maxAttendeesCount: Int
 
-    init(id: String, creatorID: String, creationDate: Date, isCommunityEvent: Bool, title: String, description: String, imageURL: String?, date: Date, attendees: [String], numberOfHours: Int, latitude: Double, longitude: Double, locationName: String, locationDescription: String) {
+    init(id: String, creatorID: String, creationDate: Date, isCommunityEvent: Bool, title: String, description: String, imageURL: String?, date: Date, attendees: [String], numberOfHours: Int, latitude: Double, longitude: Double, locationName: String, locationDescription: String, maxAttendeesCount: Int) {
         self.id = id
         self.creatorID = creatorID
         self.creationDate = creationDate
@@ -42,13 +44,37 @@ class Event: Identifiable, Codable {
         self.longitude = longitude
         self.locationName = locationName
         self.locationDescription = locationDescription
+        self.maxAttendeesCount = maxAttendeesCount
+    }
+    
+    init(id: String, data: [String: Any]) {
+        self.id = id
+        self.creatorID = data["creatorID"] as? String ?? ""
+        self.creationDate = data["creationDate"] as? Date ?? Date()
+        self.isCommunityEvent = data["isCommunityEvent"] as? Bool ?? false
+        
+        self.title = data["title"] as? String ?? ""
+        self.description = data["description"] as? String ?? ""
+        self.imageURL = data["imageURL"] as? String
+        self.date = data["date"] as? Date ?? Date()
+        self.attendees = data["attendees"] as? [String] ?? []
+        self.numberOfHours = data["numberOfHours"] as? Int ?? 1
+        
+        self.latitude = data["latitude"] as? Double ?? 0.0
+        self.longitude = data["longitude"] as? Double ?? 0.0
+        self.locationName = data["locationName"] as? String ?? ""
+        self.locationDescription = data["locationDescription"] as? String ?? ""
+        
+        self.maxAttendeesCount = data["maxAttendeesCount"] as? Int ?? 1
     }
     
     
     
+    
+    
     static var MOCK = [
-        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "LEVELS Night #6 - Terraforming Mars: Ares Expedition!", description: "Join us for fun!", imageURL: "billiard_img", date: Date(), attendees: [], numberOfHours: 3, latitude: 12.3456, longitude: -78.9012, locationName: "Stamp Student Union", locationDescription: "2nd floor next to ballroom 102."),
-        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "Community Event", description: "Join us for fun!", imageURL: nil, date: Date(), attendees: [], numberOfHours: 2, latitude: 12.3456, longitude: -78.9012, locationName: "Campus Park", locationDescription: "First floor next to door.")
+        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "LEVELS Night #6 - Terraforming Mars: Ares Expedition!", description: "Join us for fun!", imageURL: "billiard_img", date: Date(), attendees: [], numberOfHours: 3, latitude: 12.3456, longitude: -78.9012, locationName: "Stamp Student Union", locationDescription: "2nd floor next to ballroom 102.", maxAttendeesCount: 4),
+        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "Community Event", description: "Join us for fun!", imageURL: nil, date: Date(), attendees: [], numberOfHours: 2, latitude: 12.3456, longitude: -78.9012, locationName: "Campus Park", locationDescription: "First floor next to door.", maxAttendeesCount: 12)
     ]
     
     // could be used to transfer user to google maps app

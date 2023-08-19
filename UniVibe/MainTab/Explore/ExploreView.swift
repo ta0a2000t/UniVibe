@@ -13,8 +13,10 @@ struct ExploreView: View {
     let searchTypesIndices = [0, 1, 2]
     @State private var selectedSearchTypeIdx : Int
     
-    @EnvironmentObject private var viewModel: UserViewModel
+    //@EnvironmentObject private var viewModel: UserViewModel
 
+    @StateObject var viewModel = UserViewModel()
+    
     let communities: [Community] = Community.MOCK
 
 
