@@ -40,7 +40,6 @@ struct CreateEventView: View {
     @State var numberOfHours: Int = 1
     @State var locationName: String = ""
     @State var locationDescription: String = ""
-    @State var maxAttendeesCount: Int = 0
     
     @EnvironmentObject private var viewModel: UserViewModel
     
@@ -181,7 +180,7 @@ struct CreateEventView: View {
             longitude: 0.0, // Change this as needed
             locationName: locationName,
             locationDescription: locationDescription,
-            maxAttendeesCount: maxAttendeesCount
+            maxAttendeesCount: Int(maxAttendeesInput.value) ?? 1
         )
     }
     
@@ -246,7 +245,7 @@ struct CreateEventView_Previews: PreviewProvider {
 class NumbersOnly: ObservableObject {
     let MAX_VALUE = 1000
     
-    @Published var value = "0" {
+    @Published var value = "1" {
         didSet {
             let filtered = value.filter { $0.isNumber }
             
