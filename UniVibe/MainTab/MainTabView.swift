@@ -13,9 +13,10 @@ struct MainTabView: View {
     //@EnvironmentObject private var viewModel: UserViewModel
     @State var idx = 0
     
-    @State private var featchedUser: User? = nil
-
+    @State private var fetchedUser: User? = nil
     
+    @StateObject var currentUserViewModel = CurrentUserViewModel(currentUser: User.MOCK_USERS[0])
+
     var body: some View {
         VStack{
             
@@ -25,15 +26,15 @@ struct MainTabView: View {
                 Text("User Details")
                     .font(.title)
                 
-                if let user = featchedUser {
+                if let user = fetchedUser {
                     Text("Username: \(user.username)")
                     Text("fullname: \(user.fullname)")
                     // ... other user details
                 } else {
                     Text("Loading user data...")
-                        .onAppear {
-                            UserViewModel.fetchByID(id: "abcuser") { fetchedUser in
-                                self.featchedUser = fetchedUser
+                        .task {
+                            await UserDataModel.fetchByID(id: "abcuser") { fetchedUser in
+                                self.fetchedUser = fetchedUser
                             }
                         }
                 }

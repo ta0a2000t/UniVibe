@@ -56,7 +56,7 @@ struct HomeView: View {
                     
                     HStack {
                         Spacer()
-                        NavigationLink(destination: CreateEventView(user: currentUser).navigationBarBackButtonHidden(true)) {
+                        NavigationLink(destination: CreateEventView(creatorID: currentUser.id, isCommunityEvent: false).navigationBarBackButtonHidden(true)) {
                             Text("Create Event")
                                 .font(.headline)
                                 .foregroundColor(.red)

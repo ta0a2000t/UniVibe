@@ -1,38 +1,27 @@
 //
-//  UserViewModel.swift
+//  UserDataModel.swift
 //  UniVibe
 //
-//  Created by Taha Al on 8/18/23.
+//  Created by Taha Al on 8/19/23.
 //
 
 import Foundation
 import FirebaseFirestore
 
-class UserViewModel: ObservableObject {
-
-    @Published var users = [User]() // initializing empty array
-
+class UserDataModel: ObservableObject {
     
-    init() {
-        fetchAll() // Initial fetch using MOCK_USERS
-    }
-    
-    private func fetchAll() {
-        
-        FirestoreManager.shared.db.collection("users").addSnapshotListener { (querySnapshot, error) in
-            guard let documents = querySnapshot?.documents else {
-                print("No documents")
-                return
-            }
-
-            self.users = documents.map { queryDocumentSnapshot -> User in
-                let data = queryDocumentSnapshot.data()
-                return User(id: queryDocumentSnapshot.documentID, data: data)
-            }
+    @MainActor
+    static func fetchAll() async throws -> [User] {
+        let querySnapshot = try await FirestoreManager.shared.db.collection("users").getDocuments()
+        let users = querySnapshot.documents.map { queryDocumentSnapshot -> User in
+            let data = queryDocumentSnapshot.data()
+            return User(id: queryDocumentSnapshot.documentID, data: data)
         }
+        return users
     }
+    
 
-    static func addToDB(user: User) -> Bool{
+    static func addToDB(user: User) async -> Bool {
         var success = true
         let data = self.encodeObj(user: user)
         FirestoreManager.shared.db.collection("users").document(user.id).setData(data) { error in
@@ -44,7 +33,7 @@ class UserViewModel: ObservableObject {
         return success
     }
     
-    static func fetchByID(id: String, completion: @escaping (User?) -> Void) {
+    static func fetchByID(id: String, completion: @escaping (User?) -> Void) async {
         let docRef = FirestoreManager.shared.db.collection("users").document(id)
 
         docRef.getDocument { (document, error) in

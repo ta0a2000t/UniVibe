@@ -22,7 +22,9 @@ struct CreateEventView: View {
         
     }
     
-    let user: User
+    let creatorID: String // ID of currentUser or community
+    let isCommunityEvent: Bool // true iff the creator is currentUser
+    
     @Environment (\.dismiss) var dismiss
     @FocusState private var focusedField: Field?
     
@@ -40,8 +42,6 @@ struct CreateEventView: View {
     @State var numberOfHours: Int = 1
     @State var locationName: String = ""
     @State var locationDescription: String = ""
-    
-    @EnvironmentObject private var viewModel: UserViewModel
     
 
     @ObservedObject var maxAttendeesInput = NumbersOnly()
@@ -146,9 +146,9 @@ struct CreateEventView: View {
                     Button("Create") { confirmationAlertButtonClicked()}
 
                 }.alert("Event created successfully!", isPresented: $showCreationSuccessAlert) {
-                    Button("OK") {okAlertAfterCreationClicked()}
-                }.alert("Event creation Failed :(", isPresented: $showCreationSuccessAlert) {
-                    Button("OK") {}
+                    Button("OK") {eventCreationSuccessful()}
+                }.alert("Event creation Failed :(", isPresented: $showCreationFailedAlert) {
+                    Button("OK") {eventCreationFailed()}
                 }
 
                     
@@ -167,7 +167,7 @@ struct CreateEventView: View {
         
         return Event(
             id: UUID().uuidString,
-            creatorID: user.id,
+            creatorID:creatorID,
             creationDate: Date(),
             isCommunityEvent: false, // Change this as needed
             title: title,
@@ -191,17 +191,28 @@ struct CreateEventView: View {
     
     func confirmationAlertButtonClicked() {
         let event = createEvent()
+        var success = false
         
-        user.addCreatedEvent(event: event)
-        if (EventViewModel.addToDB(event: event)) {
-            showCreationSuccessAlert = true
-        } else {
-            showCreationFailedAlert = true
+        // asyncronous task
+        Task {
+            success = await EventDataModel.addToDB(event: event)
+            if (success) {
+                showCreationSuccessAlert = true
+            } else {
+                showCreationFailedAlert = true
+            }
         }
+        
+        //user.addCreatedEvent(event: event)
+
+        
     }
     
-    func okAlertAfterCreationClicked() {
+    func eventCreationSuccessful() {
         dismiss()
+    }
+    func eventCreationFailed() {
+        
     }
     
 }
@@ -238,7 +249,7 @@ struct GrowingButton: ButtonStyle {
 
 struct CreateEventView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateEventView(user: User.MOCK_USERS[0])
+        CreateEventView(creatorID: "testUserID8776875", isCommunityEvent: true)
     }
 }
 

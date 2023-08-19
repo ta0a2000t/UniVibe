@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		190714862A8EFF8D004DAB04 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 190714852A8EFF8D004DAB04 /* GoogleService-Info.plist */; };
-		1907148B2A8F0401004DAB04 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1907148A2A8F0401004DAB04 /* UserViewModel.swift */; };
 		192A8B9C2A8B4214004F6302 /* EventProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8B9B2A8B4214004F6302 /* EventProfileView.swift */; };
 		192A8B9F2A8B4A1B004F6302 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8B9E2A8B4A1B004F6302 /* SettingsView.swift */; };
 		192A8BA22A8B5211004F6302 /* PastEventInGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BA12A8B5211004F6302 /* PastEventInGridView.swift */; };
@@ -25,6 +24,9 @@
 		199D8B732A8F19A1002A4031 /* CommunityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D8B722A8F19A1002A4031 /* CommunityViewModel.swift */; };
 		19A29BF42A8F5DE60042D6A2 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A29BF32A8F5DE60042D6A2 /* FirestoreManager.swift */; };
 		19A29BF62A8F60120042D6A2 /* CurrentUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A29BF52A8F60120042D6A2 /* CurrentUserViewModel.swift */; };
+		19A29BF82A9071DC0042D6A2 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A29BF72A9071DC0042D6A2 /* UserDataModel.swift */; };
+		19A29BFA2A9072FA0042D6A2 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A29BF92A9072FA0042D6A2 /* ExploreViewModel.swift */; };
+		19A29BFC2A90822D0042D6A2 /* EventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A29BFB2A90822D0042D6A2 /* EventDataModel.swift */; };
 		19B3C2FD2A8A9B8C00BEFB0E /* UniVibeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B3C2FC2A8A9B8C00BEFB0E /* UniVibeApp.swift */; };
 		19B3C2FF2A8A9B8C00BEFB0E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B3C2FE2A8A9B8C00BEFB0E /* ContentView.swift */; };
 		19B3C3012A8A9B8D00BEFB0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B3C3002A8A9B8D00BEFB0E /* Assets.xcassets */; };
@@ -52,13 +54,11 @@
 		19D826272A8D4A180052AECA /* SearchResultItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D826262A8D4A180052AECA /* SearchResultItemProtocol.swift */; };
 		19D826292A8D5AFD0052AECA /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D826282A8D5AFD0052AECA /* CreateEventView.swift */; };
 		19D8262C2A8E0DA70052AECA /* CampusMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D8262B2A8E0DA70052AECA /* CampusMapView.swift */; };
-		19E20EF22A8E80CC008C97F6 /* EventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E20EF12A8E80CC008C97F6 /* EventViewModel.swift */; };
 		BD077965A21BE7587E831215 /* Pods_UniVibe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A436BF225E800D8AB48ECC /* Pods_UniVibe.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		190714852A8EFF8D004DAB04 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		1907148A2A8F0401004DAB04 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		192A8B9B2A8B4214004F6302 /* EventProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventProfileView.swift; sourceTree = "<group>"; };
 		192A8B9E2A8B4A1B004F6302 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		192A8BA12A8B5211004F6302 /* PastEventInGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastEventInGridView.swift; sourceTree = "<group>"; };
@@ -75,6 +75,9 @@
 		199D8B722A8F19A1002A4031 /* CommunityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewModel.swift; sourceTree = "<group>"; };
 		19A29BF32A8F5DE60042D6A2 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		19A29BF52A8F60120042D6A2 /* CurrentUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserViewModel.swift; sourceTree = "<group>"; };
+		19A29BF72A9071DC0042D6A2 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
+		19A29BF92A9072FA0042D6A2 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
+		19A29BFB2A90822D0042D6A2 /* EventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDataModel.swift; sourceTree = "<group>"; };
 		19B3C2F92A8A9B8C00BEFB0E /* UniVibe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UniVibe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B3C2FC2A8A9B8C00BEFB0E /* UniVibeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniVibeApp.swift; sourceTree = "<group>"; };
 		19B3C2FE2A8A9B8C00BEFB0E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -103,7 +106,6 @@
 		19D826262A8D4A180052AECA /* SearchResultItemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultItemProtocol.swift; sourceTree = "<group>"; };
 		19D826282A8D5AFD0052AECA /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
 		19D8262B2A8E0DA70052AECA /* CampusMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusMapView.swift; sourceTree = "<group>"; };
-		19E20EF12A8E80CC008C97F6 /* EventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewModel.swift; sourceTree = "<group>"; };
 		543313CC4B7DE60A99E04EA4 /* Pods-UniVibe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniVibe.release.xcconfig"; path = "Target Support Files/Pods-UniVibe/Pods-UniVibe.release.xcconfig"; sourceTree = "<group>"; };
 		71A436BF225E800D8AB48ECC /* Pods_UniVibe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniVibe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F14FEC1EFA044D15086D3156 /* Pods-UniVibe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniVibe.debug.xcconfig"; path = "Target Support Files/Pods-UniVibe/Pods-UniVibe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -176,6 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				19A29BF32A8F5DE60042D6A2 /* FirestoreManager.swift */,
+				19A29BF72A9071DC0042D6A2 /* UserDataModel.swift */,
+				19A29BFB2A90822D0042D6A2 /* EventDataModel.swift */,
 			);
 			path = FirebaseThings;
 			sourceTree = "<group>";
@@ -416,10 +420,9 @@
 		19E20EF02A8E80A4008C97F6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				1907148A2A8F0401004DAB04 /* UserViewModel.swift */,
 				199D8B722A8F19A1002A4031 /* CommunityViewModel.swift */,
-				19E20EF12A8E80CC008C97F6 /* EventViewModel.swift */,
 				19A29BF52A8F60120042D6A2 /* CurrentUserViewModel.swift */,
+				19A29BF92A9072FA0042D6A2 /* ExploreViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -562,13 +565,14 @@
 				199D8B732A8F19A1002A4031 /* CommunityViewModel.swift in Sources */,
 				19B3C3342A8AD5B200BEFB0E /* EditProfileView.swift in Sources */,
 				19D826272A8D4A180052AECA /* SearchResultItemProtocol.swift in Sources */,
+				19A29BFA2A9072FA0042D6A2 /* ExploreViewModel.swift in Sources */,
 				192A8B9F2A8B4A1B004F6302 /* SettingsView.swift in Sources */,
 				19B3C2FF2A8A9B8C00BEFB0E /* ContentView.swift in Sources */,
+				19A29BFC2A90822D0042D6A2 /* EventDataModel.swift in Sources */,
 				192A8BB62A8C3CE2004F6302 /* CustomDenets.swift in Sources */,
 				19B3C3282A8AA48C00BEFB0E /* Event.swift in Sources */,
 				19B3C3182A8A9EBC00BEFB0E /* HomeView.swift in Sources */,
 				192A8BBF2A8C8F48004F6302 /* TitleAndBodyView.swift in Sources */,
-				19E20EF22A8E80CC008C97F6 /* EventViewModel.swift in Sources */,
 				19B3C2FD2A8A9B8C00BEFB0E /* UniVibeApp.swift in Sources */,
 				192A8BAF2A8C304E004F6302 /* EventDateDetailsView.swift in Sources */,
 				192A8BA22A8B5211004F6302 /* PastEventInGridView.swift in Sources */,
@@ -576,6 +580,7 @@
 				192A8BB12A8C32C2004F6302 /* EventLocDetailsView.swift in Sources */,
 				19B3C3242A8AA46900BEFB0E /* Community.swift in Sources */,
 				19B3C30C2A8A9BC200BEFB0E /* MainTabView.swift in Sources */,
+				19A29BF82A9071DC0042D6A2 /* UserDataModel.swift in Sources */,
 				19B3C3452A8AFF4E00BEFB0E /* MyNavigationLinkModifier.swift in Sources */,
 				192A8BAB2A8B5BE2004F6302 /* HorizontalEventGridView.swift in Sources */,
 				19B3C3392A8AF67E00BEFB0E /* CommunityInListView.swift in Sources */,
@@ -592,7 +597,6 @@
 				19D826242A8D42720052AECA /* UserInListView.swift in Sources */,
 				19B3C3402A8AFF0800BEFB0E /* CommunityProfileView.swift in Sources */,
 				19A29BF62A8F60120042D6A2 /* CurrentUserViewModel.swift in Sources */,
-				1907148B2A8F0401004DAB04 /* UserViewModel.swift in Sources */,
 				192A8BA42A8B538C004F6302 /* TimeHelpers.swift in Sources */,
 				19B3C31C2A8A9ED600BEFB0E /* FeedView.swift in Sources */,
 				19B3C31A2A8A9EC600BEFB0E /* ExploreView.swift in Sources */,

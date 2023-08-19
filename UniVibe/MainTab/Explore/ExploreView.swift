@@ -15,7 +15,7 @@ struct ExploreView: View {
     
     //@EnvironmentObject private var viewModel: UserViewModel
 
-    @StateObject var viewModel = UserViewModel()
+    @StateObject var exploreViewModel = ExploreViewModel()
     
     let communities: [Community] = Community.MOCK
 
@@ -75,7 +75,7 @@ struct ExploreView: View {
     
     
     var searchResults: [SearchResultItemProtocol] {
-        let users = viewModel.users
+        let users = exploreViewModel.users
 
         func getItemsInList() -> [SearchResultItemProtocol] {
             if selectedSearchTypeIdx == 0 {
