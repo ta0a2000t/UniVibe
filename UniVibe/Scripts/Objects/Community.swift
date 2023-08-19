@@ -31,6 +31,21 @@ class Community: Identifiable, Codable , SearchResultItemProtocol{
         self.interests = interests
     }
     
+    init(id: String, data: [String: Any]) {
+        self.id = id
+        self.email = data["email"] as? String ?? ""
+        self.fullname = data["fullname"] as? String ?? ""
+        self.description = data["description"] as? String ?? ""
+        self.profileImageURL = data["profileImageURL"] as? String
+        self.membersIDs = data["membersIDs"] as? [String] ?? []
+        self.organizerIDs = data["organizerIDs"] as? [String] ?? []
+        self.createdEventsIDs = data["createdEventsIDs"] as? [String] ?? []
+        self.interests = data["interests"] as? [String] ?? []
+    }
+
+    
+    
+    
     // Community(id: "community123", fullname: "Music Lovers", description: "For those who love music.", profileImageURL: nil, membersIDs: ["user123", "user456"], email: "musiclovers@example.com")
     
 }

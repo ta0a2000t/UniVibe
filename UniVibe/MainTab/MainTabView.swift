@@ -11,7 +11,6 @@ struct MainTabView: View {
     let currentUser: User
     @Environment(\.colorScheme) var colorScheme
     //@EnvironmentObject private var viewModel: UserViewModel
-    @State var idx = 0
     
     @State private var fetchedUser: User? = nil
     
@@ -43,15 +42,7 @@ struct MainTabView: View {
 
             
             
-            Button {
-                //UserViewModel.addToDB(user: User.MOCK_USERS[idx])
 
-
-                idx += 1
-            } label: {
-                Text("abc")
-                
-            }
             TabView {
                 HomeView(currentUser: currentUser).tabItem() {
                     Image(systemName: "house").foregroundColor(.white)

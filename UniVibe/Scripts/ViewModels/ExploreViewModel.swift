@@ -9,7 +9,7 @@ import Foundation
 
 class ExploreViewModel: ObservableObject {
     @Published var users = [User]()
-    
+    @Published var communities = [Community]()
     
     init() {
         Task {
@@ -21,8 +21,14 @@ class ExploreViewModel: ObservableObject {
             }
         }
         
-        
-        
+        Task {
+            do {
+                try await fetchCommunities()
+            } catch {
+                // Handle error
+                print("Error fetching users: \(error)")
+            }
+        }
         
     }
     
@@ -32,8 +38,10 @@ class ExploreViewModel: ObservableObject {
     }
     
     
-    
-    
+    @MainActor
+    private func fetchCommunities() async throws {
+        self.communities = try await CommunityDataModel.fetchAll()
+    }
     
     
     
