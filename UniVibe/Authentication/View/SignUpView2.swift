@@ -14,8 +14,8 @@ struct SignUpView2: View {
     @Environment(\.dismiss) var dismiss
     
     //@StateObject var validator = SignUpView2Validator()
+    @State var showNextView: Bool = false
 
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -33,15 +33,13 @@ struct SignUpView2: View {
                 
 
                 
-                NavigationLink {
-                    SignUpView3().environmentObject(registrationViewModel).navigationBarBackButtonHidden(true)
+                Button {
+                    nextClicked()
                 } label: {
                     Text("Next")
                         .font(.headline)
                         .frame(width: 250, height:50)
                         .cornerRadius(25)
-                }.onTapGesture {
-                    nextClicked()
                 }.disabled(interests.isEmpty || communitiesIDs.isEmpty).buttonStyle(GrowingButton(enabledColor: .purple))
                 .padding(.vertical, 30)
 
@@ -67,13 +65,17 @@ struct SignUpView2: View {
             
         
             
+        }.navigationDestination(isPresented: $showNextView) {
+            SignUpView3().environmentObject(registrationViewModel).navigationBarBackButtonHidden(true)
         }
+        
     }
     
     func nextClicked() {
         registrationViewModel.interests = interests
                                                 // making a copy
         registrationViewModel.communitiesIDs = communitiesIDs.map { $0 }
+        showNextView = true
     }
 }
 

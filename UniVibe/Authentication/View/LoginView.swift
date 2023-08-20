@@ -12,6 +12,9 @@ struct LoginView: View {
     @EnvironmentObject var registrationViewModel : RegistrationViewModel
     
     @StateObject var validator = LoginViewValidator()
+    @State private var isLoading: Bool = false
+    let errorMessage: String = "Incorrect Email or Password."
+    @State var showErrorAlert: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -73,6 +76,11 @@ struct LoginView: View {
                 }.padding(.bottom)
                 
             }
+        }.modifier(ActivityIndicatorModifier(isLoading: isLoading)).alert("Sign In Failed :(", isPresented: $showErrorAlert) {
+            
+            Button("Try Again") {}
+        } message: {
+            Text(errorMessage)
         }
     }
     
@@ -82,7 +90,22 @@ struct LoginView: View {
         loginViewModel.email = validator.userEmail
         loginViewModel.password = validator.userPassword
         
-        Task{ try await loginViewModel.signIn()}
+        
+        
+        Task {
+            isLoading = true
+            do {
+                try await loginViewModel.signIn()
+                isLoading = false
+            } catch{
+                //print(error.localizedDescription)
+                isLoading = false
+                showErrorAlert = true
+            }
+            
+            
+        }
+
     }
 }
 

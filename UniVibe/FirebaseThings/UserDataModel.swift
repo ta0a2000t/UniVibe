@@ -21,17 +21,12 @@ class UserDataModel: ObservableObject {
     }
     
 
-    static func addToDB(user: User) async -> Bool {
-        var success = true
+    static func addToDB(user: User) async throws {
+        
         let data = self.encodeObj(user: user)
         
-        FirestoreManager.shared.db.collection("users").document(user.id).setData(data) { error in
-            if let error = error {
-                print("Error adding user: \(error)")
-                success = false
-            }
-        }
-        return success
+        try await FirestoreManager.shared.db.collection("users").document(user.id).setData(data)
+        
     }
     
     static func fetchByID(id: String, completion: @escaping (User?) -> Void) async {

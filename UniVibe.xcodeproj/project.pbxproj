@@ -67,6 +67,7 @@
 		19CC90F12A91702B00E98934 /* LoginViewValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CC90F02A91702B00E98934 /* LoginViewValidator.swift */; };
 		19CC90F32A9173A900E98934 /* LogoOnTopMiddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CC90F22A9173A900E98934 /* LogoOnTopMiddleView.swift */; };
 		19CC90F62A9178D100E98934 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CC90F52A9178D100E98934 /* StringExtensions.swift */; };
+		19CC90FA2A919BB900E98934 /* ActivityIndicatorModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CC90F92A919BB900E98934 /* ActivityIndicatorModifier.swift */; };
 		19D826242A8D42720052AECA /* UserInListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D826232A8D42720052AECA /* UserInListView.swift */; };
 		19D826272A8D4A180052AECA /* SearchResultItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D826262A8D4A180052AECA /* SearchResultItemProtocol.swift */; };
 		19D826292A8D5AFD0052AECA /* CreateEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19D826282A8D5AFD0052AECA /* CreateEventView.swift */; };
@@ -136,6 +137,7 @@
 		19CC90F02A91702B00E98934 /* LoginViewValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewValidator.swift; sourceTree = "<group>"; };
 		19CC90F22A9173A900E98934 /* LogoOnTopMiddleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoOnTopMiddleView.swift; sourceTree = "<group>"; };
 		19CC90F52A9178D100E98934 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		19CC90F92A919BB900E98934 /* ActivityIndicatorModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorModifier.swift; sourceTree = "<group>"; };
 		19D826232A8D42720052AECA /* UserInListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInListView.swift; sourceTree = "<group>"; };
 		19D826262A8D4A180052AECA /* SearchResultItemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultItemProtocol.swift; sourceTree = "<group>"; };
 		19D826282A8D5AFD0052AECA /* CreateEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventView.swift; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 				19B3C3442A8AFF4E00BEFB0E /* MyNavigationLinkModifier.swift */,
 				192A8BA72A8B556F004F6302 /* MyTimeStringModifier.swift */,
 				19A29C072A90BC210042D6A2 /* MyTextFieldModifier.swift */,
+				19CC90F92A919BB900E98934 /* ActivityIndicatorModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -481,10 +484,10 @@
 		19CC90E72A916A7000E98934 /* FormValidation */ = {
 			isa = PBXGroup;
 			children = (
+				19CC90F02A91702B00E98934 /* LoginViewValidator.swift */,
 				19CC90EE2A916D7F00E98934 /* SignUpView1Validator.swift */,
 				19CC90EC2A916B7900E98934 /* SignUpView2Validator.swift */,
 				19CC90EA2A916ACB00E98934 /* SignUpView3Validator.swift */,
-				19CC90F02A91702B00E98934 /* LoginViewValidator.swift */,
 			);
 			path = FormValidation;
 			sourceTree = "<group>";
@@ -701,6 +704,7 @@
 				19B3C3312A8AD54300BEFB0E /* ProfileStatView.swift in Sources */,
 				19B3C3372A8AECD500BEFB0E /* SectionAndSelectionsView.swift in Sources */,
 				19B3C3472A8B1C2000BEFB0E /* EventInListView.swift in Sources */,
+				19CC90FA2A919BB900E98934 /* ActivityIndicatorModifier.swift in Sources */,
 				19CC90E62A9158BE00E98934 /* SelectInterestsView.swift in Sources */,
 				192A8B9C2A8B4214004F6302 /* EventProfileView.swift in Sources */,
 				19B3C31E2A8A9EE200BEFB0E /* ChatView.swift in Sources */,

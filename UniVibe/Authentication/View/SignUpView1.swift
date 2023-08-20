@@ -11,6 +11,7 @@ struct SignUpView1: View {
     @EnvironmentObject var registrationViewModel : RegistrationViewModel
     @Environment(\.dismiss) var dismiss
     @StateObject private var validator = SignUpView1Validator()
+    @State var showNextView: Bool = false
 
     var body: some View {
         NavigationView {
@@ -41,15 +42,13 @@ struct SignUpView1: View {
                 
 
                 
-                NavigationLink {
-                    SignUpView2().environmentObject(registrationViewModel).navigationBarBackButtonHidden(true)
+                Button {
+                    nextClicked()
                 } label: {
                     Text("Next")
                         .font(.headline)
                         .frame(width: 250, height:50)
                         .cornerRadius(25)
-                }.onTapGesture {
-                    nextClicked()
                 }.disabled(!validator.formIsValid).buttonStyle(GrowingButton(enabledColor: .purple))
                 .padding(.vertical, 30)
                     
@@ -72,12 +71,16 @@ struct SignUpView1: View {
             
         
             
+        }.navigationDestination(isPresented: $showNextView) {
+            SignUpView2().environmentObject(registrationViewModel).navigationBarBackButtonHidden(true)
         }
+        
     }
     
     func nextClicked() {
         registrationViewModel.fullname = validator.fullname
         registrationViewModel.bio = validator.bio
+        showNextView = true
     }
     
 }

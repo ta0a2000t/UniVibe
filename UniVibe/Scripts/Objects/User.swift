@@ -10,7 +10,7 @@ import Foundation
 class User: Identifiable, Codable, SearchResultItemProtocol {
     let id: String
     let email: String
-
+    
     var username: String
     var profileImageURL: String?
     var fullname: String

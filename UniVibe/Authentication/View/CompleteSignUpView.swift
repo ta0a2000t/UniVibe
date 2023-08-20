@@ -8,17 +8,16 @@
 import SwiftUI
 
 struct CompleteSignUpView: View {
-    @State var showLoading = false
+    @State private var isLoading: Bool = false
 
     @EnvironmentObject var registrationViewModel: RegistrationViewModel
     @Environment(\.dismiss) var dismiss
-    @State var disableButton: Bool = false
     @State var showCreationFailedAlert: Bool = false
     @State var creationErrorMessage: String = ""
     
     var body: some View {
         NavigationView{
-            ZStack {
+            
                 VStack {
                     Spacer()
                     Text("Your Info Is Complete! \(registrationViewModel.username)").font(.title2).foregroundColor(.purple).bold()
@@ -26,22 +25,7 @@ struct CompleteSignUpView: View {
                     
                     
                     Button {
-                        disableButton = true
-                        showLoading = true
-                        
-                        Task {
-                            do {
-                                try await registrationViewModel.createUser()
-                                showLoading = false
-                                
-                            } catch {
-                                showLoading = false
-                                
-                                showCreationFailedAlert = true
-                                creationErrorMessage = error.localizedDescription
-                            }
-                        }
-                        
+                        createAccountClicked()
                         
                     } label: {
                         Text("Create Account")
@@ -49,13 +33,12 @@ struct CompleteSignUpView: View {
                             .frame(width: 250, height:50)
                             .cornerRadius(25)
                     }.buttonStyle(GrowingButton(enabledColor: .purple))
-                        .padding(.vertical, 30).disabled(disableButton)
+                        .padding(.vertical, 30)
                     
                     Spacer()
                 }
                 
-                if showLoading { LoadingView() }
-            }
+            
         }.toolbar {
             
             ToolbarItem(placement: .navigationBarLeading) {
@@ -72,17 +55,36 @@ struct CompleteSignUpView: View {
             
         
             
-        }.alert("Sign Up Failed :(", isPresented: $showCreationFailedAlert) {
+        }.modifier(ActivityIndicatorModifier(isLoading: isLoading))
+        .alert("Sign Up Failed :(", isPresented: $showCreationFailedAlert) {
             
             Button("OK") {dismiss()}
         } message: {
             Text(creationErrorMessage)
-        }.animation(.default, value: showLoading)
+        }
 
 
 
 
             
+    }
+    
+    func createAccountClicked() {
+        isLoading = true
+        
+        Task {
+            do {
+                try await registrationViewModel.createUser()
+                isLoading = false
+                
+            } catch {
+                isLoading = false
+                
+                showCreationFailedAlert = true
+                creationErrorMessage = error.localizedDescription
+            }
+        }
+        
     }
 }
 
@@ -94,25 +96,3 @@ struct CompleteSignUpView_Previews: PreviewProvider {
 
 
 
-struct LoadingView: View {
-    
-    var body: some View {
-        ZStack {
-            Rectangle()
-                .fill(.black)
-                .opacity(0.75)
-                .ignoresSafeArea()
-            
-            VStack(spacing: 20) {
-                ProgressView()
-                Text("Loading...")
-            }
-            .background {
-                RoundedRectangle(cornerRadius: 20)
-                .fill(.white)
-                .frame(width: 200, height: 200)
-            }
-            .offset(y: -70)
-        }
-    }
-}

@@ -26,11 +26,21 @@ class RegistrationViewModel: ObservableObject {
     
     
     func createUser() async throws {
-        do {
-            try await AuthService.shared.createUser(email: email, password: password, username: username)
-        } catch {
-            throw error
-        }
+        let data: [String: Any] = [
+            "username": username,
+            "email": email,
+            "fullname": fullname,
+            "bio": bio,
+            "interests": interests,
+            "lookingTo": lookingTo,
+            "createdEventsIDs": createdEventsIDs,
+            "reservedEventsIDs": reservedEventsIDs,
+            "communitiesIDs": communitiesIDs,
+            "friendsIDs": friendsIDs
+        ]
+        
+        try await AuthService.shared.createUser(email: email, password: password, data: data)
+
     }
     
 }

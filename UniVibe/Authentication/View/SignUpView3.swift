@@ -15,6 +15,7 @@ struct SignUpView3: View {
     @StateObject private var validator = SignUpView3Validator()
     
     @State var showNextView: Bool = false
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -92,9 +93,6 @@ struct SignUpView3: View {
         registrationViewModel.email = validator.userEmail
         registrationViewModel.password = validator.userPassword
         
-        print("99")
-        print(validator.userName)
-        print("99")
         showNextView = true
     }
     
