@@ -8,9 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var contentViewModel = ContentViewModel()
+    @StateObject var registrationViewModel = RegistrationViewModel()
 
     var body: some View {
-        MainTabView(currentUser: User.MOCK_USERS[0])
+        Group {
+            if contentViewModel.userSession == nil {
+                LoginView().environmentObject(registrationViewModel)
+            } else {
+                MainTabView(currentUser: User.MOCK_USERS[0])
+            }
+        }
+        
+        /*.onAppear {
+            // Apply dark mode color scheme to the entire view hierarchy
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                if let window = windowScene.windows.first {
+                    window.rootViewController?.overrideUserInterfaceStyle = .dark
+                }
+            }
+        }
+         */
+        
     }
 }
 

@@ -23,12 +23,13 @@ struct SettingsView: View {
         NavigationView {
              List {
                ForEach(settings, id: \.self) { setting in
-                   
-                   NavigationLink(destination: RootSettingView(viewToDisplay: setting.title)) {
-                     HStack {
-                       SettingImage(color: setting.color, imageName: setting.imageName)
-                       Text(setting.title)
-                     }
+                   Button {
+                       ActionToDo(selectionName:  setting.title)
+                   } label: {
+                       HStack {
+                         SettingImage(color: setting.color, imageName: setting.imageName)
+                         Text(setting.title)
+                       }
                    }
                    
                    
@@ -36,6 +37,18 @@ struct SettingsView: View {
              }
              .navigationTitle("settings")
                
+            
+        }
+    }
+    
+
+    
+    func ActionToDo(selectionName: String) {
+        switch selectionName {
+        case "logout":
+            AuthService.shared.signout()
+        default:
+            break
             
         }
     }

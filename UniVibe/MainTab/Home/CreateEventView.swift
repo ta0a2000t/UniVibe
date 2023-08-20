@@ -113,7 +113,7 @@ struct CreateEventView: View {
                             createButtonClicked()
                         } label: {
                             Text("Create").bold()
-                        }.disabled(title.isEmpty || description.isEmpty || locationName.isEmpty || locationDescription.isEmpty).buttonStyle(GrowingButton())
+                        }.disabled(title.isEmpty || description.isEmpty || locationName.isEmpty || locationDescription.isEmpty).buttonStyle(GrowingButton(enabledColor: .green))
                         
                     }
                     ToolbarItem(placement: .principal) {
@@ -234,12 +234,13 @@ struct Background<Content: View>: View {
 
 struct GrowingButton: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
+    let enabledColor : Color // do not choose black or white
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(3)
-            .background(isEnabled ? Color.green : Color.white)
-            .foregroundStyle(isEnabled ? Color.white : Color.gray)
+            .background(isEnabled ? enabledColor : Color.gray.opacity(0.2))
+            .foregroundStyle(isEnabled ? .primary: Color.gray)
             .clipShape(Capsule())
             .scaleEffect(configuration.isPressed ? 1.2 : 1)
             .animation(.easeOut(duration: 0.2), value: configuration.isPressed)

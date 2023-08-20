@@ -24,6 +24,7 @@ class UserDataModel: ObservableObject {
     static func addToDB(user: User) async -> Bool {
         var success = true
         let data = self.encodeObj(user: user)
+        
         FirestoreManager.shared.db.collection("users").document(user.id).setData(data) { error in
             if let error = error {
                 print("Error adding user: \(error)")

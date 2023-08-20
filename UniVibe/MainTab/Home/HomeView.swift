@@ -84,7 +84,7 @@ struct HomeView: View {
                 
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        Image("univibe_logo").resizable().scaledToFit().frame(height: 35)
+                        LogoOnTopMiddleView()
                     }
 
                     ToolbarItem(placement: .navigationBarTrailing) {
