@@ -17,6 +17,7 @@ struct ExploreView: View {
 
     @StateObject var exploreViewModel = ExploreViewModel()
     
+    @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
 
     init() {
         selectedSearchTypeIdx = searchTypesIndices[0]

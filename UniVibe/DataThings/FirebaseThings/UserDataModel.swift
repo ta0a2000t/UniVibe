@@ -102,4 +102,38 @@ class UserDataModel: ObservableObject {
     
     
     
+    static func listenForChangesByID(userID: String, completion: @escaping (User) -> Void) -> ListenerRegistration {
+        let userListener = FirestoreManager.shared.db.collection("users")
+            .document(userID)
+            .addSnapshotListener { documentSnapshot, error in
+                if let document = documentSnapshot, document.exists {
+                    let data = document.data() ?? [:]
+                    let updatedUser = decodeObj(id: document.documentID, data: data)
+                    completion(updatedUser)
+                }
+            }
+        
+        return userListener
+    }
+    
+    // Listen for changes to the users collection
+    static func listenForChanges(completion: @escaping ([User]) -> Void) -> ListenerRegistration {
+        let listener = FirestoreManager.shared.db.collection("users")
+            .addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching users: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
+
+                let updatedUsers = documents.compactMap { document in
+                    let data = document.data()
+                    return decodeObj(id: document.documentID, data: data)
+                }
+
+                completion(updatedUsers)
+            }
+        
+        return listener
+    }
+    
 }

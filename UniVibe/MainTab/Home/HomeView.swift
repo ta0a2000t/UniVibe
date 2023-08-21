@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject var profileViewModel: ProfileViewModel
-
+    @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
+    
     @State var showCreateEventView: Bool = false
-
+    
+    
     var body: some View {
         NavigationStack{
             VStack {
                 VStack(alignment:.trailing) {
-                    Text(" \(profileViewModel.currentUser.fullname)").font(.title3).bold().padding(.bottom)
+                    Text(" \(currentUserViewModel.currentUser.fullname)").font(.title3).bold().padding(.bottom)
                     
                     
                     
@@ -28,7 +29,7 @@ struct HomeView: View {
                             
                             LazyVStack(spacing:12) {
                                 
-                                ForEach(profileViewModel.reservedEvents) { event in
+                                ForEach(currentUserViewModel.getReservedEvents()) { event in
                                     
                                     NavigationLink(destination: EventProfileView(event: event).navigationBarBackButtonHidden(true)) {
                                         EventInListView(event: event)
@@ -46,7 +47,7 @@ struct HomeView: View {
                     VStack {
 
                         Text("Created Events").font(.title2).bold()
-                        HorizontalEventGridView(events: profileViewModel.createdEvents)
+                        HorizontalEventGridView(events: currentUserViewModel.getCreatedEvents())
                         
                         Divider()
                     }.padding(.bottom)
@@ -56,7 +57,7 @@ struct HomeView: View {
                     
                     HStack {
                         Spacer()
-                        NavigationLink(destination: CreateEventView(creatorID: profileViewModel.currentUser.id, isCommunityEvent: false).navigationBarBackButtonHidden(true)) {
+                        NavigationLink(destination: CreateEventView(creatorID: currentUserViewModel.currentUser.id, isCommunityEvent: false).navigationBarBackButtonHidden(true)) {
                             Text("Create Event")
                                 .font(.headline)
                                 .foregroundColor(.red)
@@ -83,16 +84,17 @@ struct HomeView: View {
             .navigationBarTitleDisplayMode(.inline)
                 
                 .toolbar {
+                    
                     ToolbarItem(placement: .principal) {
                         LogoOnTopMiddleView()
                     }
 
                     ToolbarItem(placement: .navigationBarTrailing) {
                         NavigationLink {
-                            CurrentUserProfile(currentUser: profileViewModel.currentUser).navigationBarBackButtonHidden(true)
+                            CurrentUserProfile().environmentObject(currentUserViewModel).navigationBarBackButtonHidden(true)
                         } label: {
                             
-                            if let profileImageURL = profileViewModel.currentUser.profileImageURL {
+                            if let profileImageURL = currentUserViewModel.currentUser.profileImageURL {
                                 Image(profileImageURL)
                                     .resizable()
                                     .frame(width: 40, height: 40)

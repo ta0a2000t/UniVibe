@@ -22,33 +22,33 @@ final class DataRepository: ObservableObject {
         fetchData()
     }
     
-    func getUserByID(id: String) -> User? {
-        return users.first { $0.id == id }
+    static func getUserByID(id: String) -> User? {
+        return DataRepository.shared.users.first { $0.id == id }
     }
     
-    func getEventByID(id: String) -> Event? {
-        return events.first { $0.id == id }
+    static func getEventByID(id: String) -> Event? {
+        return DataRepository.shared.events.first { $0.id == id }
     }
     
-    func getCommunityByID(id: String) -> Community? {
-        return communities.first { $0.id == id }
+    static func getCommunityByID(id: String) -> Community? {
+        return DataRepository.shared.communities.first { $0.id == id }
     }
     
-    func getUsersByIDs(ids: [String]) -> [User] {
-        return users.filter { ids.contains($0.id) }
+    static func getUsersByIDs(ids: [String]) -> [User] {
+        return DataRepository.shared.users.filter { ids.contains($0.id) }
     }
     
-    func getEventsByIDs(ids: [String]) -> [Event] {
-        return events.filter { ids.contains($0.id) }
+    static func getEventsByIDs(ids: [String]) -> [Event] {
+        return DataRepository.shared.events.filter { ids.contains($0.id) }
     }
     
-    func getCommunitiesByIDs(ids: [String]) -> [Community] {
-        return communities.filter { ids.contains($0.id) }
+    static func getCommunitiesByIDs(ids: [String]) -> [Community] {
+        return DataRepository.shared.communities.filter { ids.contains($0.id) }
     }
     
 
     // Fetch data and populate properties
-    func fetchData() {
+    private func fetchData() {
         // Fetch current user's data
         Task {
             // Fetch events

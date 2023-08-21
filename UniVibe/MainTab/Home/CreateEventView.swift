@@ -46,7 +46,7 @@ struct CreateEventView: View {
 
     @ObservedObject var maxAttendeesInput = NumbersOnly()
     
-    @EnvironmentObject var profileViewModel: ProfileViewModel
+    @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
     
     
     @State var createdEvent: Event? = nil
@@ -208,7 +208,7 @@ struct CreateEventView: View {
                 showCreationFailedAlert = true
             }
         }
-        profileViewModel.addCreatedEvent(event: createdEvent!)
+        currentUserViewModel.addCreatedEvent(event: createdEvent!)
     }
     
     func eventCreationSuccessful() {

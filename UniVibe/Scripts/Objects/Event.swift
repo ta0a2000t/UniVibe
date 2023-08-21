@@ -50,13 +50,7 @@ class Event: Identifiable, Codable {
     init(id: String, data: [String: Any]) {
         self.id = id
         self.creatorID = data["creatorID"] as? String ?? ""
-        print( data["creationDate"])
-        do {
-             try self.creationDate = MyDateFormaters.decodeDate(from: data["creationDate"] as! String)!
-        } catch {
-            print(data["creationDate"])
-        }
-        
+        self.creationDate = MyDateFormaters.decodeDate(from: data["creationDate"] as! String)!
         self.isCommunityEvent = data["isCommunityEvent"] as? Bool ?? false
         
         self.title = data["title"] as? String ?? ""
@@ -77,6 +71,7 @@ class Event: Identifiable, Codable {
         
         self.maxAttendeesCount = data["maxAttendeesCount"] as? Int ?? 1
     }
+    
     
     
     

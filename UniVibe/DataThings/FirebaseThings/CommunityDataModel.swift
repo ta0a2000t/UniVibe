@@ -68,4 +68,24 @@ class CommunityDataModel: ObservableObject {
         return Community(id: id, data: data)
     }
     
+    // Listen for changes to the communities collection
+    static func listenForChanges(completion: @escaping ([Community]) -> Void) -> ListenerRegistration {
+        let listener = FirestoreManager.shared.db.collection("communities")
+            .addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching communities: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
+
+                let updatedCommunities = documents.compactMap { document in
+                    let data = document.data()
+                    return decodeObj(id: document.documentID, data: data)
+                }
+
+                completion(updatedCommunities)
+            }
+        
+        return listener
+    }
+    
 }

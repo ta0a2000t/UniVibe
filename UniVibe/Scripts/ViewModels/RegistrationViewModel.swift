@@ -43,12 +43,12 @@ class RegistrationViewModel: ObservableObject {
         try await AuthService.shared.createUser(email: email, password: password, data: data)
         
         
-        resetFields()
+        await resetFields()
     }
     
     
     
-    
+    @MainActor
     func resetFields() {
         username = ""
         email = ""

@@ -13,18 +13,17 @@ struct CurrentUserProfile: View {
     @State private var showSettings: Bool = false
     @State private var settingsDetent = PresentationDetent.medium
 
-    let currentUser: User
     @Environment (\.dismiss) var dismiss
     
     
-    @EnvironmentObject var profileViewModel: ProfileViewModel
+    @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
 
     var body: some View {
         NavigationView{
             VStack{
                 HStack {
                     // prof pic
-                    if let profileImageURL = currentUser.profileImageURL {
+                    if let profileImageURL = currentUserViewModel.currentUser.profileImageURL {
                         Image(profileImageURL)
                             .resizable()
                             .frame(width: 80, height: 80)
@@ -42,18 +41,18 @@ struct CurrentUserProfile: View {
                     
                     HStack(spacing: 23) {
                         
-                        ProfileStatView(value: profileViewModel.currentUser.communitiesIDs.count, title: "Groups")
+                        ProfileStatView(value: currentUserViewModel.currentUser.communitiesIDs.count, title: "Groups")
                         Divider().frame(height: 40)
-                        ProfileStatView(value: profileViewModel.currentUser.friendsIDs.count, title: "Friends")
+                        ProfileStatView(value: currentUserViewModel.currentUser.friendsIDs.count, title: "Friends")
                         Divider().frame(height: 40)
-                        ProfileStatView(value: profileViewModel.currentUser.reservedEventsIDs.count + currentUser.createdEventsIDs.count, title: "Events")
+                        ProfileStatView(value: currentUserViewModel.getEventsCount(), title: "Events")
                     }.padding(.trailing)
                 }.padding(.horizontal)
                 HStack {
                     VStack(alignment: .leading){
-                        Text(currentUser.fullname).bold()
+                        Text(currentUserViewModel.currentUser.fullname).bold()
                         
-                        if let bio = currentUser.bio {
+                        if let bio = currentUserViewModel.currentUser.bio {
                             Text(bio)
                         }
                         
@@ -75,14 +74,14 @@ struct CurrentUserProfile: View {
                 Divider()
                 ScrollView {
                     VStack{
-                        SectionAndSelectionsView(title: "Interests", selections: profileViewModel.currentUser.interests).padding(.bottom)
+                        SectionAndSelectionsView(title: "Interests", selections: currentUserViewModel.currentUser.interests).padding(.bottom)
                         
-                        SectionAndSelectionsView(title: "Looking To", selections: profileViewModel.currentUser.lookingTo)
+                        SectionAndSelectionsView(title: "Looking To", selections: currentUserViewModel.currentUser.lookingTo)
                         
                         VStack {
                             
                             Text("Created Events").font(.title2).bold()
-                            HorizontalEventGridView(events: profileViewModel.createdEvents)//.background(.gray)
+                            HorizontalEventGridView(events: currentUserViewModel.getCreatedEvents())//.background(.gray)
                             
                             Divider()
                         }.padding(.bottom)
@@ -92,7 +91,7 @@ struct CurrentUserProfile: View {
                             Text("Communities").font(.title2).bold()
                             
                             LazyVStack(spacing:12) {
-                                ForEach(profileViewModel.communities) { community in
+                                ForEach(currentUserViewModel.getCommunities()) { community in
                                     
                                     NavigationLink(destination: CommunityProfileView(community: community).navigationBarBackButtonHidden(true)) {
                                         CommunityInListView(community: community)
@@ -118,7 +117,7 @@ struct CurrentUserProfile: View {
         }
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(currentUser.username)
+                    Text(currentUserViewModel.currentUser.username)
                         .font(.headline)
                         .accessibilityAddTraits(.isHeader)
                 }
@@ -153,6 +152,6 @@ struct CurrentUserProfile: View {
 }
 struct CurrentUserProfile_Previews: PreviewProvider {
     static var previews: some View {
-        CurrentUserProfile(currentUser: User.MOCK_USERS[0])
+        CurrentUserProfile()
     }
 }
