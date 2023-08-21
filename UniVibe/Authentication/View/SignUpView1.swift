@@ -12,6 +12,7 @@ struct SignUpView1: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var validator = SignUpView1Validator()
     @State var showNextView: Bool = false
+    @Binding var navigationStackPath : NavigationPath
 
     var body: some View {
         NavigationView {
@@ -54,6 +55,7 @@ struct SignUpView1: View {
                     
                 
                 Spacer()
+                
             }
         }.toolbar {
             
@@ -72,7 +74,7 @@ struct SignUpView1: View {
         
             
         }.navigationDestination(isPresented: $showNextView) {
-            SignUpView2().environmentObject(registrationViewModel).navigationBarBackButtonHidden(true)
+            SignUpView2(navigationStackPath: $navigationStackPath).environmentObject(registrationViewModel).navigationBarBackButtonHidden(true)
         }
         
     }
@@ -87,6 +89,7 @@ struct SignUpView1: View {
 
 struct SignUpView1_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView1()
+        //SignUpView1()
+        Text("")
     }
 }

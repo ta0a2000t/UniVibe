@@ -12,10 +12,15 @@ import Firebase
 
 class AuthService {
     @Published var userSession: FirebaseAuth.User?
+    @Published var currentUser: User?
+    
     static let shared = AuthService()
     
     init() {
-        self.userSession = Auth.auth().currentUser
+        print("initializing")
+        Task{
+            try await loadUserData()
+        }
     }
     
     @MainActor
@@ -37,6 +42,10 @@ class AuthService {
     }
 
     func loadUserData() async throws {
+        self.userSession = Auth.auth().currentUser
+        guard let currentUid = self.userSession?.uid else { return }
+        
+        self.currentUser = await UserDataModel.fetchByID(id: currentUid)
         
     }
     

@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct FeedView: View {
+    // don't want to be StateObject because that it keep FeedViewModel listeners On
+    @ObservedObject var feedViewModel = FeedViewModel()
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(feedViewModel.events) { event in
+            // Display event details
+            Text("\(event.title)")
+        }
     }
 }
 

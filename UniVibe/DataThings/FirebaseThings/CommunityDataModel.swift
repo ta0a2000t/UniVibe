@@ -33,22 +33,24 @@ class CommunityDataModel: ObservableObject {
         return success
     }
     
-    static func fetchByID(id: String, completion: @escaping (Community?) -> Void) async {
+    static func fetchByID(id: String) async -> Community? {
         let docRef = FirestoreManager.shared.db.collection("communities").document(id)
-
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                if let data = document.data() {
-                    let communities = self.decodeObj(id: document.documentID, data: data)
-                    completion(communities)
-                }
-
-
-            } else {
-                completion(nil) // Community document does not exist or error occurred
+        
+        do {
+            let document = try await docRef.getDocument()
+            
+            if let data = document.data() {
+                let community = decodeObj(id: document.documentID, data: data)
+                return community
             }
+        } catch {
+            // Handle any errors that occurred while fetching the document
+            print("Error fetching community document: \(error)")
         }
+        
+        return nil
     }
+
 
     
     private static func encodeObj(community: Community) -> [String: Any] {

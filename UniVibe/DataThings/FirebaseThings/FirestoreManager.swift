@@ -16,4 +16,6 @@ class FirestoreManager {
     private init() {
         db = Firestore.firestore()
     }
+    
+
 }

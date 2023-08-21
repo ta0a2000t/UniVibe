@@ -16,8 +16,12 @@ struct LoginView: View {
     let errorMessage: String = "Incorrect Email or Password."
     @State var showErrorAlert: Bool = false
     
+
+    // TODO: use this navigationPath thing to navigate
+    @State var navigationStackPath = NavigationPath()
+
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationStackPath) {
             VStack {
                 Spacer()
                 
@@ -65,7 +69,7 @@ struct LoginView: View {
                 Spacer()
                 
                 NavigationLink {
-                    SignUpView1().navigationBarBackButtonHidden(true)
+                    SignUpView1(navigationStackPath: $navigationStackPath).navigationBarBackButtonHidden(true)
                 } label: {
                     HStack(spacing: 3) {
                         Text("Don't have an account?")
@@ -78,7 +82,10 @@ struct LoginView: View {
             }
         }.modifier(ActivityIndicatorModifier(isLoading: isLoading)).alert("Sign In Failed :(", isPresented: $showErrorAlert) {
             
-            Button("Try Again") {}
+            Button("Try Again") {
+                
+
+            }
         } message: {
             Text(errorMessage)
         }

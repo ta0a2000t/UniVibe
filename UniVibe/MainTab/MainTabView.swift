@@ -8,19 +8,22 @@
 import SwiftUI
 
 struct MainTabView: View {
-    let currentUser: User
     @Environment(\.colorScheme) var colorScheme
     //@EnvironmentObject private var viewModel: UserViewModel
-    
-    @State private var fetchedUser: User? = nil
-    
-    @StateObject var currentUserViewModel = CurrentUserViewModel(currentUser: User.MOCK_USERS[0])
+
+    //@State private var fetchedUser: User? = nil
+
+    @StateObject var profileViewModel: ProfileViewModel
+
+    init(currentUser: User) {
+        self._profileViewModel = StateObject(wrappedValue: ProfileViewModel(currentUser: currentUser))
+    }
 
     var body: some View {
         VStack{
             
             
-
+            /*
             VStack {
                 Text("User Details")
                     .font(.title)
@@ -32,19 +35,14 @@ struct MainTabView: View {
                 } else {
                     Text("Loading user data...")
                         .task {
-                            await UserDataModel.fetchByID(id: "abcuser") { fetchedUser in
-                                self.fetchedUser = fetchedUser
-                            }
+                            self.fetchedUser = await UserDataModel.fetchByID(id: "abcuser")
                         }
                 }
             }
+             */
             
-
-            
-            
-
             TabView {
-                HomeView(currentUser: currentUser).tabItem() {
+                HomeView().environmentObject(profileViewModel).tabItem() {
                     Image(systemName: "house").foregroundColor(.white)
                     //Text("Record")
                 }

@@ -21,8 +21,11 @@
 		192A8BBB2A8C4820004F6302 /* AttendeesDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BBA2A8C4820004F6302 /* AttendeesDetailsView.swift */; };
 		192A8BBF2A8C8F48004F6302 /* TitleAndBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BBE2A8C8F48004F6302 /* TitleAndBodyView.swift */; };
 		192A8BC22A8C957D004F6302 /* MembersDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BC12A8C957D004F6302 /* MembersDetailsView.swift */; };
+		19613C582A91F70400280FDB /* MyDateFormaters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C572A91F70400280FDB /* MyDateFormaters.swift */; };
+		19613C5D2A92EDA900280FDB /* DataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C5C2A92EDA900280FDB /* DataRepository.swift */; };
+		19613C602A93018B00280FDB /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C5F2A93018B00280FDB /* FeedViewModel.swift */; };
 		19A29BF42A8F5DE60042D6A2 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A29BF32A8F5DE60042D6A2 /* FirestoreManager.swift */; };
-		19A29BF62A8F60120042D6A2 /* CurrentUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A29BF52A8F60120042D6A2 /* CurrentUserViewModel.swift */; };
+		19A29BF62A8F60120042D6A2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A29BF52A8F60120042D6A2 /* ProfileViewModel.swift */; };
 		19A29BF82A9071DC0042D6A2 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A29BF72A9071DC0042D6A2 /* UserDataModel.swift */; };
 		19A29BFA2A9072FA0042D6A2 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A29BF92A9072FA0042D6A2 /* ExploreViewModel.swift */; };
 		19A29BFC2A90822D0042D6A2 /* EventDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A29BFB2A90822D0042D6A2 /* EventDataModel.swift */; };
@@ -90,8 +93,11 @@
 		192A8BBA2A8C4820004F6302 /* AttendeesDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendeesDetailsView.swift; sourceTree = "<group>"; };
 		192A8BBE2A8C8F48004F6302 /* TitleAndBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndBodyView.swift; sourceTree = "<group>"; };
 		192A8BC12A8C957D004F6302 /* MembersDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersDetailsView.swift; sourceTree = "<group>"; };
+		19613C572A91F70400280FDB /* MyDateFormaters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDateFormaters.swift; sourceTree = "<group>"; };
+		19613C5C2A92EDA900280FDB /* DataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepository.swift; sourceTree = "<group>"; };
+		19613C5F2A93018B00280FDB /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		19A29BF32A8F5DE60042D6A2 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
-		19A29BF52A8F60120042D6A2 /* CurrentUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserViewModel.swift; sourceTree = "<group>"; };
+		19A29BF52A8F60120042D6A2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		19A29BF72A9071DC0042D6A2 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		19A29BF92A9072FA0042D6A2 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		19A29BFB2A90822D0042D6A2 /* EventDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDataModel.swift; sourceTree = "<group>"; };
@@ -210,6 +216,23 @@
 			path = Community;
 			sourceTree = "<group>";
 		};
+		19613C562A91F6F000280FDB /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				19613C572A91F70400280FDB /* MyDateFormaters.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		19613C5B2A92ED8000280FDB /* DataThings */ = {
+			isa = PBXGroup;
+			children = (
+				19613C5C2A92EDA900280FDB /* DataRepository.swift */,
+				19A29BF22A8F5DAC0042D6A2 /* FirebaseThings */,
+			);
+			path = DataThings;
+			sourceTree = "<group>";
+		};
 		19A29BF22A8F5DAC0042D6A2 /* FirebaseThings */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,12 +295,13 @@
 		19B3C2FB2A8A9B8C00BEFB0E /* UniVibe */ = {
 			isa = PBXGroup;
 			children = (
+				19613C562A91F6F000280FDB /* Utilities */,
 				19CC90F42A9178BE00E98934 /* Extensions */,
 				19A29BFF2A90B92D0042D6A2 /* Authentication */,
-				19A29BF22A8F5DAC0042D6A2 /* FirebaseThings */,
 				190714852A8EFF8D004DAB04 /* GoogleService-Info.plist */,
 				192A8BB22A8C3C5C004F6302 /* CustomDetents */,
 				19B3C3432A8AFF4100BEFB0E /* Modifiers */,
+				19613C5B2A92ED8000280FDB /* DataThings */,
 				19B3C33E2A8AFEEF00BEFB0E /* ProfileViews */,
 				19B3C32E2A8AD51100BEFB0E /* Components */,
 				19B3C3212A8AA44500BEFB0E /* Scripts */,
@@ -519,12 +543,13 @@
 		19E20EF02A8E80A4008C97F6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				19CC90E72A916A7000E98934 /* FormValidation */,
-				19A29BF52A8F60120042D6A2 /* CurrentUserViewModel.swift */,
+				19A29BF52A8F60120042D6A2 /* ProfileViewModel.swift */,
 				19A29BF92A9072FA0042D6A2 /* ExploreViewModel.swift */,
 				19A29C112A912E580042D6A2 /* RegistrationViewModel.swift */,
 				19A29C132A912E6D0042D6A2 /* ContentViewModel.swift */,
 				19CC90DC2A91451100E98934 /* LoginViewModel.swift */,
+				19CC90E72A916A7000E98934 /* FormValidation */,
+				19613C5F2A93018B00280FDB /* FeedViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -667,6 +692,7 @@
 				19D826292A8D5AFD0052AECA /* CreateEventView.swift in Sources */,
 				19A29C022A90BBB20042D6A2 /* LoginView.swift in Sources */,
 				19A29C0C2A90BC5D0042D6A2 /* CompleteSignUpView.swift in Sources */,
+				19613C5D2A92EDA900280FDB /* DataRepository.swift in Sources */,
 				19A29BFE2A9086B20042D6A2 /* CommunityDataModel.swift in Sources */,
 				19B3C3342A8AD5B200BEFB0E /* EditProfileView.swift in Sources */,
 				19CC90DD2A91451100E98934 /* LoginViewModel.swift in Sources */,
@@ -685,6 +711,7 @@
 				19A29C0A2A90BC420042D6A2 /* SignUpView2.swift in Sources */,
 				19CC90F62A9178D100E98934 /* StringExtensions.swift in Sources */,
 				192A8BBF2A8C8F48004F6302 /* TitleAndBodyView.swift in Sources */,
+				19613C602A93018B00280FDB /* FeedViewModel.swift in Sources */,
 				19B3C2FD2A8A9B8C00BEFB0E /* UniVibeApp.swift in Sources */,
 				192A8BAF2A8C304E004F6302 /* EventDateDetailsView.swift in Sources */,
 				192A8BA22A8B5211004F6302 /* PastEventInGridView.swift in Sources */,
@@ -709,10 +736,11 @@
 				192A8B9C2A8B4214004F6302 /* EventProfileView.swift in Sources */,
 				19B3C31E2A8A9EE200BEFB0E /* ChatView.swift in Sources */,
 				19B3C33D2A8AF92C00BEFB0E /* CommunityListView.swift in Sources */,
+				19613C582A91F70400280FDB /* MyDateFormaters.swift in Sources */,
 				19D826242A8D42720052AECA /* UserInListView.swift in Sources */,
 				19B3C3402A8AFF0800BEFB0E /* CommunityProfileView.swift in Sources */,
 				19CC90DF2A914B7000E98934 /* SignUpView3.swift in Sources */,
-				19A29BF62A8F60120042D6A2 /* CurrentUserViewModel.swift in Sources */,
+				19A29BF62A8F60120042D6A2 /* ProfileViewModel.swift in Sources */,
 				192A8BA42A8B538C004F6302 /* TimeHelpers.swift in Sources */,
 				19B3C31C2A8A9ED600BEFB0E /* FeedView.swift in Sources */,
 				19B3C31A2A8A9EC600BEFB0E /* ExploreView.swift in Sources */,

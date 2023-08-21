@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct HomeView: View {
-    let currentUser: User
-    
+    @EnvironmentObject var profileViewModel: ProfileViewModel
+
     @State var showCreateEventView: Bool = false
-    
+
     var body: some View {
         NavigationStack{
             VStack {
                 VStack(alignment:.trailing) {
-                    Text(" \(currentUser.fullname)").font(.title3).bold().padding(.bottom)
+                    Text(" \(profileViewModel.currentUser.fullname)").font(.title3).bold().padding(.bottom)
                     
                     
                     
@@ -28,7 +28,7 @@ struct HomeView: View {
                             
                             LazyVStack(spacing:12) {
                                 
-                                ForEach(currentUser.getReservedEvents()) { event in
+                                ForEach(profileViewModel.reservedEvents) { event in
                                     
                                     NavigationLink(destination: EventProfileView(event: event).navigationBarBackButtonHidden(true)) {
                                         EventInListView(event: event)
@@ -37,7 +37,7 @@ struct HomeView: View {
                                 }
                                 
                             }
-                        }.frame(height: 180)//.background(.gray)
+                        }.frame(height: 180)
                         
                         Divider()
                     }.padding(.bottom)
@@ -45,8 +45,8 @@ struct HomeView: View {
                     
                     VStack {
 
-                        Text("Past Events").font(.title2).bold()
-                        HorizontalEventGridView(events: currentUser.getPastEvents())
+                        Text("Created Events").font(.title2).bold()
+                        HorizontalEventGridView(events: profileViewModel.createdEvents)
                         
                         Divider()
                     }.padding(.bottom)
@@ -56,7 +56,7 @@ struct HomeView: View {
                     
                     HStack {
                         Spacer()
-                        NavigationLink(destination: CreateEventView(creatorID: currentUser.id, isCommunityEvent: false).navigationBarBackButtonHidden(true)) {
+                        NavigationLink(destination: CreateEventView(creatorID: profileViewModel.currentUser.id, isCommunityEvent: false).navigationBarBackButtonHidden(true)) {
                             Text("Create Event")
                                 .font(.headline)
                                 .foregroundColor(.red)
@@ -89,10 +89,10 @@ struct HomeView: View {
 
                     ToolbarItem(placement: .navigationBarTrailing) {
                         NavigationLink {
-                            CurrentUserProfile(currentUser: currentUser).navigationBarBackButtonHidden(true)
+                            CurrentUserProfile(currentUser: profileViewModel.currentUser).navigationBarBackButtonHidden(true)
                         } label: {
                             
-                            if let profileImageURL = currentUser.profileImageURL {
+                            if let profileImageURL = profileViewModel.currentUser.profileImageURL {
                                 Image(profileImageURL)
                                     .resizable()
                                     .frame(width: 40, height: 40)
@@ -101,8 +101,7 @@ struct HomeView: View {
                             } else {
                                 Image(systemName: "person.circle")
                                     .resizable()
-                                    .frame(width: 80, height: 80)
-                                    .background(.gray)
+                                    .frame(width: 40, height: 40)
                                     .clipShape(Circle())
                             }
                         }
@@ -120,6 +119,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(currentUser: User.MOCK_USERS[0])
+        HomeView()
     }
 }

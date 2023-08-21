@@ -45,7 +45,12 @@ struct CreateEventView: View {
     
 
     @ObservedObject var maxAttendeesInput = NumbersOnly()
-
+    
+    @EnvironmentObject var profileViewModel: ProfileViewModel
+    
+    
+    @State var createdEvent: Event? = nil
+    
     var body: some View {
         NavigationView {
             ScrollView(.vertical){
@@ -190,27 +195,26 @@ struct CreateEventView: View {
     
     
     func confirmationAlertButtonClicked() {
-        let event = createEvent()
+        createdEvent = createEvent()
         var success = false
         
         // asyncronous task
         Task {
-            success = await EventDataModel.addToDB(event: event)
+            success = await EventDataModel.addToDB(event: createdEvent!)
+
             if (success) {
                 showCreationSuccessAlert = true
             } else {
                 showCreationFailedAlert = true
             }
         }
-        
-        //user.addCreatedEvent(event: event)
-
-        
+        profileViewModel.addCreatedEvent(event: createdEvent!)
     }
     
     func eventCreationSuccessful() {
         dismiss()
     }
+    
     func eventCreationFailed() {
         
     }

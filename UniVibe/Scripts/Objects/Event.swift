@@ -50,13 +50,23 @@ class Event: Identifiable, Codable {
     init(id: String, data: [String: Any]) {
         self.id = id
         self.creatorID = data["creatorID"] as? String ?? ""
-        self.creationDate = data["creationDate"] as? Date ?? Date()
+        print( data["creationDate"])
+        do {
+             try self.creationDate = MyDateFormaters.decodeDate(from: data["creationDate"] as! String)!
+        } catch {
+            print(data["creationDate"])
+        }
+        
         self.isCommunityEvent = data["isCommunityEvent"] as? Bool ?? false
         
         self.title = data["title"] as? String ?? ""
         self.description = data["description"] as? String ?? ""
         self.imageURL = data["imageURL"] as? String
-        self.date = data["date"] as? Date ?? Date()
+        
+             
+        self.date = MyDateFormaters.decodeDate(from: data["date"] as! String)!
+        
+        
         self.attendees = data["attendees"] as? [String] ?? []
         self.numberOfHours = data["numberOfHours"] as? Int ?? 1
         

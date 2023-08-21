@@ -25,6 +25,7 @@ class RegistrationViewModel: ObservableObject {
 
     
     
+    
     func createUser() async throws {
         let data: [String: Any] = [
             "username": username,
@@ -40,7 +41,26 @@ class RegistrationViewModel: ObservableObject {
         ]
         
         try await AuthService.shared.createUser(email: email, password: password, data: data)
-
+        
+        
+        resetFields()
+    }
+    
+    
+    
+    
+    func resetFields() {
+        username = ""
+        email = ""
+        password = ""
+        fullname = ""
+        bio = ""
+        interests = []
+        lookingTo = []
+        createdEventsIDs = []
+        reservedEventsIDs = []
+        communitiesIDs = []
+        friendsIDs = []
     }
     
 }

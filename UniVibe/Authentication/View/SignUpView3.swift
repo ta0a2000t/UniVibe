@@ -15,7 +15,7 @@ struct SignUpView3: View {
     @StateObject private var validator = SignUpView3Validator()
     
     @State var showNextView: Bool = false
-    
+    @Binding var navigationStackPath :NavigationPath
     var body: some View {
         NavigationView {
             VStack {
@@ -81,7 +81,7 @@ struct SignUpView3: View {
         
             
         }.navigationDestination(isPresented: $showNextView) {
-            CompleteSignUpView().environmentObject(registrationViewModel).navigationBarBackButtonHidden(true)
+            CompleteSignUpView(navigationStackPath: $navigationStackPath).environmentObject(registrationViewModel).navigationBarBackButtonHidden(true)
         }
         
         
@@ -100,6 +100,7 @@ struct SignUpView3: View {
 
 struct SignUpView3_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView3()
+        //SignUpView3()
+        EmptyView()
     }
 }

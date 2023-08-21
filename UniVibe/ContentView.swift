@@ -10,13 +10,14 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var contentViewModel = ContentViewModel()
     @StateObject var registrationViewModel = RegistrationViewModel()
+    @EnvironmentObject var dataRepository: DataRepository
 
     var body: some View {
         Group {
             if contentViewModel.userSession == nil {
                 LoginView().environmentObject(registrationViewModel)
-            } else {
-                MainTabView(currentUser: User.MOCK_USERS[0])
+            } else if let currentUser = contentViewModel.currentUser {
+                MainTabView(currentUser: currentUser)
             }
         }
         

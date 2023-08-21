@@ -15,6 +15,10 @@ struct CurrentUserProfile: View {
 
     let currentUser: User
     @Environment (\.dismiss) var dismiss
+    
+    
+    @EnvironmentObject var profileViewModel: ProfileViewModel
+
     var body: some View {
         NavigationView{
             VStack{
@@ -30,7 +34,6 @@ struct CurrentUserProfile: View {
                         Image(systemName: "person.circle")
                             .resizable()
                             .frame(width: 80, height: 80)
-                            .background(.gray)
                             .clipShape(Circle())
                     }
                     
@@ -39,11 +42,11 @@ struct CurrentUserProfile: View {
                     
                     HStack(spacing: 23) {
                         
-                        ProfileStatView(value: currentUser.communitiesIDs.count, title: "Groups")
+                        ProfileStatView(value: profileViewModel.currentUser.communitiesIDs.count, title: "Groups")
                         Divider().frame(height: 40)
-                        ProfileStatView(value: currentUser.friendsIDs.count, title: "Friends")
+                        ProfileStatView(value: profileViewModel.currentUser.friendsIDs.count, title: "Friends")
                         Divider().frame(height: 40)
-                        ProfileStatView(value: currentUser.reservedEventsIDs.count + currentUser.createdEventsIDs.count, title: "Events")
+                        ProfileStatView(value: profileViewModel.currentUser.reservedEventsIDs.count + currentUser.createdEventsIDs.count, title: "Events")
                     }.padding(.trailing)
                 }.padding(.horizontal)
                 HStack {
@@ -72,14 +75,14 @@ struct CurrentUserProfile: View {
                 Divider()
                 ScrollView {
                     VStack{
-                        SectionAndSelectionsView(title: "Interests", selections: currentUser.interests).padding(.bottom)
+                        SectionAndSelectionsView(title: "Interests", selections: profileViewModel.currentUser.interests).padding(.bottom)
                         
-                        SectionAndSelectionsView(title: "Looking To", selections: currentUser.lookingTo)
+                        SectionAndSelectionsView(title: "Looking To", selections: profileViewModel.currentUser.lookingTo)
                         
                         VStack {
                             
                             Text("Created Events").font(.title2).bold()
-                            HorizontalEventGridView(events: currentUser.getCreatedEvents())//.background(.gray)
+                            HorizontalEventGridView(events: profileViewModel.createdEvents)//.background(.gray)
                             
                             Divider()
                         }.padding(.bottom)
@@ -89,7 +92,7 @@ struct CurrentUserProfile: View {
                             Text("Communities").font(.title2).bold()
                             
                             LazyVStack(spacing:12) {
-                                ForEach(currentUser.getCommunities()) { community in
+                                ForEach(profileViewModel.communities) { community in
                                     
                                     NavigationLink(destination: CommunityProfileView(community: community).navigationBarBackButtonHidden(true)) {
                                         CommunityInListView(community: community)
@@ -140,7 +143,7 @@ struct CurrentUserProfile: View {
             }.sheet(isPresented: $showSettings) {
                 SettingsView()
                     .presentationDetents(
-                        [.medium],
+                        [.height(200)],
                         selection: $settingsDetent
                      )
             }

@@ -14,7 +14,8 @@ struct CompleteSignUpView: View {
     @Environment(\.dismiss) var dismiss
     @State var showCreationFailedAlert: Bool = false
     @State var creationErrorMessage: String = ""
-    
+    @Binding var navigationStackPath : NavigationPath
+
     var body: some View {
         NavigationView{
             
@@ -36,6 +37,9 @@ struct CompleteSignUpView: View {
                         .padding(.vertical, 30)
                     
                     Spacer()
+                    
+                    
+                    
                 }
                 
             
@@ -90,7 +94,8 @@ struct CompleteSignUpView: View {
 
 struct CompleteSignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        CompleteSignUpView()
+        //CompleteSignUpView()
+        EmptyView()
     }
 }
 

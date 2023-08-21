@@ -32,14 +32,14 @@ struct ActivityIndicatorModifier: AnimatableModifier {
                             .blur(radius: self.isLoading ? 3 : 0)
 
                         VStack {
-                            Text("Loading")
-                            ActivityIndicator(isAnimating: .constant(true), style: .large)
+                            Image(systemName: "eyes.inverse").resizable().scaledToFit().padding()
+                            ActivityIndicator(isAnimating: .constant(true), style: .large).padding(.bottom)
                         }
                         .frame(width: geometry.size.width / 2,
                                height: geometry.size.height / 5)
                         .background(Color.secondary.colorInvert())
                         .foregroundColor(Color.primary)
-                        .cornerRadius(20)
+                        .cornerRadius(30)
                         .opacity(self.isLoading ? 1 : 0)
                         .position(x: geometry.frame(in: .local).midX, y: geometry.frame(in: .local).midY)
                     }
