@@ -52,7 +52,7 @@ struct CreateEventView: View {
     @State var createdEvent: Event? = nil
     
     var body: some View {
-        NavigationView {
+        
             ScrollView(.vertical){
                 VStack {
                     PhotosPicker(selection: $selectedImagePickerItem) {
@@ -111,7 +111,7 @@ struct CreateEventView: View {
                     
                 }
                 
-            }
+            
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
@@ -126,15 +126,6 @@ struct CreateEventView: View {
                         HStack {
                             Text("Create Event").bold()
                             Image(systemName: "square.and.pencil")
-                        }
-                        
-                    }
-                    
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            dismiss()
-                        } label: {
-                            Text("Cancel")
                         }
                         
                     }

@@ -12,7 +12,7 @@ import SwiftUI
 struct EventInListView: View {
     let event: Event
     var body: some View {
-        NavigationLink(destination: EventProfileView(event: event).navigationBarBackButtonHidden(true)) {
+        NavigationLink(destination: EventProfileView(event: event, isCurrentUserAttending: CurrentUserViewModel.shared.isAttending(event: event))) {
             
             HStack {
                 VStack(alignment: .leading) {

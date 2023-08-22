@@ -11,7 +11,7 @@ struct CommunityInListView: View {
     let community: Community
     
     var body: some View {
-        NavigationLink(destination: CommunityProfileView(community: community).navigationBarBackButtonHidden(true)) {
+        NavigationLink(destination: CommunityProfileView(community: community)) {
             
             VStack{
                 HStack {

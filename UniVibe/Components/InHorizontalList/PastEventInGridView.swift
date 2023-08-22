@@ -16,7 +16,7 @@ struct PastEventInGridView: View {
     }
     
     var body: some View {
-        NavigationLink(destination: EventProfileView(event: event).navigationBarBackButtonHidden(true)) {
+        NavigationLink(destination: EventProfileView(event: event, isCurrentUserAttending: CurrentUserViewModel.shared.isAttending(event: event))) {
             
             VStack(alignment: .leading) {
                 

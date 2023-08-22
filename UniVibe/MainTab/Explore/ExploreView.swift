@@ -25,7 +25,7 @@ struct ExploreView: View {
 
     var body: some View {
         
-        NavigationView {
+        
             ZStack(alignment: .top) {
 
                 VStack {
@@ -67,7 +67,7 @@ struct ExploreView: View {
                     }
                 }
             }.linearGradientBackground()
-        }
+        
     }
     
     

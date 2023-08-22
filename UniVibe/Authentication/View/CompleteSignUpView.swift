@@ -17,7 +17,7 @@ struct CompleteSignUpView: View {
     @Binding var navigationStackPath : NavigationPath
 
     var body: some View {
-        NavigationView{
+    
             
                 VStack {
                     Spacer()
@@ -43,15 +43,7 @@ struct CompleteSignUpView: View {
                 }
                 
             
-        }.toolbar {
-            
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left").foregroundColor(.purple)
-                }
-            }
+        .toolbar {
             
             ToolbarItem(placement: .principal) {
                 LogoOnTopMiddleView()

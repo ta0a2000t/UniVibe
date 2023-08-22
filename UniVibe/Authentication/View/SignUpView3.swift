@@ -17,7 +17,7 @@ struct SignUpView3: View {
     @State var showNextView: Bool = false
     @Binding var navigationStackPath :NavigationPath
     var body: some View {
-        NavigationView {
+        
             VStack {
                 Spacer()
                 
@@ -64,21 +64,13 @@ struct SignUpView3: View {
 
                 
             }
-        }.toolbar {
-            
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left").foregroundColor(.purple)
-                }
-            }
+        .toolbar {
             
             ToolbarItem(placement: .principal) {
                 LogoOnTopMiddleView()
             }
         }.navigationDestination(isPresented: $showNextView) {
-            CompleteSignUpView(navigationStackPath: $navigationStackPath).environmentObject(registrationViewModel).navigationBarBackButtonHidden(true)
+            CompleteSignUpView(navigationStackPath: $navigationStackPath).environmentObject(registrationViewModel)
         }
         
         

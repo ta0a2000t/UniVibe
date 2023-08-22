@@ -10,7 +10,7 @@ import SwiftUI
 struct UserInListView: View {
     let user: User
     var body: some View {
-        NavigationLink(destination: UserProfileView(user: user).navigationBarBackButtonHidden(true)) {
+        NavigationLink(destination: UserProfileView(user: user)) {
                 HStack {
                     if let profileImageURL = user.profileImageURL {
                         Image(profileImageURL).resizable().scaledToFit().frame(width: 55, height: 55).clipShape(RoundedRectangle(cornerRadius: 10))

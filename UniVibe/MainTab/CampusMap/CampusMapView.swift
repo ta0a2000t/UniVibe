@@ -57,7 +57,7 @@ struct CampusMapView: View {
                         mapSettings.resetRegion()
                     }) {
                         Image(systemName: "location.fill")
-                            .font(.system(size: 20, weight: .bold)).shadow(radius: 4) // Set the font and size
+                            .font(.system(size: 24, weight: .bold)).shadow(radius: 4) // Set the font and size
                     }.padding()
                     .cornerRadius(15) // Apply corner radius for a rounded look
                     .shadow(radius: 7).buttonStyle(GrowingButton(enabledColor: .purple))// Add a shadow for a raised appearance
@@ -77,7 +77,7 @@ struct CampusMapView: View {
                             }.padding([.top, .leading, .trailing], 16)
                     }
                 }*/.sheet(item: $selectedEvent) { event in
-                    EventProfileView(event: event).padding(.top)
+                    NavigationView{EventProfileView(event: event, isCurrentUserAttending: CurrentUserViewModel.shared.isAttending(event: event))}
                 }.linearGradientBackground()
     }
 }

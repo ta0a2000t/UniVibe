@@ -16,7 +16,7 @@ struct EditProfileView: View {
     @State var bio: String = ""
     @State var selectedImage: PhotosPickerItem?
     var body: some View {
-        NavigationView {
+        
             
             VStack {
                 HStack {
@@ -70,7 +70,7 @@ struct EditProfileView: View {
             }
             
             
-        }
+        
     }
 }
 

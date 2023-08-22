@@ -69,7 +69,7 @@ struct LoginView: View {
                 Spacer()
                 
                 NavigationLink {
-                    SignUpView1(navigationStackPath: $navigationStackPath).navigationBarBackButtonHidden(true)
+                    SignUpView1(navigationStackPath: $navigationStackPath)
                 } label: {
                     HStack(spacing: 3) {
                         Text("Don't have an account?")

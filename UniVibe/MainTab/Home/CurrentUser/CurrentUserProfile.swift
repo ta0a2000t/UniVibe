@@ -19,11 +19,11 @@ struct CurrentUserProfile: View {
     @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
 
     var body: some View {
-        NavigationView{
+        
             VStack{
                 HStack {
                     // prof pic
-                    if let profileImageURL = currentUserViewModel.currentUser.profileImageURL {
+                    if let profileImageURL = currentUserViewModel.user.profileImageURL {
                         Image(profileImageURL)
                             .resizable()
                             .frame(width: 80, height: 80)
@@ -41,18 +41,18 @@ struct CurrentUserProfile: View {
                     
                     HStack(spacing: 23) {
                         
-                        ProfileStatView(value: currentUserViewModel.currentUser.communitiesIDs.count, title: "Groups")
+                        ProfileStatView(value: currentUserViewModel.user.communitiesIDs.count, title: "Groups")
                         Divider().frame(height: 40)
-                        ProfileStatView(value: currentUserViewModel.currentUser.friendsIDs.count, title: "Friends")
+                        ProfileStatView(value: currentUserViewModel.user.friendsIDs.count, title: "Friends")
                         Divider().frame(height: 40)
                         ProfileStatView(value: currentUserViewModel.getEventsCount(), title: "Events")
                     }.padding(.trailing)
                 }.padding(.horizontal)
                 HStack {
                     VStack(alignment: .leading){
-                        Text(currentUserViewModel.currentUser.fullname).bold()
+                        Text(currentUserViewModel.user.fullname).bold()
                         
-                        if let bio = currentUserViewModel.currentUser.bio {
+                        if let bio = currentUserViewModel.user.bio {
                             Text(bio)
                         }
                         
@@ -74,9 +74,9 @@ struct CurrentUserProfile: View {
                 Divider()
                 ScrollView {
                     VStack{
-                        SectionAndSelectionsView(title: "Interests", selections: currentUserViewModel.currentUser.interests).padding(.bottom)
+                        SectionAndSelectionsView(title: "Interests", selections: currentUserViewModel.user.interests).padding(.bottom)
                         
-                        SectionAndSelectionsView(title: "Looking To", selections: currentUserViewModel.currentUser.lookingTo)
+                        SectionAndSelectionsView(title: "Looking To", selections: currentUserViewModel.user.lookingTo)
                         
                         VStack {
                             
@@ -105,12 +105,11 @@ struct CurrentUserProfile: View {
                 Spacer()
 
             }
-        }.sheet(isPresented: $showEditProfile) {
+        .sheet(isPresented: $showEditProfile) {
             EditProfileView()
-        }
-            .toolbar {
+        }.toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(currentUserViewModel.currentUser.username)
+                    Text(currentUserViewModel.user.username)
                         .font(.headline)
                         .accessibilityAddTraits(.isHeader)
                 }
@@ -119,15 +118,6 @@ struct CurrentUserProfile: View {
                         showSettings.toggle()
                     } label: {
                         Image(systemName: "line.3.horizontal")
-                    }
-                    
-                }
-                
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "house.circle.fill").resizable()
                     }
                     
                 }

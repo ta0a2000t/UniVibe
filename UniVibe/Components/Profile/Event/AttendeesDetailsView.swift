@@ -16,7 +16,7 @@ struct AttendeesDetailsView: View {
     
     
     var body: some View {
-        NavigationLink(destination: ListOfAttendeesView(attendees: attendeesDetailsViewModel.event.attendees).navigationBarBackButtonHidden(true)) {
+        NavigationLink(destination: ListOfAttendeesView(attendees: attendeesDetailsViewModel.event.attendees)) {
             VStack {
 
                 

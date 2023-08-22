@@ -14,10 +14,10 @@ struct HomeView: View {
     
     
     var body: some View {
-        NavigationView{
+        //NavigationView{
             VStack {
                 VStack(alignment:.trailing) {
-                    Text(" \(currentUserViewModel.currentUser.fullname)").font(.title3).bold().padding(.bottom)
+                    Text(" \(currentUserViewModel.user.fullname)").font(.title3).bold().padding(.bottom)
                     
                     
                     
@@ -27,14 +27,14 @@ struct HomeView: View {
                         Text("Reserved Events").font(.title2).bold()
                         
                         ScrollView{
-                            EventListView(events: Event.MOCK)
+                            EventListView(events: CurrentUserViewModel.shared.getReservedEvents())
                         }.frame(maxHeight: 200)
                     }.padding(.bottom)
                     
                     
                     VStack {
                         Text("Created Events").font(.title2).bold()
-                        HorizontalEventGridView(events: Event.MOCK)
+                        HorizontalEventGridView(events: CurrentUserViewModel.shared.getCreatedEvents())
                         
                         Divider()
                     }.padding(.bottom)
@@ -44,7 +44,7 @@ struct HomeView: View {
                     
                     HStack {
                         Spacer()
-                        NavigationLink(destination: CreateEventView(creatorID: currentUserViewModel.currentUser.id, isCommunityEvent: false).navigationBarBackButtonHidden(true)) {
+                        NavigationLink(destination: CreateEventView(creatorID: currentUserViewModel.user.id, isCommunityEvent: false)) {
                             Text("Create Event")
                                 .font(.headline)
                                 .foregroundColor(.purple)
@@ -78,10 +78,10 @@ struct HomeView: View {
 
                     ToolbarItem(placement: .navigationBarTrailing) {
                         NavigationLink {
-                            CurrentUserProfile().environmentObject(currentUserViewModel).navigationBarBackButtonHidden(true)
+                            CurrentUserProfile().environmentObject(currentUserViewModel)
                         } label: {
                             
-                            if let profileImageURL = currentUserViewModel.currentUser.profileImageURL {
+                            if let profileImageURL = currentUserViewModel.user.profileImageURL {
                                 Image(profileImageURL)
                                     .resizable()
                                     .frame(width: 40, height: 40)
@@ -101,7 +101,7 @@ struct HomeView: View {
             }.linearGradientBackground()
 
             
-        }
+        //}
         
     }
 }

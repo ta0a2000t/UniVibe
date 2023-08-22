@@ -13,23 +13,23 @@ import FirebaseFirestore
 
 
 class UserViewModel: ObservableObject {
-    private var userListener: ListenerRegistration? // Store the listener instance
+    var userListener: ListenerRegistration? // Store the listener instance
 
-    @Published var currentUser: User
+    @Published var user: User
     
     
-    init(currentUser: User) {
+    init(user: User) {
         
-        self.currentUser = currentUser
+        self.user = user
         setupListeners()
     }
     
     private func setupListeners() {
         
         // Listen for changes to current user document
-        userListener = UserDataModel.listenForChangesByID(userID: currentUser.id) { updatedUser in
+        userListener = UserDataModel.listenForChangesByID(userID: user.id) { updatedUser in
             DispatchQueue.main.async {
-                self.currentUser = updatedUser
+                self.user = updatedUser
             }
         }
     }
@@ -46,46 +46,69 @@ class UserViewModel: ObservableObject {
     
     
     func getReservedEvents() -> [Event] {
-        return DataRepository.getEventsByIDs(ids: self.currentUser.reservedEventsIDs)
+        return DataRepository.getEventsByIDs(ids: self.user.reservedEventsIDs)
     }
     
     func getCreatedEvents() -> [Event] {
-        return DataRepository.getEventsByIDs(ids: self.currentUser.createdEventsIDs)
+        return DataRepository.getEventsByIDs(ids: self.user.createdEventsIDs)
     }
     
     func getCommunities() -> [Community] {
-        return DataRepository.getCommunitiesByIDs(ids: self.currentUser.communitiesIDs)
+        return DataRepository.getCommunitiesByIDs(ids: self.user.communitiesIDs)
     }
     
     func getFriends() -> [User] {
-        return DataRepository.getUsersByIDs(ids: self.currentUser.friendsIDs)
+        return DataRepository.getUsersByIDs(ids: self.user.friendsIDs)
     }
     
     func getEventsCount() -> Int {
-        let uniqueEventIDs = Set(currentUser.reservedEventsIDs + currentUser.createdEventsIDs)
+        let uniqueEventIDs = Set(user.reservedEventsIDs + user.createdEventsIDs)
         return uniqueEventIDs.count
     }
     
     func getFriendsCount() -> Int {
-        return currentUser.friendsIDs.count
+        return user.friendsIDs.count
     }
     
     func getCommunitiesCount() -> Int {
-        return currentUser.communitiesIDs.count
+        return user.communitiesIDs.count
     }
-    
 }
 
 
-class CurrentUserViewModel: UserViewModel {
+import Combine
+
+class CurrentUserViewModel: ObservableObject {
+    static let shared = CurrentUserViewModel()
+    var userListener: ListenerRegistration? // Store the listener instance
+    @Published var user: User
+    
+    private init() {
+        // Initialize currentUser here, assuming it's guaranteed to be non-nil
+        user = AuthService.shared.currentUser!
+        setupListeners()
+    }
+    
+    // Call this method when the view model is deallocated
+    deinit {
+        removeListeners()
+    }
+    
+    
+    func isAttending(event: Event) -> Bool {
+        return user.reservedEventsIDs.contains(event.id)
+    }
+    
+    
+    
     func addCreatedEvent(event: Event) {
         // upload to db
         Task{
-            await UserDataModel.appendItemToList(userID: currentUser.id, propertyName: "createdEventsIDs", item: event.id)
+            await UserDataModel.appendItemToList(userID: user.id, propertyName: "createdEventsIDs", item: event.id)
         }
         
         // update disk
-        self.currentUser.createdEventsIDs.append(event.id)
+        self.user.createdEventsIDs.append(event.id)
     }
     
     func addReservedEvent(event: Event) {
@@ -93,33 +116,128 @@ class CurrentUserViewModel: UserViewModel {
         
         // upload to db
         Task{
-            await UserDataModel.appendItemToList(userID: currentUser.id, propertyName: "reservedEventsIDs", item: event.id)
+            await UserDataModel.appendItemToList(userID: user.id, propertyName: "reservedEventsIDs", item: event.id)
         }
         
         // update disk
-        self.currentUser.reservedEventsIDs.append(event.id)
+        self.user.reservedEventsIDs.append(event.id)
     }
     
     func addCommunity(community: Community) {
         // upload to db
         Task{
-            await UserDataModel.appendItemToList(userID: currentUser.id, propertyName: "communitiesIDs", item: community.id)
+            await UserDataModel.appendItemToList(userID: self.user.id, propertyName: "communitiesIDs", item: community.id)
         }
         
         // update disk
-        self.currentUser.communitiesIDs.append(community.id)
+        self.user.communitiesIDs.append(community.id)
     }
     
     
     
     
-    func addFriend(user: User) {
+    func addFriend(other: User) {
         // upload to db
         Task{
-            await UserDataModel.appendItemToList(userID: currentUser.id, propertyName: "friendsIDs", item: user.id)
+            await UserDataModel.appendItemToList(userID: user.id, propertyName: "friendsIDs", item: other.id)
         }
         
         // update disk
-        self.currentUser.friendsIDs.append(user.id)
+        self.user.friendsIDs.append(other.id)
     }
+    
+    
+    func removeReservedEvent(event: Event) {
+        user.reservedEventsIDs.removeAll { $0 == event.id }
+        
+        // upload to db
+        Task{
+            await UserDataModel.updateUserProperty(userID: user.id ,propertyName: "reservedEventsIDs",newValue: user.reservedEventsIDs)
+        }
+        
+    }
+    
+    func removeCreatedEvent(event: Event) {
+        user.reservedEventsIDs.removeAll { $0 == event.id }
+        
+        // upload to db
+        Task{
+            await UserDataModel.updateUserProperty(userID: user.id ,propertyName: "createdEventsIDs",newValue: user.createdEventsIDs)
+        }
+        
+    }
+    
+    
+    func removeCommunity(community: Community) {
+        user.communitiesIDs.removeAll { $0 == community.id }
+        
+        // upload to db
+        Task{
+            await UserDataModel.updateUserProperty(userID: user.id ,propertyName: "communitiesIDs",newValue: user.communitiesIDs)
+        }
+        
+    }
+    
+    func removeFriend(friend: User) {
+        user.friendsIDs.removeAll { $0 == friend.id }
+        
+        // upload to db
+        Task{
+            await UserDataModel.updateUserProperty(userID: user.id ,propertyName: "friendsIDs", newValue: user.friendsIDs)
+        }
+    }
+    
+    
+
+    
+    private func setupListeners() {
+        
+        // Listen for changes to current user document
+        userListener = UserDataModel.listenForChangesByID(userID: user.id) { updatedUser in
+            DispatchQueue.main.async {
+                self.user = updatedUser
+            }
+        }
+    }
+    
+    
+    
+
+    
+    private func removeListeners() {
+        // Remove the Firestore listener for the current user
+        userListener?.remove()
+    }
+    
+    
+    func getReservedEvents() -> [Event] {
+        return DataRepository.getEventsByIDs(ids: self.user.reservedEventsIDs)
+    }
+    
+    func getCreatedEvents() -> [Event] {
+        return DataRepository.getEventsByIDs(ids: self.user.createdEventsIDs)
+    }
+    
+    func getCommunities() -> [Community] {
+        return DataRepository.getCommunitiesByIDs(ids: self.user.communitiesIDs)
+    }
+    
+    func getFriends() -> [User] {
+        return DataRepository.getUsersByIDs(ids: self.user.friendsIDs)
+    }
+    
+    func getEventsCount() -> Int {
+        let uniqueEventIDs = Set(user.reservedEventsIDs + user.createdEventsIDs)
+        return uniqueEventIDs.count
+    }
+    
+    func getFriendsCount() -> Int {
+        return user.friendsIDs.count
+    }
+    
+    func getCommunitiesCount() -> Int {
+        return user.communitiesIDs.count
+    }
+    
+    
 }

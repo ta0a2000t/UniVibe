@@ -12,7 +12,6 @@ struct CommunityProfileView: View {
     @Environment (\.dismiss) var dismiss
 
     var body: some View {
-        NavigationView {
             
             ScrollView {
                 VStack(alignment: .leading){
@@ -52,22 +51,12 @@ struct CommunityProfileView: View {
             
             
             
-        }
+        
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Image(systemName: "person.3.sequence.fill")
             }
-            
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left").resizable()
-                }
-                
-            }
-            
-        }.toolbarBackground(.visible)
+        }
     }
 }
 

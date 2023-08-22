@@ -17,18 +17,7 @@ struct ListOfAttendeesView: View {
     }
     
     var body: some View {
-        StyledScrollableFullScreenView(scrollViewContent: scrollViewContent, title: "Attendees").toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "chevron.left").resizable()
-                }
-                
-            }
-            
-            
-        }
+        StyledScrollableFullScreenView(scrollViewContent: scrollViewContent, title: "Attendees")
     }
     
     var scrollViewContent: some View {

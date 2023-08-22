@@ -14,9 +14,9 @@ struct FeedView: View {
     @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
 
     var body: some View {
-        NavigationView {
+        
             StyledScrollableFullScreenView(scrollViewContent: EventListView(events: feedViewModel.getSortedEvents()), title: "Feed")
-        }
+        
     }
 }
 

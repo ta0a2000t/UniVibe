@@ -20,7 +20,7 @@ struct SettingsView: View {
     ]
     
     var body: some View {
-        NavigationView {
+        
              List {
                ForEach(settings, id: \.self) { setting in
                    Button {
@@ -38,7 +38,7 @@ struct SettingsView: View {
              .navigationTitle("settings")
                
             
-        }
+        
     }
     
 
