@@ -17,17 +17,19 @@ class ExploreViewModel: ObservableObject {
     private var userListener: ListenerRegistration?
     private var communityListener: ListenerRegistration?
 
+    
+    
     init() {
         // Initialize users and communities based on DataRepository
         users = DataRepository.shared.users
         communities = DataRepository.shared.communities
         
         
-        DataRepository.shared.$users.sink { [weak self] updatedUsers in
+        DataRepository.shared.$users.receive(on: DispatchQueue.main).sink { [weak self] updatedUsers in
             self?.users = updatedUsers
         }.store(in: &cancellables)
 
-        DataRepository.shared.$communities.sink { [weak self] updatedCommunities in
+        DataRepository.shared.$communities.receive(on: DispatchQueue.main).sink { [weak self] updatedCommunities in
             self?.communities = updatedCommunities
         }.store(in: &cancellables)
 

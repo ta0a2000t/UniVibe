@@ -89,7 +89,7 @@ extension Community {
                 print("Error decoding Community: \(error)")
             }
         }*/
-        result.append(Community(id: UUID().uuidString, fullname: "Music Lovers", description: "For those who love music.", profileImageURL: nil, membersIDs: [UUID().uuidString, UUID().uuidString], email: "musiclovers@example.com", organizerIDs: [], interests: ["Board Games", "Card Games", "Fun Games", "Games"]))
+        result.append(Community(id: UUID().uuidString, fullname: "Music Lovers", description: "For those who love music.", profileImageURL: "zuckerberg", membersIDs: [UUID().uuidString, UUID().uuidString], email: "musiclovers@example.com", organizerIDs: [], interests: ["Board Games", "Card Games", "Fun Games", "Games"]))
         result.append(Community(id: UUID().uuidString, fullname: "Music Lovers", description: "For those who love music.", profileImageURL: nil, membersIDs: [UUID().uuidString, UUID().uuidString], email: "musiclovers@example.com", organizerIDs: [], interests: ["Board Games", "Card Games", "Fun Games", "Games"]))
         result.append(Community(id: UUID().uuidString, fullname: "Music Lovers", description: "For those who love music.", profileImageURL: nil, membersIDs: [UUID().uuidString, UUID().uuidString], email: "musiclovers@example.com", organizerIDs: [], interests: ["Board Games", "Card Games", "Fun Games", "Games"]))
 

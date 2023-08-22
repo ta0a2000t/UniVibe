@@ -45,7 +45,7 @@ struct CommunityProfileView: View {
                     
                 }
                 
-            }
+            }.linearGradientBackground()
             
 
             
@@ -73,6 +73,8 @@ struct CommunityProfileView: View {
 
 struct CommunityProfileView_Previews: PreviewProvider {
     static var previews: some View {
+        
         CommunityProfileView(community: Community.MOCK[0])
+        
     }
 }

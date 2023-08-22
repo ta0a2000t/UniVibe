@@ -15,7 +15,7 @@ import FirebaseFirestore
 
 // the updates to events come whenever (DataRepository.events) changes
 class FeedViewModel: ObservableObject {
-    @Published var events: [Event]
+    @Published private var events: [Event]
 
     private var cancellables: Set<AnyCancellable> = []
     private var listener: ListenerRegistration? // Store the listener instance
@@ -26,7 +26,7 @@ class FeedViewModel: ObservableObject {
 
         
         //  using the sink operator to listen for changes in DataRepository.shared.$events (which is a Publisher). When changes occur, the closure inside sink is executed
-        DataRepository.shared.$events.sink { [weak self] updatedEvents in
+        DataRepository.shared.$events.receive(on: DispatchQueue.main).sink { [weak self] updatedEvents in
             self?.events = updatedEvents
         }.store(in: &cancellables)
 
@@ -35,6 +35,14 @@ class FeedViewModel: ObservableObject {
         listenForChanges()
         
     }
+    
+    // from new to old
+    func getSortedEvents() -> [Event] {
+        return self.events.sorted { event1, event2 in
+            return event1.creationDate > event2.creationDate
+        }
+    }
+
     
     
     deinit {

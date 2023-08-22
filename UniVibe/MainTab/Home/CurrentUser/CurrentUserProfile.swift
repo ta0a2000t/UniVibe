@@ -89,16 +89,9 @@ struct CurrentUserProfile: View {
                         
                         VStack(alignment: .center) {
                             Text("Communities").font(.title2).bold()
+                            CommunityListView(communities: Community.MOCK)
                             
-                            LazyVStack(spacing:12) {
-                                ForEach(currentUserViewModel.getCommunities()) { community in
-                                    
-                                    NavigationLink(destination: CommunityProfileView(community: community).navigationBarBackButtonHidden(true)) {
-                                        CommunityInListView(community: community)
-                                        
-                                    }
-                                }
-                            }
+                            
                             
                             
                             
@@ -152,6 +145,7 @@ struct CurrentUserProfile: View {
 }
 struct CurrentUserProfile_Previews: PreviewProvider {
     static var previews: some View {
-        CurrentUserProfile()
+        //CurrentUserProfile()
+        EmptyView()
     }
 }

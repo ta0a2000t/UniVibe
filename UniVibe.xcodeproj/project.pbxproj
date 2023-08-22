@@ -24,6 +24,14 @@
 		19613C582A91F70400280FDB /* MyDateFormaters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C572A91F70400280FDB /* MyDateFormaters.swift */; };
 		19613C5D2A92EDA900280FDB /* DataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C5C2A92EDA900280FDB /* DataRepository.swift */; };
 		19613C602A93018B00280FDB /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C5F2A93018B00280FDB /* FeedViewModel.swift */; };
+		19613C622A9399D400280FDB /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C612A9399D400280FDB /* EventListView.swift */; };
+		19613C642A941E5F00280FDB /* StyledScrollableFullScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C632A941E5F00280FDB /* StyledScrollableFullScreenView.swift */; };
+		19613C672A942A3200280FDB /* EventProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C662A942A3200280FDB /* EventProfileViewModel.swift */; };
+		19613C692A942A4600280FDB /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C682A942A4600280FDB /* UserProfileViewModel.swift */; };
+		19613C6B2A942A5400280FDB /* CommunityProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C6A2A942A5400280FDB /* CommunityProfileViewModel.swift */; };
+		19613C6F2A94365200280FDB /* ListOfAttendeesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C6E2A94365200280FDB /* ListOfAttendeesView.swift */; };
+		19613C732A943F2800280FDB /* MapWithPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C722A943F2800280FDB /* MapWithPinView.swift */; };
+		19613C792A9491CF00280FDB /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C782A9491CF00280FDB /* ViewExtensions.swift */; };
 		19A29BF42A8F5DE60042D6A2 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A29BF32A8F5DE60042D6A2 /* FirestoreManager.swift */; };
 		19A29BF62A8F60120042D6A2 /* CurrentUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A29BF52A8F60120042D6A2 /* CurrentUserViewModel.swift */; };
 		19A29BF82A9071DC0042D6A2 /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19A29BF72A9071DC0042D6A2 /* UserDataModel.swift */; };
@@ -96,6 +104,14 @@
 		19613C572A91F70400280FDB /* MyDateFormaters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDateFormaters.swift; sourceTree = "<group>"; };
 		19613C5C2A92EDA900280FDB /* DataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepository.swift; sourceTree = "<group>"; };
 		19613C5F2A93018B00280FDB /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		19613C612A9399D400280FDB /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
+		19613C632A941E5F00280FDB /* StyledScrollableFullScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyledScrollableFullScreenView.swift; sourceTree = "<group>"; };
+		19613C662A942A3200280FDB /* EventProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventProfileViewModel.swift; sourceTree = "<group>"; };
+		19613C682A942A4600280FDB /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
+		19613C6A2A942A5400280FDB /* CommunityProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityProfileViewModel.swift; sourceTree = "<group>"; };
+		19613C6E2A94365200280FDB /* ListOfAttendeesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfAttendeesView.swift; sourceTree = "<group>"; };
+		19613C722A943F2800280FDB /* MapWithPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWithPinView.swift; sourceTree = "<group>"; };
+		19613C782A9491CF00280FDB /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		19A29BF32A8F5DE60042D6A2 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		19A29BF52A8F60120042D6A2 /* CurrentUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserViewModel.swift; sourceTree = "<group>"; };
 		19A29BF72A9071DC0042D6A2 /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
@@ -173,20 +189,20 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		192A8BA02A8B51EA004F6302 /* InGrid */ = {
+		192A8BA02A8B51EA004F6302 /* InHorizontalList */ = {
 			isa = PBXGroup;
 			children = (
 				192A8BA12A8B5211004F6302 /* PastEventInGridView.swift */,
 			);
-			path = InGrid;
+			path = InHorizontalList;
 			sourceTree = "<group>";
 		};
-		192A8BA92A8B5BCA004F6302 /* Grid */ = {
+		192A8BA92A8B5BCA004F6302 /* HorizontalList */ = {
 			isa = PBXGroup;
 			children = (
 				192A8BAA2A8B5BE2004F6302 /* HorizontalEventGridView.swift */,
 			);
-			path = Grid;
+			path = HorizontalList;
 			sourceTree = "<group>";
 		};
 		192A8BB22A8C3C5C004F6302 /* CustomDetents */ = {
@@ -231,6 +247,51 @@
 				19A29BF22A8F5DAC0042D6A2 /* FirebaseThings */,
 			);
 			path = DataThings;
+			sourceTree = "<group>";
+		};
+		19613C652A942A1600280FDB /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				19A29BF52A8F60120042D6A2 /* CurrentUserViewModel.swift */,
+				19613C682A942A4600280FDB /* UserProfileViewModel.swift */,
+				19613C662A942A3200280FDB /* EventProfileViewModel.swift */,
+				19613C6A2A942A5400280FDB /* CommunityProfileViewModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		19613C6C2A9435C000280FDB /* FullScreenViews */ = {
+			isa = PBXGroup;
+			children = (
+				19613C702A94369B00280FDB /* Templates */,
+				19613C6D2A94362C00280FDB /* NavigatableLists */,
+				19B3C33E2A8AFEEF00BEFB0E /* ProfileViews */,
+			);
+			path = FullScreenViews;
+			sourceTree = "<group>";
+		};
+		19613C6D2A94362C00280FDB /* NavigatableLists */ = {
+			isa = PBXGroup;
+			children = (
+				19613C6E2A94365200280FDB /* ListOfAttendeesView.swift */,
+			);
+			path = NavigatableLists;
+			sourceTree = "<group>";
+		};
+		19613C702A94369B00280FDB /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				19613C632A941E5F00280FDB /* StyledScrollableFullScreenView.swift */,
+			);
+			path = Templates;
+			sourceTree = "<group>";
+		};
+		19613C712A943F1800280FDB /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				19613C722A943F2800280FDB /* MapWithPinView.swift */,
+			);
+			path = Maps;
 			sourceTree = "<group>";
 		};
 		19A29BF22A8F5DAC0042D6A2 /* FirebaseThings */ = {
@@ -302,8 +363,8 @@
 				192A8BB22A8C3C5C004F6302 /* CustomDetents */,
 				19B3C3432A8AFF4100BEFB0E /* Modifiers */,
 				19613C5B2A92ED8000280FDB /* DataThings */,
-				19B3C33E2A8AFEEF00BEFB0E /* ProfileViews */,
 				19B3C32E2A8AD51100BEFB0E /* Components */,
+				19613C6C2A9435C000280FDB /* FullScreenViews */,
 				19B3C3212A8AA44500BEFB0E /* Scripts */,
 				19B3C30D2A8A9C2700BEFB0E /* MainTab */,
 				19B3C2FC2A8A9B8C00BEFB0E /* UniVibeApp.swift */,
@@ -426,10 +487,11 @@
 		19B3C32E2A8AD51100BEFB0E /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				192A8BA92A8B5BCA004F6302 /* Grid */,
-				192A8BA02A8B51EA004F6302 /* InGrid */,
-				19B3C33B2A8AF90500BEFB0E /* List */,
-				19B3C33A2A8AF8FA00BEFB0E /* InList */,
+				19613C712A943F1800280FDB /* Maps */,
+				192A8BA92A8B5BCA004F6302 /* HorizontalList */,
+				192A8BA02A8B51EA004F6302 /* InHorizontalList */,
+				19B3C33B2A8AF90500BEFB0E /* VerticalList */,
+				19B3C33A2A8AF8FA00BEFB0E /* InVerticalList */,
 				19B3C32F2A8AD51B00BEFB0E /* Profile */,
 				19CC90F22A9173A900E98934 /* LogoOnTopMiddleView.swift */,
 			);
@@ -458,22 +520,23 @@
 			path = CurrentUser;
 			sourceTree = "<group>";
 		};
-		19B3C33A2A8AF8FA00BEFB0E /* InList */ = {
+		19B3C33A2A8AF8FA00BEFB0E /* InVerticalList */ = {
 			isa = PBXGroup;
 			children = (
 				19B3C3382A8AF67E00BEFB0E /* CommunityInListView.swift */,
 				19B3C3462A8B1C2000BEFB0E /* EventInListView.swift */,
 				19D826232A8D42720052AECA /* UserInListView.swift */,
 			);
-			path = InList;
+			path = InVerticalList;
 			sourceTree = "<group>";
 		};
-		19B3C33B2A8AF90500BEFB0E /* List */ = {
+		19B3C33B2A8AF90500BEFB0E /* VerticalList */ = {
 			isa = PBXGroup;
 			children = (
 				19B3C33C2A8AF92C00BEFB0E /* CommunityListView.swift */,
+				19613C612A9399D400280FDB /* EventListView.swift */,
 			);
-			path = List;
+			path = VerticalList;
 			sourceTree = "<group>";
 		};
 		19B3C33E2A8AFEEF00BEFB0E /* ProfileViews */ = {
@@ -520,6 +583,7 @@
 			isa = PBXGroup;
 			children = (
 				19CC90F52A9178D100E98934 /* StringExtensions.swift */,
+				19613C782A9491CF00280FDB /* ViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -543,8 +607,8 @@
 		19E20EF02A8E80A4008C97F6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				19613C652A942A1600280FDB /* Profile */,
 				19A29C132A912E6D0042D6A2 /* ContentViewModel.swift */,
-				19A29BF52A8F60120042D6A2 /* CurrentUserViewModel.swift */,
 				19A29BF92A9072FA0042D6A2 /* ExploreViewModel.swift */,
 				19A29C112A912E580042D6A2 /* RegistrationViewModel.swift */,
 				19CC90DC2A91451100E98934 /* LoginViewModel.swift */,
@@ -690,6 +754,7 @@
 				19A29BF42A8F5DE60042D6A2 /* FirestoreManager.swift in Sources */,
 				19A29C082A90BC210042D6A2 /* MyTextFieldModifier.swift in Sources */,
 				19D826292A8D5AFD0052AECA /* CreateEventView.swift in Sources */,
+				19613C6F2A94365200280FDB /* ListOfAttendeesView.swift in Sources */,
 				19A29C022A90BBB20042D6A2 /* LoginView.swift in Sources */,
 				19A29C0C2A90BC5D0042D6A2 /* CompleteSignUpView.swift in Sources */,
 				19613C5D2A92EDA900280FDB /* DataRepository.swift in Sources */,
@@ -699,14 +764,18 @@
 				19D826272A8D4A180052AECA /* SearchResultItemProtocol.swift in Sources */,
 				19A29C122A912E580042D6A2 /* RegistrationViewModel.swift in Sources */,
 				19CC90F32A9173A900E98934 /* LogoOnTopMiddleView.swift in Sources */,
+				19613C672A942A3200280FDB /* EventProfileViewModel.swift in Sources */,
 				19A29BFA2A9072FA0042D6A2 /* ExploreViewModel.swift in Sources */,
 				192A8B9F2A8B4A1B004F6302 /* SettingsView.swift in Sources */,
 				19CC90EB2A916ACB00E98934 /* SignUpView3Validator.swift in Sources */,
 				19B3C2FF2A8A9B8C00BEFB0E /* ContentView.swift in Sources */,
 				19A29BFC2A90822D0042D6A2 /* EventDataModel.swift in Sources */,
+				19613C642A941E5F00280FDB /* StyledScrollableFullScreenView.swift in Sources */,
 				192A8BB62A8C3CE2004F6302 /* CustomDenets.swift in Sources */,
 				19B3C3282A8AA48C00BEFB0E /* Event.swift in Sources */,
 				19CC90F12A91702B00E98934 /* LoginViewValidator.swift in Sources */,
+				19613C692A942A4600280FDB /* UserProfileViewModel.swift in Sources */,
+				19613C732A943F2800280FDB /* MapWithPinView.swift in Sources */,
 				19B3C3182A8A9EBC00BEFB0E /* HomeView.swift in Sources */,
 				19A29C0A2A90BC420042D6A2 /* SignUpView2.swift in Sources */,
 				19CC90F62A9178D100E98934 /* StringExtensions.swift in Sources */,
@@ -715,6 +784,7 @@
 				19B3C2FD2A8A9B8C00BEFB0E /* UniVibeApp.swift in Sources */,
 				192A8BAF2A8C304E004F6302 /* EventDateDetailsView.swift in Sources */,
 				192A8BA22A8B5211004F6302 /* PastEventInGridView.swift in Sources */,
+				19613C6B2A942A5400280FDB /* CommunityProfileViewModel.swift in Sources */,
 				19A29C062A90BBEF0042D6A2 /* SignUpView1.swift in Sources */,
 				19B3C3422A8AFF1700BEFB0E /* UserProfileView.swift in Sources */,
 				192A8BB12A8C32C2004F6302 /* EventLocDetailsView.swift in Sources */,
@@ -723,6 +793,7 @@
 				19A29BF82A9071DC0042D6A2 /* UserDataModel.swift in Sources */,
 				19B3C3452A8AFF4E00BEFB0E /* MyNavigationLinkModifier.swift in Sources */,
 				192A8BAB2A8B5BE2004F6302 /* HorizontalEventGridView.swift in Sources */,
+				19613C792A9491CF00280FDB /* ViewExtensions.swift in Sources */,
 				19B3C3392A8AF67E00BEFB0E /* CommunityInListView.swift in Sources */,
 				19D8262C2A8E0DA70052AECA /* CampusMapView.swift in Sources */,
 				19B3C32A2A8AD37200BEFB0E /* CurrentUserProfile.swift in Sources */,
@@ -741,6 +812,7 @@
 				19B3C3402A8AFF0800BEFB0E /* CommunityProfileView.swift in Sources */,
 				19CC90DF2A914B7000E98934 /* SignUpView3.swift in Sources */,
 				19A29BF62A8F60120042D6A2 /* CurrentUserViewModel.swift in Sources */,
+				19613C622A9399D400280FDB /* EventListView.swift in Sources */,
 				192A8BA42A8B538C004F6302 /* TimeHelpers.swift in Sources */,
 				19B3C31C2A8A9ED600BEFB0E /* FeedView.swift in Sources */,
 				19B3C31A2A8A9EC600BEFB0E /* ExploreView.swift in Sources */,

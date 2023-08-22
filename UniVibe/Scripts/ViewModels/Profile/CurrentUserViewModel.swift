@@ -19,6 +19,7 @@ class UserViewModel: ObservableObject {
     
     
     init(currentUser: User) {
+        
         self.currentUser = currentUser
         setupListeners()
     }

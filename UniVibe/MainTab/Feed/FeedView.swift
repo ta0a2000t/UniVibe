@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+// TODO: fix style of ExploreView & copy the stuff here, so they have same style.
 
 struct FeedView: View {
     // don't want to be StateObject because that it keep FeedViewModel listeners On
@@ -13,9 +14,8 @@ struct FeedView: View {
     @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
 
     var body: some View {
-        List(feedViewModel.events) { event in
-            // Display event details
-            Text("\(event.title)")
+        NavigationView {
+            StyledScrollableFullScreenView(scrollViewContent: EventListView(events: feedViewModel.getSortedEvents()), title: "Feed")
         }
     }
 }

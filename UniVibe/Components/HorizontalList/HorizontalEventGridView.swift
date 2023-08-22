@@ -10,24 +10,16 @@ import SwiftUI
 struct HorizontalEventGridView: View {
     let events : [Event]
     var body: some View {
-        VStack {
+        
             ScrollView(.horizontal) {
-                LazyHGrid(rows: [GridItem()], spacing: 10) {
+                LazyHGrid(rows: [GridItem()], spacing: 8) {
                     ForEach(events) { event in
-                        NavigationLink(destination: EventProfileView(event: event).navigationBarBackButtonHidden(true)) {
-                            PastEventInGridView(event: event)
-                            
-                        }
-
+                        PastEventInGridView(event: event)
                     }
-                }.padding()
-                Spacer()
-            }.frame(height: 170)
-            
-            
+                }.frame(height: 160).padding(.leading, 8)
+            }
 
-            
-        }
+        
 
     }
 }

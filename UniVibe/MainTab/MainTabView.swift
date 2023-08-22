@@ -10,6 +10,7 @@ import SwiftUI
 struct MainTabView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject var currentUserViewModel : CurrentUserViewModel
+    @State private var selection = 3
 
     init(currentUser: User) {
         self.currentUserViewModel = CurrentUserViewModel(currentUser: currentUser)
@@ -17,32 +18,41 @@ struct MainTabView: View {
     
 
     var body: some View {
-        VStack{
+        ZStack {
             
-            TabView {
-                HomeView().environmentObject(currentUserViewModel).tabItem() {
-                    Image(systemName: "house").foregroundColor(.white)
-                }
+            
+            VStack{
                 
-                ExploreView().tabItem() {
-                    Image(systemName: "magnifyingglass").foregroundColor(.white)
-                }.environmentObject(currentUserViewModel)
-                
-                CampusMapView().tabItem() {
-                    Image(systemName: "map").foregroundColor(.white)
-                }
-                
-                FeedView().tabItem() {
-                    Image(systemName: "newspaper").foregroundColor(.white)
-                }.environmentObject(currentUserViewModel)
-                
-                ChatView().tabItem() {
-                    Image(systemName: "envelope").foregroundColor(.white)
-                }.environmentObject(currentUserViewModel)
-                
-            }.tint(colorScheme == .dark ? Color.white : Color.black)
+                TabView(selection:$selection) {
+                    HomeView().environmentObject(currentUserViewModel).tabItem() {
+                        
+                        Label("Home", systemImage: "house")
+                    }.tag(1)
+                    
+                    ExploreView().tabItem() {
+                        Label("Search", systemImage: "magnifyingglass")
+                        
+
+                    }.tag(2).environmentObject(currentUserViewModel)
+                    
+                    CampusMapView().tabItem() {
+                        Label("Map", systemImage: "map")
+                        
+                    }.tag(3)
+                    
+                    FeedView().tabItem() {
+                        Label("Feed", systemImage: "newspaper")
+
+                    }.tag(4).environmentObject(currentUserViewModel)
+                    
+                    ChatView().tabItem() {
+                        Label("Chat", systemImage: "envelope")
+
+                    }.tag(5).environmentObject(currentUserViewModel)
+                    
+                }.tint(colorScheme == .dark ? Color.white : Color.black)
+            }
         }
-        
     }
 }
 

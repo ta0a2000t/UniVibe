@@ -31,7 +31,7 @@ struct UserProfileView: View {
                     
                 }
                 
-            }
+            }.linearGradientBackground()
             
 
             

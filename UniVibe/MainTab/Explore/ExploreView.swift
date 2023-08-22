@@ -11,65 +11,66 @@ import SwiftUI
 struct ExploreView: View {
     @State private var searchText: String = ""
     let searchTypesIndices = [0, 1, 2]
-    @State private var selectedSearchTypeIdx : Int
+    @State private var selectedSearchTypeIdx : Int = 0
     
-    //@EnvironmentObject private var viewModel: UserViewModel
-
     @StateObject var exploreViewModel = ExploreViewModel()
     
     @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
 
-    init() {
-        selectedSearchTypeIdx = searchTypesIndices[0]
-        
-    }
+
+
+
+
+    
 
     var body: some View {
         
-        NavigationStack {
-            VStack {
+        NavigationView {
+            ZStack(alignment: .top) {
 
-                Picker("Search Type", selection: $selectedSearchTypeIdx) {
-                    ForEach(searchTypesIndices, id: \.self) { index in
-                        if(index == 0) {
-                            Text("All")
-                        } else if (index == 1) {
-                            Image(systemName: "person.3.fill")
-                        } else {
-                            Image(systemName: "person.fill")
-                        }
-                    }
-                }
-                .pickerStyle(.segmented)
-                
-                ScrollView {
-                    LazyVStack(spacing: 12) {
-                        ForEach(searchResults, id: \.id) { item in
-                            if let community = item as? Community {
-                                NavigationLink(destination: CommunityProfileView(community: community).navigationBarBackButtonHidden(true)) {
-                                    CommunityInListView(community: community)
-                                }
-                            } else if let user = item as? User {
-                                NavigationLink(destination: UserProfileView(user: user).navigationBarBackButtonHidden(true)) {
-                                    UserInListView(user: user)
-                                }
+                VStack {
+                    
+                    Picker("Search Type", selection: $selectedSearchTypeIdx) {
+                        ForEach(searchTypesIndices, id: \.self) { index in
+                            if(index == 0) {
+                                Text("All")
+                            } else if (index == 1) {
+                                Image(systemName: "person.3.fill")
+                            } else {
+                                Image(systemName: "person.fill")
                             }
                         }
                     }
-
-                    .padding(.top, 8)
-                    .searchable(text: $searchText, prompt: "Search...") {
+                    .pickerStyle(.segmented)
+                    
+                    ScrollView {
+                        LazyVStack(spacing: 3) {
+                            ForEach(searchResults, id: \.id) { item in
+                                if let community = item as? Community {
+                                    CommunityInListView(community: community)
+                                } else if let user = item as? User {
+                                    UserInListView(user: user)
+                                    
+                                }
+                            }
+                        }
+                        
+                        .padding(.top, 8)
+                        .searchable(text: $searchText, prompt: "Search...") {
+                        }
+                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .principal) {
+                            Image("univibe_logo").resizable().scaledToFit().frame(height: 35).padding()
+                        }
                     }
                 }
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Image("univibe_logo").resizable().scaledToFit().frame(height: 35).padding()
-                    }
-                }
-            }
+            }.linearGradientBackground()
         }
     }
+    
+    
     
     
     

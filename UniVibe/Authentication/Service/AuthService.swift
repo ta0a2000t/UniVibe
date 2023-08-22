@@ -10,23 +10,23 @@ import FirebaseAuth
 import FirebaseFirestoreSwift
 import Firebase
 
-class AuthService {
-    @Published var userSession: FirebaseAuth.User?
-    @Published var currentUser: User?
+class AuthService : ObservableObject {
+    @Published var userSession: FirebaseAuth.User? = nil
+    @Published var currentUser: User? = nil
     
     static let shared = AuthService()
     
     init() {
-        print("initializing")
-        Task{
-            try await loadUserData()
-        }
+
     }
     
     @MainActor
     func login(withEmail email: String, password: String) async throws {
         let result = try await Auth.auth().signIn(withEmail: email, password: password)
         self.userSession = result.user
+        
+        print("initializing")
+        try await loadUserData()
     }
     
     @MainActor

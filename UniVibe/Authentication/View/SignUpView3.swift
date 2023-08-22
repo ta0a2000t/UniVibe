@@ -77,9 +77,6 @@ struct SignUpView3: View {
             ToolbarItem(placement: .principal) {
                 LogoOnTopMiddleView()
             }
-            
-        
-            
         }.navigationDestination(isPresented: $showNextView) {
             CompleteSignUpView(navigationStackPath: $navigationStackPath).environmentObject(registrationViewModel).navigationBarBackButtonHidden(true)
         }

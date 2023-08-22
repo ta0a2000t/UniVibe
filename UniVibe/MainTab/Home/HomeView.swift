@@ -14,40 +14,27 @@ struct HomeView: View {
     
     
     var body: some View {
-        NavigationStack{
+        NavigationView{
             VStack {
                 VStack(alignment:.trailing) {
                     Text(" \(currentUserViewModel.currentUser.fullname)").font(.title3).bold().padding(.bottom)
                     
                     
                     
+                    
                     VStack {
 
                         Text("Reserved Events").font(.title2).bold()
-                        ScrollView(.vertical) {
-                            
-                            
-                            LazyVStack(spacing:12) {
-                                
-                                ForEach(currentUserViewModel.getReservedEvents()) { event in
-                                    
-                                    NavigationLink(destination: EventProfileView(event: event).navigationBarBackButtonHidden(true)) {
-                                        EventInListView(event: event)
-                                        
-                                    }
-                                }
-                                
-                            }
-                        }.frame(height: 180)
                         
-                        Divider()
+                        ScrollView{
+                            EventListView(events: Event.MOCK)
+                        }.frame(maxHeight: 200)
                     }.padding(.bottom)
                     
                     
                     VStack {
-
                         Text("Created Events").font(.title2).bold()
-                        HorizontalEventGridView(events: currentUserViewModel.getCreatedEvents())
+                        HorizontalEventGridView(events: Event.MOCK)
                         
                         Divider()
                     }.padding(.bottom)
@@ -60,15 +47,15 @@ struct HomeView: View {
                         NavigationLink(destination: CreateEventView(creatorID: currentUserViewModel.currentUser.id, isCommunityEvent: false).navigationBarBackButtonHidden(true)) {
                             Text("Create Event")
                                 .font(.headline)
-                                .foregroundColor(.red)
-                                .frame(width: 330, height:40)
+                                .foregroundColor(.purple)
+                                .frame(width: 150, height:40)
                                 .overlay(RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 3).foregroundColor(.red)
                                 )
                         }
                         Spacer()
                     }.padding()
                     
-                }.padding(.horizontal)
+                }
                 
                 
                 
@@ -111,7 +98,7 @@ struct HomeView: View {
                         
                         
                 }
-            }
+            }.linearGradientBackground()
 
             
         }
@@ -121,6 +108,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        //HomeView()
+        EmptyView()
     }
 }

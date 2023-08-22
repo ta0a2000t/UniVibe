@@ -92,7 +92,7 @@ class EventDataModel: ObservableObject {
 
                 let updatedEvents = documents.compactMap { document in
                     let data = document.data()
-                    print(data)
+                    //print(data)
                     return decodeObj(id: document.documentID, data: data)
                 }
 

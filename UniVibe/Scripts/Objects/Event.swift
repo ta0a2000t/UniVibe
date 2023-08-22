@@ -78,9 +78,13 @@ class Event: Identifiable, Codable {
     
     
     static var MOCK = [
-        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "LEVELS Night #6 - Terraforming Mars: Ares Expedition!", description: "Join us for fun!", imageURL: "billiard_img", date: Date(), attendees: [], numberOfHours: 3, latitude: 12.3456, longitude: -78.9012, locationName: "Stamp Student Union", locationDescription: "2nd floor next to ballroom 102.", maxAttendeesCount: 4),
-        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "Community Event", description: "Join us for fun!", imageURL: nil, date: Date(), attendees: [], numberOfHours: 2, latitude: 12.3456, longitude: -78.9012, locationName: "Campus Park", locationDescription: "First floor next to door.", maxAttendeesCount: 12)
+        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "LEVELS Night #6 - Terraforming Mars: Ares Expedition!", description: "Join us for fun!", imageURL: "billiard_img", date: Date(), attendees: [], numberOfHours: 3, latitude: 38.9760, longitude: -76.9426, locationName: "Stamp Student Union", locationDescription: "2nd floor next to ballroom 102.", maxAttendeesCount: 4),
+        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "Community Event", description: "Join us for fun!", imageURL: nil, date: Date(), attendees: [], numberOfHours: 2, latitude: 38.9859, longitude: -76.9425, locationName: "Campus Park", locationDescription: "First floor next to door.", maxAttendeesCount: 12),
+        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "Art Gallery Opening", description: "Explore the latest art installations!", imageURL: nil, date: Date(), attendees: [], numberOfHours: 2, latitude: 38.9861, longitude: -76.9427, locationName: "Art Gallery", locationDescription: "Gallery on 4th Street.", maxAttendeesCount: 8),
+        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "Outdoor Yoga Session", description: "Relax and unwind in a peaceful yoga session.", imageURL: nil, date: Date(), attendees: [], numberOfHours: 1, latitude: 38.9058, longitude: -76.9425, locationName: "Campus Green", locationDescription: "Near the fountain.", maxAttendeesCount: 15),
+        Event(id: UUID().uuidString, creatorID: UUID().uuidString, creationDate: Date(), isCommunityEvent: true, title: "Food Truck Festival", description: "Enjoy a variety of delicious food trucks.", imageURL: nil, date: Date(), attendees: [], numberOfHours: 3, latitude: 38.9862, longitude: -76.0425, locationName: "Parking Lot A", locationDescription: "Adjacent to the Student Union.", maxAttendeesCount: 20),
     ]
+
     
     // could be used to transfer user to google maps app
     func getGoogleMapsURL() -> URL? {
