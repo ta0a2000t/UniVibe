@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct EventProfileView: View {
     let event: Event
@@ -15,11 +16,12 @@ struct EventProfileView: View {
     @State var isCurrentUserAttending: Bool
     @ObservedObject var currentUserViewModel = CurrentUserViewModel.shared
     
+    
     var body: some View {
         
         
         VStack{
-            Text("\(currentUserViewModel.user.fullname)")
+            //Text("\(currentUserViewModel.user.fullname)")
             ScrollView{
                 VStack(alignment: .leading) {
                     if let imageURL = event.imageURL {
@@ -75,7 +77,7 @@ struct EventProfileView: View {
                     TitleAndBodyView(title:"Description", textBody: event.description).padding(.horizontal).padding(.vertical)
                     
                     VStack {
-                        MapWithPinView(latitude: event.latitude, longitude: event.longitude).padding()
+                        MapWithPinView(coordinates: .constant(CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude))).padding()
                             .frame(height: 250)
                     }
                     
@@ -88,7 +90,8 @@ struct EventProfileView: View {
             
             
             Spacer()
-            CommunityInListView(community: Community.MOCK[0])
+            CommunityInListView(community: .constant(Community.MOCK[0]))
+            
         }.linearGradientBackground()
         
         
@@ -112,17 +115,15 @@ struct EventProfileView: View {
     
     
     func reserveButtonClicked() {
-        //let boolean = currentUserViewModel.user.reservedEventsIDs.contains(event.id)
         if isCurrentUserAttending == false {
             currentUserViewModel.addReservedEvent(event: event)
         } else {
             currentUserViewModel.removeReservedEvent(event: event)
         }
-        
-        
-        
-
     }
+    
+    
+    
     
     
 }

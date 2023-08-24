@@ -80,6 +80,36 @@ class EventDataModel: ObservableObject {
         return Event(id: id, data: data)
     }
     
+    static func updateEventProperty(eventID: String, propertyName: String, newValue: Any) async {
+        let eventRef = FirestoreManager.shared.db.collection("events").document(eventID)
+        
+        do {
+            let document = try await eventRef.getDocument()
+            
+            if var data = document.data() {
+                data[propertyName] = newValue
+                
+                try await eventRef.setData(data)
+            }
+        } catch {
+            // Handle error
+            print("Error updating event property: \(error)")
+        }
+    }
+    
+    static func listenForChangesByID(eventID: String, completion: @escaping (Event) -> Void) -> ListenerRegistration {
+        let eventListener = FirestoreManager.shared.db.collection("events")
+            .document(eventID)
+            .addSnapshotListener { documentSnapshot, error in
+                if let document = documentSnapshot, document.exists {
+                    let data = document.data() ?? [:]
+                    let updatedEvent = decodeObj(id: document.documentID, data: data)
+                    completion(updatedEvent)
+                }
+            }
+        
+        return eventListener
+    }
     
     // Listen for changes to the events collection
     static func listenForChanges(completion: @escaping ([Event]) -> Void) -> ListenerRegistration {

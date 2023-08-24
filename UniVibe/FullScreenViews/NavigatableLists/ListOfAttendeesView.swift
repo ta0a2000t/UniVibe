@@ -36,7 +36,10 @@ struct ListOfAttendeesView: View {
             } else {
                 LazyVStack(spacing: 3) {
                     ForEach(attendees, id: \.id) { user in
-                        UserInListView(user: user)
+                        if let userBinding = DataRepository.getUserBindingByID(for: user.id) {
+                            UserInListView(user: userBinding)
+                        }
+
                     }
                 }
                 .padding(.top, 8)

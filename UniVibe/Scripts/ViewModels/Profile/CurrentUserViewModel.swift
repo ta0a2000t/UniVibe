@@ -12,69 +12,6 @@ import FirebaseAuth
 import FirebaseFirestore
 
 
-class UserViewModel: ObservableObject {
-    var userListener: ListenerRegistration? // Store the listener instance
-
-    @Published var user: User
-    
-    
-    init(user: User) {
-        
-        self.user = user
-        setupListeners()
-    }
-    
-    private func setupListeners() {
-        
-        // Listen for changes to current user document
-        userListener = UserDataModel.listenForChangesByID(userID: user.id) { updatedUser in
-            DispatchQueue.main.async {
-                self.user = updatedUser
-            }
-        }
-    }
-    
-    // Call this method when the view model is deallocated
-    deinit {
-        removeListeners()
-    }
-    
-    private func removeListeners() {
-        // Remove the Firestore listener for the current user
-        userListener?.remove()
-    }
-    
-    
-    func getReservedEvents() -> [Event] {
-        return DataRepository.getEventsByIDs(ids: self.user.reservedEventsIDs)
-    }
-    
-    func getCreatedEvents() -> [Event] {
-        return DataRepository.getEventsByIDs(ids: self.user.createdEventsIDs)
-    }
-    
-    func getCommunities() -> [Community] {
-        return DataRepository.getCommunitiesByIDs(ids: self.user.communitiesIDs)
-    }
-    
-    func getFriends() -> [User] {
-        return DataRepository.getUsersByIDs(ids: self.user.friendsIDs)
-    }
-    
-    func getEventsCount() -> Int {
-        let uniqueEventIDs = Set(user.reservedEventsIDs + user.createdEventsIDs)
-        return uniqueEventIDs.count
-    }
-    
-    func getFriendsCount() -> Int {
-        return user.friendsIDs.count
-    }
-    
-    func getCommunitiesCount() -> Int {
-        return user.communitiesIDs.count
-    }
-}
-
 
 import Combine
 
@@ -150,6 +87,10 @@ class CurrentUserViewModel: ObservableObject {
     func removeReservedEvent(event: Event) {
         user.reservedEventsIDs.removeAll { $0 == event.id }
         
+        if let diskUser = DataRepository.getUserByID(id: user.id) {
+            diskUser.reservedEventsIDs.append(event.id)
+        }
+
         // upload to db
         Task{
             await UserDataModel.updateUserProperty(userID: user.id ,propertyName: "reservedEventsIDs",newValue: user.reservedEventsIDs)
@@ -159,6 +100,11 @@ class CurrentUserViewModel: ObservableObject {
     
     func removeCreatedEvent(event: Event) {
         user.reservedEventsIDs.removeAll { $0 == event.id }
+        
+        if let diskUser = DataRepository.getUserByID(id: user.id) {
+            diskUser.reservedEventsIDs.removeAll { $0 == event.id }
+        }
+        
         
         // upload to db
         Task{
@@ -180,6 +126,7 @@ class CurrentUserViewModel: ObservableObject {
     
     func removeFriend(friend: User) {
         user.friendsIDs.removeAll { $0 == friend.id }
+                
         
         // upload to db
         Task{

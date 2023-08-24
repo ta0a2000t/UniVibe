@@ -62,8 +62,9 @@ struct EditProfileView: View {
                 //Divider()
                 EditProfileRowView(title: "Name", placeholder: "Your Name", text: $fullname)
                 
-                EditProfileRowView(title: "Bio", placeholder: "Your Bio", text: $bio)
+                EditProfileMultiLineView(title: "Bio", placeholder: "Your Bio", text: $bio)
                 Divider().hidden()
+                
                 
                 Spacer()
                 
@@ -80,18 +81,24 @@ struct EditProfileRowView: View {
     @Binding var text: String
     
     var body: some View {
-        HStack {
-            Text(title).font(.callout).bold()
-                .frame(width: 100, alignment: .leading)
-            VStack{
-                TextField(placeholder, text: $text)
-                
-                Divider()
-            }
-        }.font(.subheadline)
-            .frame(height: 36)
+        HStack(alignment: .center, spacing: 0) {
+            Text(title)
+                .font(.headline)
+                .bold().padding(.trailing, 7)
+            
+            
+            TextField(placeholder, text: $text)
+                .modifier(MyTextFieldModifier(horizontalPadding: 0))
+        }
+        .frame(height: 50)
+        .cornerRadius(10)
+        
+        
     }
 }
+
+
+
 
 struct EditProfileMultiLineView: View {
     let title: String
@@ -99,23 +106,32 @@ struct EditProfileMultiLineView: View {
     @Binding var text: String
     
     var body: some View {
-        HStack {
-            
-            Text(title).font(.callout).bold()
-                .frame(width: 100, alignment: .leading)
-            
-            VStack {
-                TextEditor(text: $text)
-                    .frame(height: 100)
-                    .padding(2)
-                    .background(Color.secondary.opacity(0.2))
-                    .cornerRadius(3)
-            }
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.headline)
+                .bold()
+            VStack{
+                ZStack(alignment: .top) {
+                    TextEditor(text: $text).background(Color.clear)
+                        //.frame(height: 100)
+                        .scrollContentBackground(.hidden) // <- Hide it
+                        .modifier(MyTextFieldModifier(horizontalPadding: 0))
+                    if text.isEmpty {
+                        Text(placeholder)
+                            .foregroundColor(.gray.opacity(0.5)).padding(.top)
+                            .font(.callout)
+                        
+                    }
+                }
+            }.cornerRadius(10)
+                .frame(minHeight: 50, maxHeight: 200)
+                .shadow(color: Color.gray.opacity(0.2), radius: 0, x: 1, y: 2)
+
         }
-        .font(.subheadline)
-        .frame(height: 140) // Adjust the height as needed
+
     }
 }
+
 
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {

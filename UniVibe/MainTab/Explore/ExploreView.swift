@@ -18,17 +18,19 @@ struct ExploreView: View {
     @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
 
 
-
-
-
-    
-
     var body: some View {
         
         
             ZStack(alignment: .top) {
 
                 VStack {
+                    
+                    Button {
+                        print(DataRepository.getUserByID(id: currentUserViewModel.user.id)!.toDictionary())
+                    } label : {
+                        Text("Name: \(currentUserViewModel.user.fullname)")
+                        Text("print data")
+                    }
                     
                     Picker("Search Type", selection: $selectedSearchTypeIdx) {
                         ForEach(searchTypesIndices, id: \.self) { index in
@@ -43,30 +45,16 @@ struct ExploreView: View {
                     }
                     .pickerStyle(.segmented)
                     
-                    ScrollView {
-                        LazyVStack(spacing: 3) {
-                            ForEach(searchResults, id: \.id) { item in
-                                if let community = item as? Community {
-                                    CommunityInListView(community: community)
-                                } else if let user = item as? User {
-                                    UserInListView(user: user)
-                                    
-                                }
-                            }
-                        }
-                        
-                        .padding(.top, 8)
-                        .searchable(text: $searchText, prompt: "Search...") {
-                        }
-                    }
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .principal) {
-                            Image("univibe_logo").resizable().scaledToFit().frame(height: 35).padding()
-                        }
-                    }
+                    PlainStyledListView(items: searchResults).searchable(text: $searchText, prompt: "Search...")
+                    
+                }.padding(.bottom, 20)
+            }.linearGradientBackground()                  .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Image("univibe_logo").resizable().scaledToFit().frame(height: 35).padding()
                 }
-            }.linearGradientBackground()
+            }
+
         
     }
     

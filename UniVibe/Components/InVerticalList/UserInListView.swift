@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct UserInListView: View {
-    let user: User
+    @Binding var user: User
+    
     var body: some View {
         NavigationLink(destination: UserProfileView(user: user)) {
                 HStack {
@@ -36,7 +37,9 @@ struct UserInListView: View {
 }
 
 struct UserInListView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        UserInListView(user: User.MOCK_USERS[0])
+        let user =  User.MOCK_USERS[0]
+        return UserInListView(user: .constant(user))
     }
 }

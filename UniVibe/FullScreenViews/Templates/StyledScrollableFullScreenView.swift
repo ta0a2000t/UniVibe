@@ -16,6 +16,8 @@ struct StyledScrollableFullScreenView<Content: View>: View {
     
     var body: some View {
         
+        
+        
         ZStack(alignment: .top){
             
             
@@ -24,13 +26,13 @@ struct StyledScrollableFullScreenView<Content: View>: View {
                     
                     
                     scrollViewContent
-                        .padding(.horizontal)
                         .padding(.top, 20)
                     
                     Spacer()
                 }.padding(.top, 70)
                 
             }
+            
             
             Text(title)
                 .font(.largeTitle)

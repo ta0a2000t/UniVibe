@@ -49,7 +49,8 @@ struct CampusMapView: View {
                         
             }
                     .edgesIgnoringSafeArea(.horizontal)
-                    .padding(.bottom, 30)
+                    .edgesIgnoringSafeArea(.top)
+                    .padding(.bottom, 20)
                     .environmentObject(mapSettings)
                     
                     
@@ -57,7 +58,7 @@ struct CampusMapView: View {
                         mapSettings.resetRegion()
                     }) {
                         Image(systemName: "location.fill")
-                            .font(.system(size: 24, weight: .bold)).shadow(radius: 4) // Set the font and size
+                            .font(.system(size: 25, weight: .bold)).shadow(radius: 4).foregroundColor(.white) // Set the font and size
                     }.padding()
                     .cornerRadius(15) // Apply corner radius for a rounded look
                     .shadow(radius: 7).buttonStyle(GrowingButton(enabledColor: .purple))// Add a shadow for a raised appearance

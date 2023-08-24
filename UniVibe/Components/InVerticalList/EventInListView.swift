@@ -10,7 +10,8 @@ import SwiftUI
 
 
 struct EventInListView: View {
-    let event: Event
+    @Binding var event: Event
+    
     var body: some View {
         NavigationLink(destination: EventProfileView(event: event, isCurrentUserAttending: CurrentUserViewModel.shared.isAttending(event: event))) {
             
@@ -20,30 +21,28 @@ struct EventInListView: View {
                     Text(TimeHelpers.formatEventDate(event.date)).modifier(MyTimeStringModifier()).padding(.bottom, 1).padding(.top, 2).bold()
                     
                     Text(event.title).font(.callout).bold()
-                        //.padding(.bottom, 1)
                     
-                    
+                     
                     Spacer()
                     HStack {
-                        Text("\(event.attendees.count) going").bold().padding(.trailing)
+                        Text("\(event.attendees.count) going").padding(.trailing)
                         Spacer()
-                        Text("LEVELS Game Nights").font(.footnote)
-
-                    }.padding(.bottom, 2)
+                        Text(DataRepository.getEventCreatorName(event: event)).font(.footnote)
+                    }
                     
-                }.padding(.horizontal, 4)
+                }
                 
                 Spacer()
                 
                 if let imageUrl = event.imageURL {
-                    Image(imageUrl).resizable().frame(width: 70, height: 70).clipShape(RoundedRectangle(cornerRadius: 10)).padding(.trailing, 3)
+                    Image(imageUrl).resizable().frame(width: 50, height: 50).clipShape(RoundedRectangle(cornerRadius: 10))
                 } else {
-                    Image(systemName:"figure.play").resizable().frame(width: 70, height: 70).background(.purple.opacity(0.2)).clipShape(RoundedRectangle(cornerRadius: 10)).padding(.trailing, 3)
+                    Image(systemName:"figure.socialdance").resizable().frame(width: 50, height: 50).padding().background(.purple.opacity(0.2)).clipShape(RoundedRectangle(cornerRadius: 10))
                 }
 
                 
-            }.frame(height: 80).background(.brown.opacity(0.3)).clipShape(RoundedRectangle(cornerRadius: 10))
-            
+            }.frame(height: 70)//.padding()//.background(.red.opacity(0.1))//.clipShape(RoundedRectangle(cornerRadius: 10))
+                .edgesIgnoringSafeArea(.all)
             
         }
 
@@ -53,6 +52,6 @@ struct EventInListView: View {
 
 struct EventInListView_Previews: PreviewProvider {
     static var previews: some View {
-        EventInListView(event: Event.MOCK[0])
+        EventInListView(event: .constant(Event.MOCK[0]))
     }
 }

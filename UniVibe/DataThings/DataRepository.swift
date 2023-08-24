@@ -8,7 +8,7 @@
 import Foundation
 
 // Global Data Repository
-
+import SwiftUI
 //  only gets data updates by the listeners that are set by viewModels (i.e FeedViewModel)
 final class DataRepository: ObservableObject {
     static let shared = DataRepository()
@@ -21,6 +21,46 @@ final class DataRepository: ObservableObject {
     init() {
         fetchData()
     }
+    
+    /* Usage:
+     if let userBinding = DataRepository.getUserBindingByID(for: user.id) {
+         UserInListView(user: userBinding)
+     }*/
+    // READ ONLY
+    static func getUserBindingByID(for userID: String) -> Binding<User>? {
+        guard let index = DataRepository.shared.users.firstIndex(where: { $0.id == userID }) else {
+            return nil
+        }
+
+        return Binding<User>(
+            get: { DataRepository.shared.users[index] },
+            set: {DataRepository.shared.users[index] = $0  }  //set: { DataRepository.shared.users[index] = $0 }
+        )
+    }
+    // READ ONLY
+    static func getEventBindingByID(for eventID: String) -> Binding<Event>? {
+        guard let index = DataRepository.shared.events.firstIndex(where: { $0.id == eventID }) else {
+            return nil
+        }
+
+        return Binding<Event>(
+            get: { DataRepository.shared.events[index] },
+            set: {_ in }  //set: { DataRepository.shared.events[index] = $0 }
+        )
+    }
+    // READ ONLY
+    static func getCommunityBindingByID(for communityID: String) -> Binding<Community>? {
+        guard let index = DataRepository.shared.communities.firstIndex(where: { $0.id == communityID }) else {
+            return nil
+        }
+
+        return Binding<Community>(
+            get: { DataRepository.shared.communities[index] },
+            set: {_ in }  //set: { DataRepository.shared.communities[index] = $0 }
+        )
+    }
+    
+    
     
     static func getUserByID(id: String) -> User? {
         return DataRepository.shared.users.first { $0.id == id }
@@ -44,6 +84,14 @@ final class DataRepository: ObservableObject {
     
     static func getCommunitiesByIDs(ids: [String]) -> [Community] {
         return DataRepository.shared.communities.filter { ids.contains($0.id) }
+    }
+    
+    static func getEventCreatorName(event: Event) -> String {
+        if event.isCommunityEvent {
+            return getCommunityByID(id: event.creatorID)?.fullname ?? "Unknown"
+        } else {
+            return getUserByID(id: event.creatorID)?.fullname ?? "Unknown"
+        }
     }
     
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MyTimeStringModifier: ViewModifier {
     func body(content: Content) -> some View {
-        content.font(.subheadline).foregroundColor(.green)
+        content.font(.subheadline).foregroundColor(.orange).shadow(radius: 3)
             
     }
     

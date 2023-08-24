@@ -57,6 +57,8 @@ class User: Identifiable, Codable, SearchResultItemProtocol {
         
         //super.init() // Call the superclass designated initializer if needed
     }
+    
+    
 
     
     func getEventsCount() -> Int{

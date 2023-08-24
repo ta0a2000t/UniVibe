@@ -11,13 +11,14 @@ struct EventListView: View {
     let events : [Event]
     var body: some View {
         
-        
-        LazyVStack(spacing:3) {
-            ForEach(events) { event in
-                EventInListView(event: event)
+        List(events, id: \.id) { event in
+            if let eventBinding = DataRepository.getEventBindingByID(for: event.id) {
+                EventInListView(event: eventBinding)
+                    .listRowBackground(Color.gray.opacity(0.1))
             }
-            
-        }
+        }.frame(minHeight: 100, maxHeight: 400).listStyle(.plain)
+        
+        
         
         
     }

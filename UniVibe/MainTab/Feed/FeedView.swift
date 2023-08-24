@@ -14,9 +14,30 @@ struct FeedView: View {
     @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
 
     var body: some View {
-        
-            StyledScrollableFullScreenView(scrollViewContent: EventListView(events: feedViewModel.getSortedEvents()), title: "Feed")
-        
+        VStack{
+            Button {
+                print(feedViewModel.getSortedEvents().count)
+            } label : {
+                Text("print events count")
+            }
+            
+            
+            
+            StyledScrollableFullScreenView(scrollViewContent:feedItemsView, title: "Feed")
+        }
+    }
+    
+    var feedItemsView: some View {
+        LazyVStack(spacing:3) {
+            ForEach(feedViewModel.getSortedEvents()) { event in
+                if let eventBinding = DataRepository.getEventBindingByID(for: event.id) {
+                    EventInListView(event: eventBinding)
+                }
+                
+                
+            }
+            
+        }
     }
 }
 

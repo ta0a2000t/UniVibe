@@ -17,7 +17,6 @@ struct MainTabView: View {
     @State private var tappedTwice: Bool = false
 
     @State private var home = UUID()
-    @State private var courses = UUID()
     
     var body: some View {
         var handler: Binding<Int> { Binding(

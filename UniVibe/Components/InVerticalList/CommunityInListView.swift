@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CommunityInListView: View {
-    let community: Community
+    @Binding var community: Community
     
     var body: some View {
         NavigationLink(destination: CommunityProfileView(community: community)) {
@@ -40,7 +40,7 @@ struct CommunityInListView: View {
 struct CommunityInListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            CommunityInListView(community: Community.MOCK[0])
+            CommunityInListView(community: .constant(Community.MOCK[0]))
         }
     }
 }

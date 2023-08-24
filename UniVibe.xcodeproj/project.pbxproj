@@ -21,6 +21,12 @@
 		192A8BBB2A8C4820004F6302 /* AttendeesDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BBA2A8C4820004F6302 /* AttendeesDetailsView.swift */; };
 		192A8BBF2A8C8F48004F6302 /* TitleAndBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BBE2A8C8F48004F6302 /* TitleAndBodyView.swift */; };
 		192A8BC22A8C957D004F6302 /* MembersDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 192A8BC12A8C957D004F6302 /* MembersDetailsView.swift */; };
+		19561A4E2A96F13700F2877A /* ChooseEventTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19561A4D2A96F13700F2877A /* ChooseEventTypeView.swift */; };
+		19561A502A96F1C600F2877A /* ChooseOrganizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19561A4F2A96F1C600F2877A /* ChooseOrganizationView.swift */; };
+		19561A532A9718F600F2877A /* LocationPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 19561A522A9718F600F2877A /* LocationPicker */; };
+		19561A552A97194800F2877A /* MapPickerExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19561A542A97194800F2877A /* MapPickerExampleView.swift */; };
+		19561A572A971E8500F2877A /* MyLocationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19561A562A971E8500F2877A /* MyLocationPicker.swift */; };
+		195ED3382A961EE500F26568 /* PlainStyledListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195ED3372A961EE500F26568 /* PlainStyledListView.swift */; };
 		19613C582A91F70400280FDB /* MyDateFormaters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C572A91F70400280FDB /* MyDateFormaters.swift */; };
 		19613C5D2A92EDA900280FDB /* DataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C5C2A92EDA900280FDB /* DataRepository.swift */; };
 		19613C602A93018B00280FDB /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19613C5F2A93018B00280FDB /* FeedViewModel.swift */; };
@@ -101,6 +107,11 @@
 		192A8BBA2A8C4820004F6302 /* AttendeesDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendeesDetailsView.swift; sourceTree = "<group>"; };
 		192A8BBE2A8C8F48004F6302 /* TitleAndBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndBodyView.swift; sourceTree = "<group>"; };
 		192A8BC12A8C957D004F6302 /* MembersDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersDetailsView.swift; sourceTree = "<group>"; };
+		19561A4D2A96F13700F2877A /* ChooseEventTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseEventTypeView.swift; sourceTree = "<group>"; };
+		19561A4F2A96F1C600F2877A /* ChooseOrganizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseOrganizationView.swift; sourceTree = "<group>"; };
+		19561A542A97194800F2877A /* MapPickerExampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickerExampleView.swift; sourceTree = "<group>"; };
+		19561A562A971E8500F2877A /* MyLocationPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationPicker.swift; sourceTree = "<group>"; };
+		195ED3372A961EE500F26568 /* PlainStyledListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainStyledListView.swift; sourceTree = "<group>"; };
 		19613C572A91F70400280FDB /* MyDateFormaters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDateFormaters.swift; sourceTree = "<group>"; };
 		19613C5C2A92EDA900280FDB /* DataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepository.swift; sourceTree = "<group>"; };
 		19613C5F2A93018B00280FDB /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
@@ -175,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BD077965A21BE7587E831215 /* Pods_UniVibe.framework in Frameworks */,
+				19561A532A9718F600F2877A /* LocationPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +244,16 @@
 			path = Community;
 			sourceTree = "<group>";
 		};
+		19561A4C2A96F10C00F2877A /* EventCreation */ = {
+			isa = PBXGroup;
+			children = (
+				19D826282A8D5AFD0052AECA /* CreateEventView.swift */,
+				19561A4D2A96F13700F2877A /* ChooseEventTypeView.swift */,
+				19561A4F2A96F1C600F2877A /* ChooseOrganizationView.swift */,
+			);
+			path = EventCreation;
+			sourceTree = "<group>";
+		};
 		19613C562A91F6F000280FDB /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,7 +303,9 @@
 		19613C702A94369B00280FDB /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				19CC90E52A9158BE00E98934 /* SelectInterestsView.swift */,
 				19613C632A941E5F00280FDB /* StyledScrollableFullScreenView.swift */,
+				195ED3372A961EE500F26568 /* PlainStyledListView.swift */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -290,6 +314,8 @@
 			isa = PBXGroup;
 			children = (
 				19613C722A943F2800280FDB /* MapWithPinView.swift */,
+				19561A542A97194800F2877A /* MapPickerExampleView.swift */,
+				19561A562A971E8500F2877A /* MyLocationPicker.swift */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -400,7 +426,7 @@
 			isa = PBXGroup;
 			children = (
 				19B3C3172A8A9EBC00BEFB0E /* HomeView.swift */,
-				19D826282A8D5AFD0052AECA /* CreateEventView.swift */,
+				19561A4C2A96F10C00F2877A /* EventCreation */,
 				19B3C3352A8AD5CC00BEFB0E /* CurrentUser */,
 			);
 			path = Home;
@@ -563,7 +589,6 @@
 		19CC90E22A91585800E98934 /* PersonalizeProfileView */ = {
 			isa = PBXGroup;
 			children = (
-				19CC90E52A9158BE00E98934 /* SelectInterestsView.swift */,
 			);
 			path = PersonalizeProfileView;
 			sourceTree = "<group>";
@@ -653,6 +678,9 @@
 			dependencies = (
 			);
 			name = UniVibe;
+			packageProductDependencies = (
+				19561A522A9718F600F2877A /* LocationPicker */,
+			);
 			productName = UniVibe;
 			productReference = 19B3C2F92A8A9B8C00BEFB0E /* UniVibe.app */;
 			productType = "com.apple.product-type.application";
@@ -681,6 +709,9 @@
 				Base,
 			);
 			mainGroup = 19B3C2F02A8A9B8C00BEFB0E;
+			packageReferences = (
+				19561A512A9718F600F2877A /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */,
+			);
 			productRefGroup = 19B3C2FA2A8A9B8C00BEFB0E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -764,8 +795,10 @@
 				19D826272A8D4A180052AECA /* SearchResultItemProtocol.swift in Sources */,
 				19A29C122A912E580042D6A2 /* RegistrationViewModel.swift in Sources */,
 				19CC90F32A9173A900E98934 /* LogoOnTopMiddleView.swift in Sources */,
+				19561A572A971E8500F2877A /* MyLocationPicker.swift in Sources */,
 				19613C672A942A3200280FDB /* EventProfileViewModel.swift in Sources */,
 				19A29BFA2A9072FA0042D6A2 /* ExploreViewModel.swift in Sources */,
+				195ED3382A961EE500F26568 /* PlainStyledListView.swift in Sources */,
 				192A8B9F2A8B4A1B004F6302 /* SettingsView.swift in Sources */,
 				19CC90EB2A916ACB00E98934 /* SignUpView3Validator.swift in Sources */,
 				19B3C2FF2A8A9B8C00BEFB0E /* ContentView.swift in Sources */,
@@ -810,9 +843,11 @@
 				19613C582A91F70400280FDB /* MyDateFormaters.swift in Sources */,
 				19D826242A8D42720052AECA /* UserInListView.swift in Sources */,
 				19B3C3402A8AFF0800BEFB0E /* CommunityProfileView.swift in Sources */,
+				19561A552A97194800F2877A /* MapPickerExampleView.swift in Sources */,
 				19CC90DF2A914B7000E98934 /* SignUpView3.swift in Sources */,
 				19A29BF62A8F60120042D6A2 /* CurrentUserViewModel.swift in Sources */,
 				19613C622A9399D400280FDB /* EventListView.swift in Sources */,
+				19561A502A96F1C600F2877A /* ChooseOrganizationView.swift in Sources */,
 				192A8BA42A8B538C004F6302 /* TimeHelpers.swift in Sources */,
 				19B3C31C2A8A9ED600BEFB0E /* FeedView.swift in Sources */,
 				19B3C31A2A8A9EC600BEFB0E /* ExploreView.swift in Sources */,
@@ -821,6 +856,7 @@
 				19B3C3262A8AA47100BEFB0E /* Post.swift in Sources */,
 				192A8BB82A8C4205004F6302 /* EventChatDetailsView.swift in Sources */,
 				19CC90EF2A916D7F00E98934 /* SignUpView1Validator.swift in Sources */,
+				19561A4E2A96F13700F2877A /* ChooseEventTypeView.swift in Sources */,
 				19A29C142A912E6D0042D6A2 /* ContentViewModel.swift in Sources */,
 				19CC90ED2A916B7900E98934 /* SignUpView2Validator.swift in Sources */,
 			);
@@ -1027,6 +1063,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		19561A512A9718F600F2877A /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/alessiorubicini/LocationPickerForSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		19561A522A9718F600F2877A /* LocationPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 19561A512A9718F600F2877A /* XCRemoteSwiftPackageReference "LocationPickerForSwiftUI" */;
+			productName = LocationPicker;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 19B3C2F12A8A9B8C00BEFB0E /* Project object */;
 }

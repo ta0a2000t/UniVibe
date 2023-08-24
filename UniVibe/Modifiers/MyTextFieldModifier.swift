@@ -16,7 +16,7 @@ struct MyTextFieldModifier: ViewModifier {
             .background(Color(.systemGray6))
             .cornerRadius(10)
             .padding(.horizontal, horizontalPadding)
-            
+            .shadow(color: Color.gray.opacity(0.2), radius: 1, x: 1, y: 2)
     }
 }
 

@@ -14,7 +14,12 @@ struct CommunityListView: View {
         
         LazyVStack(spacing:3) {
             ForEach(communities) { community in
-                CommunityInListView(community: community)
+                
+                if let communityBinding = DataRepository.getCommunityBindingByID(for: community.id) {
+                    CommunityInListView(community: communityBinding)
+                }
+
+                
             }
             
         }

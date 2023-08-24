@@ -122,6 +122,10 @@ extension Community {
         
         //createdEventsIDs.append(event.id)
     }
+    
+    func getEventsCount() -> Int {
+        return self.createdEventsIDs.count
+    }
 
 
 

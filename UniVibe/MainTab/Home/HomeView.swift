@@ -16,19 +16,22 @@ struct HomeView: View {
     var body: some View {
         //NavigationView{
             VStack {
-                VStack(alignment:.trailing) {
-                    Text(" \(currentUserViewModel.user.fullname)").font(.title3).bold().padding(.bottom)
+                Button {
                     
-                    
-                    
-                    
+                    print(DataRepository.getUserByID(id: currentUserViewModel.user.id)!.toDictionary())
+                } label : {
+                    Text("Name: \(currentUserViewModel.user.fullname)")
+                    Text("print data")
+                }
+                
+                VStack() {
                     VStack {
 
                         Text("Reserved Events").font(.title2).bold()
                         
-                        ScrollView{
-                            EventListView(events: CurrentUserViewModel.shared.getReservedEvents())
-                        }.frame(maxHeight: 200)
+                        EventListView(events: CurrentUserViewModel.shared.getReservedEvents()).frame(minHeight: 100, maxHeight: 400)
+                        
+
                     }.padding(.bottom)
                     
                     
@@ -36,8 +39,9 @@ struct HomeView: View {
                         Text("Created Events").font(.title2).bold()
                         HorizontalEventGridView(events: CurrentUserViewModel.shared.getCreatedEvents())
                         
-                        Divider()
                     }.padding(.bottom)
+                    
+                    
                     
 
                     Spacer()
@@ -49,11 +53,12 @@ struct HomeView: View {
                                 .font(.headline)
                                 .foregroundColor(.purple)
                                 .frame(width: 150, height:40)
-                                .overlay(RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 3).foregroundColor(.red)
+                                .overlay(RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 3).foregroundColor(.purple)
                                 )
                         }
                         Spacer()
                     }.padding()
+                    
                     
                 }
                 
@@ -80,19 +85,22 @@ struct HomeView: View {
                         NavigationLink {
                             CurrentUserProfile().environmentObject(currentUserViewModel)
                         } label: {
-                            
-                            if let profileImageURL = currentUserViewModel.user.profileImageURL {
-                                Image(profileImageURL)
-                                    .resizable()
-                                    .frame(width: 40, height: 40)
-                                    .clipShape(Circle())
-                                    
-                            } else {
-                                Image(systemName: "person.circle")
-                                    .resizable()
-                                    .frame(width: 40, height: 40)
-                                    .clipShape(Circle())
+                            VStack {
+                                if let profileImageURL = currentUserViewModel.user.profileImageURL {
+                                    Image(profileImageURL)
+                                        .resizable()
+                                        .frame(width: 40, height: 40)
+                                        .clipShape(Circle())
+                                        
+                                } else {
+                                    Image(systemName: "person.circle")
+                                        .resizable()
+                                        .frame(width: 40, height: 40)
+                                        .clipShape(Circle())
+                                }
+                                Text(" \(currentUserViewModel.user.fullname)")
                             }
+
                         }
 
                         

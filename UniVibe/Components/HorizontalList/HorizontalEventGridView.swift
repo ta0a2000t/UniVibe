@@ -14,7 +14,10 @@ struct HorizontalEventGridView: View {
             ScrollView(.horizontal) {
                 LazyHGrid(rows: [GridItem()], spacing: 8) {
                     ForEach(events) { event in
-                        PastEventInGridView(event: event)
+                        if let eventBinding = DataRepository.getEventBindingByID(for: event.id) {
+                            PastEventInGridView(event: eventBinding)
+                        }
+                        
                     }
                 }.frame(height: 160).padding(.leading, 8)
             }

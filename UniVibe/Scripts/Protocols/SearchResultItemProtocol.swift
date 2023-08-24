@@ -11,4 +11,7 @@ protocol SearchResultItemProtocol {
     var fullname: String { get }
     var profileImageURL: String? { get }
     // Add other common properties if needed
+    
+    func getEventsCount() -> Int
+    
 }
