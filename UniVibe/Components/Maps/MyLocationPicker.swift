@@ -3,11 +3,11 @@ import MapKit
 
 struct MyLocationPicker: View {
     @State private var showSheet = false
-    @State private var coordinates = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
+    @Binding var coordinates : CLLocationCoordinate2D
     
     var body: some View {
         NavigationView {
-            ZStack(alignment: .top) {
+            ZStack(alignment: .bottom) {
 
                 MapWithPinView(coordinates: $coordinates)
                 
@@ -16,18 +16,17 @@ struct MyLocationPicker: View {
                 } label: {
                     HStack {
                             Image(systemName: "mappin.and.ellipse") // SF Symbol for location
-                                .font(.title2)
+                            
                                 .foregroundColor(.blue)
                             Text("Select Location")
-                            .font(.headline)
+                            .font(.body)
                             .foregroundColor(.blue)
                         }
                     .padding(.horizontal, 16)
                     .padding(.vertical, 12)
-                    .background(Color.green)
                     .cornerRadius(8)
                     
-                }.bold().padding().buttonStyle(GrowingButton(enabledColor: Color.green))
+                }.bold().buttonStyle(GrowingButton(enabledColor: Color.green.opacity(0.4)))
                 
             }
             .sheet(isPresented: $showSheet) {
@@ -125,7 +124,7 @@ struct Pin: Identifiable {
 
 struct MyLocationPicker_Previews: PreviewProvider {
     static var previews: some View {
-        MyLocationPicker()
+        MyLocationPicker(coordinates: .constant(CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)))
     }
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ChatView: View {
-    @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
+    @ObservedObject var currentUserViewModel = CurrentUserViewModel.shared
 
     var body: some View {
         

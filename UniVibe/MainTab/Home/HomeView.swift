@@ -7,20 +7,18 @@
 
 import SwiftUI
 
-struct HomeView: View {
-    @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
-    
+struct HomeView: View {    
     @State var showCreateEventView: Bool = false
     
-    
+    @ObservedObject var currentUserViewModel = CurrentUserViewModel.shared
     var body: some View {
         //NavigationView{
             VStack {
                 Button {
                     
-                    print(DataRepository.getUserByID(id: currentUserViewModel.user.id)!.toDictionary())
+                    print(DataRepository.getUserByID(id: CurrentUserViewModel.shared.user.id)!.toDictionary())
                 } label : {
-                    Text("Name: \(currentUserViewModel.user.fullname)")
+                    Text("Name: \(CurrentUserViewModel.shared.user.fullname)")
                     Text("print data")
                 }
                 
@@ -48,13 +46,8 @@ struct HomeView: View {
                     
                     HStack {
                         Spacer()
-                        NavigationLink(destination: CreateEventView(creatorID: currentUserViewModel.user.id, isCommunityEvent: false)) {
-                            Text("Create Event")
-                                .font(.headline)
-                                .foregroundColor(.purple)
-                                .frame(width: 150, height:40)
-                                .overlay(RoundedRectangle(cornerRadius: 20).stroke(lineWidth: 3).foregroundColor(.purple)
-                                )
+                        NavigationLink(destination: ChooseEventTypeView(userID: CurrentUserViewModel.shared.user.id)) {
+                            StylishCreateEventButton()
                         }
                         Spacer()
                     }.padding()
@@ -62,15 +55,7 @@ struct HomeView: View {
                     
                 }
                 
-                
-                
-                
-                
-                
-                
-                
-                
-                
+
                 
             }.frame(width: UIScreen.main.bounds.width)
             .navigationBarTitleDisplayMode(.inline)
@@ -83,7 +68,7 @@ struct HomeView: View {
 
                     ToolbarItem(placement: .navigationBarTrailing) {
                         NavigationLink {
-                            CurrentUserProfile().environmentObject(currentUserViewModel)
+                            CurrentUserProfile()
                         } label: {
                             VStack {
                                 if let profileImageURL = currentUserViewModel.user.profileImageURL {
@@ -113,6 +98,28 @@ struct HomeView: View {
         
     }
 }
+
+struct StylishCreateEventButton: View {
+    var body: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "plus")
+                .imageScale(.large)
+                .foregroundColor(Color.primary)
+            Text("Create Event")
+                .font(.headline)
+                .foregroundColor(Color.primary)
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 10)
+        .background(Color.secondary.opacity(0.2))
+        .cornerRadius(20)
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.primary, lineWidth: 2)
+        )
+    }
+}
+
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {

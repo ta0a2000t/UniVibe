@@ -29,20 +29,31 @@ struct MapWithPinView: View {
         _coordinates = coordinates
         _region = State(initialValue: MKCoordinateRegion(
             center: coordinates.wrappedValue,
-            span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
         ))
     }
     
     var body: some View {
         Map(coordinateRegion: $region, showsUserLocation: false, userTrackingMode: .none, annotationItems: [PinItem(coordinate: coordinates)]) { item in
-            MapMarker(coordinate: item.coordinate, tint: .blue)
+            MapMarker(coordinate: item.coordinate, tint: .red)
         }
         .edgesIgnoringSafeArea(.all)
         .onChange(of: EquatableCoordinate(coordinates)) { _ in
+            recenter()
+        }
+        .onAppear {
+            recenter()
+        }
+    }
+    
+    private func recenter() {
+        if region.center.latitude != coordinates.latitude || region.center.longitude != coordinates.longitude {
             region.center = coordinates
         }
     }
 }
+
+
 
 struct PinItem: Identifiable {
     let id = UUID()

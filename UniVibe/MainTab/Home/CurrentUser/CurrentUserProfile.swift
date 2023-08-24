@@ -16,7 +16,7 @@ struct CurrentUserProfile: View {
     @Environment (\.dismiss) var dismiss
     
     
-    @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
+    @ObservedObject var currentUserViewModel = CurrentUserViewModel.shared
 
     var body: some View {
         
@@ -74,9 +74,9 @@ struct CurrentUserProfile: View {
                 Divider()
                 ScrollView {
                     VStack{
-                        SectionAndSelectionsView(title: "Interests", selections: currentUserViewModel.user.interests).padding(.bottom)
+                        //SectionAndSelectionsView(title: "Interests", selections: currentUserViewModel.user.interests).padding(.bottom)
                         
-                        SectionAndSelectionsView(title: "Looking To", selections: currentUserViewModel.user.lookingTo)
+                        //SectionAndSelectionsView(title: "Looking To", selections: currentUserViewModel.user.lookingTo)
                         
                         VStack {
                             

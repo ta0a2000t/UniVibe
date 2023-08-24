@@ -10,7 +10,7 @@ import SwiftUI
 struct ChooseEventTypeView: View {
     // MARK: - Properties
     @Environment(\.presentationMode) private var presentationMode
-    let creatorID: String
+    let userID: String
     
     // MARK: - Body
     var body: some View {
@@ -29,7 +29,6 @@ struct ChooseEventTypeView: View {
             
             cancelButton
         }
-        .navigationBarHidden(true)
     }
 }
 
@@ -45,7 +44,7 @@ private extension ChooseEventTypeView {
     }
     
     var personalEventButton: some View {
-        NavigationLink(destination: CreateEventView(creatorID: creatorID, isCommunityEvent: false)) {
+        NavigationLink(destination: CreateEventView(creatorID: userID, isCommunityEvent: false)) {
             buttonLabel(text: "Personal Event", textColor: .white, backgroundColor: .purple)
         }
     }
@@ -84,7 +83,7 @@ private extension ChooseEventTypeView {
 struct ChooseEventTypeView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack{
-            ChooseEventTypeView(creatorID: "sampleUserID")
+            ChooseEventTypeView(userID: "sampleUserID")
         }
     }
 }

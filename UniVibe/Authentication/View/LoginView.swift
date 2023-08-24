@@ -35,7 +35,7 @@ struct LoginView: View {
                 // texts
                 VStack {
                     TextField("Enter your email", text: $validator.userEmail)
-                        .textInputAutocapitalization(.never)
+                        .textInputAutocapitalization(.never).keyboardType(.emailAddress)
                         .modifier(MyTextFieldModifier())
                     
                     SecureField("Enter your password", text: $validator.userPassword)

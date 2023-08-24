@@ -11,7 +11,7 @@ import SwiftUI
 struct FeedView: View {
     // don't want to be StateObject because that it keep FeedViewModel listeners On
     @ObservedObject var feedViewModel = FeedViewModel()
-    @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
+    @ObservedObject var currentUserViewModel = CurrentUserViewModel.shared
 
     var body: some View {
         VStack{

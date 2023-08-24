@@ -75,6 +75,11 @@
 		19B3C3422A8AFF1700BEFB0E /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B3C3412A8AFF1700BEFB0E /* UserProfileView.swift */; };
 		19B3C3452A8AFF4E00BEFB0E /* MyNavigationLinkModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B3C3442A8AFF4E00BEFB0E /* MyNavigationLinkModifier.swift */; };
 		19B3C3472A8B1C2000BEFB0E /* EventInListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B3C3462A8B1C2000BEFB0E /* EventInListView.swift */; };
+		19BC47D62A974A98001F65FE /* ColorUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BC47D52A974A98001F65FE /* ColorUtilities.swift */; };
+		19BC47DC2A975519001F65FE /* CreateCommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BC47DB2A975519001F65FE /* CreateCommunityView.swift */; };
+		19BC47DE2A975B0F001F65FE /* EditableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BC47DD2A975B0F001F65FE /* EditableImageView.swift */; };
+		19BC47E02A975E63001F65FE /* InterestSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BC47DF2A975E63001F65FE /* InterestSelectionView.swift */; };
+		19BC47E22A97A685001F65FE /* FakeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BC47E12A97A685001F65FE /* FakeTabView.swift */; };
 		19CC90DD2A91451100E98934 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CC90DC2A91451100E98934 /* LoginViewModel.swift */; };
 		19CC90DF2A914B7000E98934 /* SignUpView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CC90DE2A914B7000E98934 /* SignUpView3.swift */; };
 		19CC90E62A9158BE00E98934 /* SelectInterestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19CC90E52A9158BE00E98934 /* SelectInterestsView.swift */; };
@@ -161,6 +166,11 @@
 		19B3C3412A8AFF1700BEFB0E /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		19B3C3442A8AFF4E00BEFB0E /* MyNavigationLinkModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNavigationLinkModifier.swift; sourceTree = "<group>"; };
 		19B3C3462A8B1C2000BEFB0E /* EventInListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInListView.swift; sourceTree = "<group>"; };
+		19BC47D52A974A98001F65FE /* ColorUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtilities.swift; sourceTree = "<group>"; };
+		19BC47DB2A975519001F65FE /* CreateCommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCommunityView.swift; sourceTree = "<group>"; };
+		19BC47DD2A975B0F001F65FE /* EditableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableImageView.swift; sourceTree = "<group>"; };
+		19BC47DF2A975E63001F65FE /* InterestSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestSelectionView.swift; sourceTree = "<group>"; };
+		19BC47E12A97A685001F65FE /* FakeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeTabView.swift; sourceTree = "<group>"; };
 		19CC90DC2A91451100E98934 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		19CC90DE2A914B7000E98934 /* SignUpView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView3.swift; sourceTree = "<group>"; };
 		19CC90E52A9158BE00E98934 /* SelectInterestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectInterestsView.swift; sourceTree = "<group>"; };
@@ -247,9 +257,9 @@
 		19561A4C2A96F10C00F2877A /* EventCreation */ = {
 			isa = PBXGroup;
 			children = (
-				19D826282A8D5AFD0052AECA /* CreateEventView.swift */,
 				19561A4D2A96F13700F2877A /* ChooseEventTypeView.swift */,
 				19561A4F2A96F1C600F2877A /* ChooseOrganizationView.swift */,
+				19D826282A8D5AFD0052AECA /* CreateEventView.swift */,
 			);
 			path = EventCreation;
 			sourceTree = "<group>";
@@ -258,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				19613C572A91F70400280FDB /* MyDateFormaters.swift */,
+				19BC47D52A974A98001F65FE /* ColorUtilities.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -296,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				19613C6E2A94365200280FDB /* ListOfAttendeesView.swift */,
+				19BC47DF2A975E63001F65FE /* InterestSelectionView.swift */,
 			);
 			path = NavigatableLists;
 			sourceTree = "<group>";
@@ -418,6 +430,7 @@
 				19D8262A2A8E0D9B0052AECA /* CampusMap */,
 				19B3C30F2A8A9C6B00BEFB0E /* Feed */,
 				19B3C3132A8A9D0400BEFB0E /* Chat */,
+				19BC47E12A97A685001F65FE /* FakeTabView.swift */,
 			);
 			path = MainTab;
 			sourceTree = "<group>";
@@ -425,6 +438,7 @@
 		19B3C30E2A8A9C5100BEFB0E /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				19BC47DA2A975507001F65FE /* CommunityCreation */,
 				19B3C3172A8A9EBC00BEFB0E /* HomeView.swift */,
 				19561A4C2A96F10C00F2877A /* EventCreation */,
 				19B3C3352A8AD5CC00BEFB0E /* CurrentUser */,
@@ -532,6 +546,7 @@
 				192A8BBE2A8C8F48004F6302 /* TitleAndBodyView.swift */,
 				192A8BC02A8C9422004F6302 /* Community */,
 				192A8BB92A8C47F6004F6302 /* Event */,
+				19BC47DD2A975B0F001F65FE /* EditableImageView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -584,6 +599,14 @@
 				19CC90F92A919BB900E98934 /* ActivityIndicatorModifier.swift */,
 			);
 			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		19BC47DA2A975507001F65FE /* CommunityCreation */ = {
+			isa = PBXGroup;
+			children = (
+				19BC47DB2A975519001F65FE /* CreateCommunityView.swift */,
+			);
+			path = CommunityCreation;
 			sourceTree = "<group>";
 		};
 		19CC90E22A91585800E98934 /* PersonalizeProfileView */ = {
@@ -805,6 +828,7 @@
 				19A29BFC2A90822D0042D6A2 /* EventDataModel.swift in Sources */,
 				19613C642A941E5F00280FDB /* StyledScrollableFullScreenView.swift in Sources */,
 				192A8BB62A8C3CE2004F6302 /* CustomDenets.swift in Sources */,
+				19BC47D62A974A98001F65FE /* ColorUtilities.swift in Sources */,
 				19B3C3282A8AA48C00BEFB0E /* Event.swift in Sources */,
 				19CC90F12A91702B00E98934 /* LoginViewValidator.swift in Sources */,
 				19613C692A942A4600280FDB /* UserProfileViewModel.swift in Sources */,
@@ -823,9 +847,11 @@
 				192A8BB12A8C32C2004F6302 /* EventLocDetailsView.swift in Sources */,
 				19B3C3242A8AA46900BEFB0E /* Community.swift in Sources */,
 				19B3C30C2A8A9BC200BEFB0E /* MainTabView.swift in Sources */,
+				19BC47E02A975E63001F65FE /* InterestSelectionView.swift in Sources */,
 				19A29BF82A9071DC0042D6A2 /* UserDataModel.swift in Sources */,
 				19B3C3452A8AFF4E00BEFB0E /* MyNavigationLinkModifier.swift in Sources */,
 				192A8BAB2A8B5BE2004F6302 /* HorizontalEventGridView.swift in Sources */,
+				19BC47E22A97A685001F65FE /* FakeTabView.swift in Sources */,
 				19613C792A9491CF00280FDB /* ViewExtensions.swift in Sources */,
 				19B3C3392A8AF67E00BEFB0E /* CommunityInListView.swift in Sources */,
 				19D8262C2A8E0DA70052AECA /* CampusMapView.swift in Sources */,
@@ -834,6 +860,7 @@
 				192A8BBB2A8C4820004F6302 /* AttendeesDetailsView.swift in Sources */,
 				19B3C3312A8AD54300BEFB0E /* ProfileStatView.swift in Sources */,
 				19B3C3372A8AECD500BEFB0E /* SectionAndSelectionsView.swift in Sources */,
+				19BC47DE2A975B0F001F65FE /* EditableImageView.swift in Sources */,
 				19B3C3472A8B1C2000BEFB0E /* EventInListView.swift in Sources */,
 				19CC90FA2A919BB900E98934 /* ActivityIndicatorModifier.swift in Sources */,
 				19CC90E62A9158BE00E98934 /* SelectInterestsView.swift in Sources */,
@@ -852,6 +879,7 @@
 				19B3C31C2A8A9ED600BEFB0E /* FeedView.swift in Sources */,
 				19B3C31A2A8A9EC600BEFB0E /* ExploreView.swift in Sources */,
 				192A8BC22A8C957D004F6302 /* MembersDetailsView.swift in Sources */,
+				19BC47DC2A975519001F65FE /* CreateCommunityView.swift in Sources */,
 				19A29C102A90C8C70042D6A2 /* AuthService.swift in Sources */,
 				19B3C3262A8AA47100BEFB0E /* Post.swift in Sources */,
 				192A8BB82A8C4205004F6302 /* EventChatDetailsView.swift in Sources */,

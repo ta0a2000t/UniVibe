@@ -34,7 +34,7 @@ struct CommunityProfileView: View {
                     
                     TitleAndBodyView(title:"Description", textBody: community.description).padding(.horizontal).padding(.bottom)
                     
-                    SectionAndSelectionsView(title: "Topics", selections: community.interests).padding(.bottom)
+                    //SectionAndSelectionsView(title: "Topics", selections: community.interests).padding(.bottom)
                     
                     VStack(alignment: .leading) {
                         Text("Past Events").font(.title2).bold().padding(.leading)

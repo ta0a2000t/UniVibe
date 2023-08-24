@@ -23,7 +23,8 @@ struct CreateEventView: View {
     @Environment(\.dismiss) var dismiss
     @FocusState private var focusedField: Field?
     @State var selectedImagePickerItem: PhotosPickerItem?
-    @State private var currImage = Image(systemName: "figure.socialdance")
+    let defaultImage =  Image(systemName: "figure.socialdance")
+
     @State var showConfirmationAlert = false
     @State var showCreationSuccessAlert = false
     @State var showCreationFailedAlert = false
@@ -34,59 +35,16 @@ struct CreateEventView: View {
     @State var locationName = ""
     @State var locationDescription = ""
     @State var createdEvent: Event? = nil
-    
+    @State var coordinates = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
     @ObservedObject var maxAttendeesInput = NumbersOnly()
-    @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
     
+    @ObservedObject var currentUserViewModel = CurrentUserViewModel.shared
     
     var body: some View {
         
             ScrollView(.vertical){
                 VStack {
-                    PhotosPicker(selection: $selectedImagePickerItem) {
-                        VStack {
-                            currImage
-                                .resizable()
-                                .scaledToFit()
-                                .padding(30)
-                                .frame(height: 150)
-                                .clipShape(RoundedRectangle(cornerRadius: 25))
-                                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
-                                
-                                .overlay(
-                                    ZStack {
-                                        Circle()
-                                            .frame(width: 50, height: 50)
-                                            .foregroundColor(Color.blue.opacity(0.3))
-                                        Image(systemName: "pencil")
-                                            .font(.title2)
-                                            .foregroundColor(.blue)
-                                    }
-                                )
-                            
-                            
-                            Text("Tap to Edit Picture")
-                                .font(.footnote)
-                                .bold()
-                                .foregroundColor(.blue)
-                                .opacity(0.8)
-                                .shadow(radius: 3).padding(.top, -30)
-                            
-                        }
-                        
-                        
-                        
-                    }.onChange(of: selectedImagePickerItem) { newItem in
-                        Task {
-                            if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                                if let uiImage = UIImage(data: data) {
-                                    let image = Image(uiImage: uiImage)
-                                    currImage = image
-                                }
-                            }
-                            
-                        }
-                    }
+                    EditableImageView(selectedImagePickerItem: $selectedImagePickerItem, currImage: defaultImage)
                     
 
 
@@ -131,6 +89,8 @@ struct CreateEventView: View {
                             EditProfileRowView(title: "Name", placeholder: "Enter Location Name", text: $locationName).focused($focusedField, equals: .location_name)
                             EditProfileMultiLineView(title: "Description", placeholder: "Describe The Place", text: $locationDescription).focused($focusedField, equals: .location_desc)
                         }
+                        
+                        MyLocationPicker(coordinates: $coordinates).frame(height: 200).padding(.top)
 
                         
                     }.padding(.horizontal, 24)
@@ -143,7 +103,7 @@ struct CreateEventView: View {
                             createButtonClicked()
                         } label: {
                             Text("Create").bold()
-                        }.disabled(title.isEmpty || description.isEmpty || locationName.isEmpty || locationDescription.isEmpty).buttonStyle(GrowingButton(enabledColor: .green))
+                        }.disabled(title.isEmpty || description.isEmpty || locationName.isEmpty || locationDescription.isEmpty)//.buttonStyle(GrowingButton(enabledColor: .green))
                         
                     }
                     ToolbarItem(placement: .principal) {
@@ -190,15 +150,15 @@ struct CreateEventView: View {
             id: UUID().uuidString,
             creatorID:creatorID,
             creationDate: Date(),
-            isCommunityEvent: false, // Change this as needed
+            isCommunityEvent: isCommunityEvent,
             title: title,
             description: description,
             imageURL: imageURL,
             date: date,
             attendees: [],
             numberOfHours: numberOfHours,
-            latitude: 0.0, // Change this as needed
-            longitude: 0.0, // Change this as needed
+            latitude: coordinates.latitude,
+            longitude: coordinates.longitude,
             locationName: locationName,
             locationDescription: locationDescription,
             maxAttendeesCount: Int(maxAttendeesInput.value) ?? 1
@@ -271,7 +231,9 @@ struct GrowingButton: ButtonStyle {
 
 struct CreateEventView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateEventView(creatorID: "testUserID8776875", isCommunityEvent: true)
+        NavigationView {
+            CreateEventView(creatorID: "testUserID8776875", isCommunityEvent: true)
+        }
     }
 }
 

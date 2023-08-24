@@ -15,7 +15,6 @@ struct ExploreView: View {
     
     @StateObject var exploreViewModel = ExploreViewModel()
     
-    @EnvironmentObject var currentUserViewModel: CurrentUserViewModel
 
 
     var body: some View {
@@ -26,9 +25,9 @@ struct ExploreView: View {
                 VStack {
                     
                     Button {
-                        print(DataRepository.getUserByID(id: currentUserViewModel.user.id)!.toDictionary())
+                        print(DataRepository.getUserByID(id: CurrentUserViewModel.shared.user.id)!.toDictionary())
                     } label : {
-                        Text("Name: \(currentUserViewModel.user.fullname)")
+                        Text("Name: \(CurrentUserViewModel.shared.user.fullname)")
                         Text("print data")
                     }
                     
