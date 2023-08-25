@@ -18,8 +18,13 @@ final class DataRepository: ObservableObject {
     @Published var users = [User]()
     @Published var communities = [Community]()
 
+    private var interestsCategories: InterestsCategories?
+    private var goalsCategories: GoalsCategories?
+    
     init() {
         fetchData()
+        initInterestsCategories()
+        initGoalsCategories()
     }
     
     /* Usage:
@@ -113,4 +118,54 @@ final class DataRepository: ObservableObject {
             self.users = try await UserDataModel.fetchAll()
         }
     }
+    
+    
+    
+    private func initInterestsCategories() {
+        if let path = Bundle.main.path(forResource: "InterestsCategories", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let decoder = JSONDecoder()
+                let categories = try decoder.decode(InterestsCategories.self, from: data)
+                
+                // Use the categories object here
+                self.interestsCategories = categories
+            } catch {
+                print("Failed reading json file Error: \(error)")
+            }
+        }
+    }
+    
+    private func initGoalsCategories() {
+        if let path = Bundle.main.path(forResource: "GoalsCategories", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let decoder = JSONDecoder()
+                let categories = try decoder.decode(GoalsCategories.self, from: data)
+                
+                // Use the categories object here
+                self.goalsCategories = categories
+            } catch {
+                print("Failed reading json file Error: \(error)")
+            }
+        }
+    }
+    
+    func getInterestsCategories() -> InterestsCategories {
+        if let interestsCats = self.interestsCategories {
+            return interestsCats
+        } else {
+            return InterestsCategories()
+        }
+    }
+    
+    func getGoalsCategories() -> GoalsCategories {
+        if let goalsCats = self.goalsCategories {
+            return goalsCats
+        } else {
+            return GoalsCategories()
+        }
+    }
+    
+    
 }
