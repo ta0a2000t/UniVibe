@@ -21,16 +21,6 @@ struct ContentView: View {
             }
         }
         
-        /*.onAppear {
-            // Apply dark mode color scheme to the entire view hierarchy
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                if let window = windowScene.windows.first {
-                    window.rootViewController?.overrideUserInterfaceStyle = .dark
-                }
-            }
-        }
-         */
-        
     }
 }
 

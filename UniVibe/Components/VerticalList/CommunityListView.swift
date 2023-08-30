@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct CommunityListView: View {
-    let communities: [Community]
+    @Binding var communities: [Community]
     var body: some View {
-        
         
         LazyVStack(spacing:3) {
             ForEach(communities) { community in
@@ -31,7 +30,7 @@ struct CommunityListView: View {
 struct CommunityListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            CommunityListView(communities: Community.MOCK)
+            CommunityListView(communities: .constant(Community.MOCK))
         }
     }
 }

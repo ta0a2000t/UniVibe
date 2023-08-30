@@ -11,7 +11,7 @@ struct PastEventInGridView: View {
     @Binding var event : Event
     
     var body: some View {
-        NavigationLink(destination: EventProfileView(event: event, isCurrentUserAttending: CurrentUserViewModel.shared.isAttending(event: event))) {
+        NavigationLink(destination: EventProfileView(event: event)) {
             
             VStack(alignment: .leading) {
                 

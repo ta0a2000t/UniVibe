@@ -10,28 +10,38 @@ import SwiftUI
 
 struct FeedView: View {
     // don't want to be StateObject because that it keep FeedViewModel listeners On
-    @ObservedObject var feedViewModel = FeedViewModel()
+    @StateObject var feedViewModel = FeedViewModel()
     @ObservedObject var currentUserViewModel = CurrentUserViewModel.shared
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
+        
         VStack{
-            Button {
-                print(feedViewModel.getSortedEvents().count)
-            } label : {
-                Text("print events count")
-            }
             
             
+            List {
+                ForEach(feedViewModel.getSortedEvents()) { event in
+                    EventInListView(event: .constant(event))
+                        .listRowBackground(ColorUtilities.dynamicBackgroundColor(for: colorScheme).opacity(0.5))
+                }
+            }.listStyle(.plain).navigationTitle("Feed")
+                
+            
+            /*
             
             StyledScrollableFullScreenView(scrollViewContent:feedItemsView, title: "Feed")
-        }
+             
+             */
+        }.linearGradientBackground()
     }
     
     var feedItemsView: some View {
-        LazyVStack(spacing:3) {
+        
+        LazyVStack(spacing:24) {
             ForEach(feedViewModel.getSortedEvents()) { event in
                 if let eventBinding = DataRepository.getEventBindingByID(for: event.id) {
-                    EventInListView(event: eventBinding)
+                    EventInListView(event: eventBinding).padding(.horizontal)
+                    //EventCardView(event: event)
                 }
                 
                 

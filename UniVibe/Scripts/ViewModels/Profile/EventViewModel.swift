@@ -93,6 +93,10 @@ class EventViewModel: ObservableObject {
         }
     }
     
+    func isUserAttending(id: String) -> Bool {
+        return self.event.attendees.contains(id)
+    }
+    
     
     
     

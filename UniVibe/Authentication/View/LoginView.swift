@@ -21,7 +21,7 @@ struct LoginView: View {
     @State var navigationStackPath = NavigationPath()
 
     var body: some View {
-        NavigationStack(path: $navigationStackPath) {
+        NavigationStack {
             VStack {
                 Spacer()
                 
@@ -42,6 +42,7 @@ struct LoginView: View {
                         .modifier(MyTextFieldModifier())
                 }
                 
+
                 Button {
                     print("forgot password clicked")
                 } label : {
@@ -69,7 +70,7 @@ struct LoginView: View {
                 Spacer()
                 
                 NavigationLink {
-                    SignUpView1(navigationStackPath: $navigationStackPath)
+                    SignUpView1(navigationStackPath: $navigationStackPath).environmentObject(registrationViewModel)
                 } label: {
                     HStack(spacing: 3) {
                         Text("Don't have an account?")
@@ -77,7 +78,7 @@ struct LoginView: View {
                             .fontWeight(.semibold)
                         Image(systemName: "face.smiling")
                     }
-                }.padding(.bottom)
+                }.environmentObject(registrationViewModel).padding(.bottom)
                 
             }
         }.modifier(ActivityIndicatorModifier(isLoading: isLoading)).alert("Sign In Failed :(", isPresented: $showErrorAlert) {

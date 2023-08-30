@@ -32,7 +32,7 @@ import MapKit
 import Combine
 
 struct CampusMapView: View {
-    @ObservedObject var mapSettings = MapSettings()
+    @StateObject var mapSettings = MapSettings()
     @State var mapType = 0
     @State var selectedEvent: Event?
 
@@ -78,7 +78,7 @@ struct CampusMapView: View {
                             }.padding([.top, .leading, .trailing], 16)
                     }
                 }*/.sheet(item: $selectedEvent) { event in
-                    NavigationView{EventProfileView(event: event, isCurrentUserAttending: CurrentUserViewModel.shared.isAttending(event: event))}
+                    NavigationView{EventProfileView(event: event)}
                 }.linearGradientBackground()
     }
 }

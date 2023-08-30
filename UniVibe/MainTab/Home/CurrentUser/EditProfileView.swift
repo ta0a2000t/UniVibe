@@ -15,10 +15,26 @@ struct EditProfileView: View {
     @State var fullname: String = ""
     @State var bio: String = ""
     @State var selectedImage: PhotosPickerItem?
+    
+    @EnvironmentObject var homeViewModel : HomeViewModel
+
     var body: some View {
         
-            
+        NavigationView {
             VStack {
+                
+                NavigationLink {
+                    CreateEventView(creatorID: "dsfdfsfds", isCommunityEvent: true).environmentObject(homeViewModel)
+                    
+                    //Text("sdoifjiof")
+                } label: {
+                    Text("press")
+                }.padding(.bottom, 100)
+                
+
+                
+                
+                
                 HStack {
                     Button {
                         dismiss()
@@ -70,7 +86,7 @@ struct EditProfileView: View {
                 
             }
             
-            
+        }
         
     }
 }
@@ -124,7 +140,7 @@ struct EditProfileMultiLineView: View {
                     }
                 }
             }.cornerRadius(10)
-                .frame(minHeight: 50, maxHeight: 200)
+                .frame(minHeight: 100, maxHeight: 200)
                 .shadow(color: Color.gray.opacity(0.2), radius: 0, x: 1, y: 2)
 
         }

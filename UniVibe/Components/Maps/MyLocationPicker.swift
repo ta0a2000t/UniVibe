@@ -1,6 +1,7 @@
 import SwiftUI
 import MapKit
 
+@MainActor
 struct MyLocationPicker: View {
     @State private var showSheet = false
     @Binding var coordinates : CLLocationCoordinate2D

@@ -17,14 +17,22 @@ struct CreateCommunityView: View {
     @State var showConfirmationAlert = false
     @State var showCreationSuccessAlert = false
     @State var showCreationFailedAlert = false
-    
+    @State var isInterestSelectionViewPresented: Bool = false
+    @State var isInterestSelectionViewPresentedGoals: Bool = false
+
+    enum Field: Hashable {
+        case fullname, email, description
+    }
+
+    @FocusState private var focusedField: Field?
+
     @State var fullname = ""
     @State var email = ""
     @State var description = ""
     
     @State var interests : Set<String> = []
+    @State var goals : Set<String> = []
 
-    
     @ObservedObject var currentUserViewModel = CurrentUserViewModel.shared
     
     var body: some View {
@@ -41,29 +49,31 @@ struct CreateCommunityView: View {
                                     .padding(.top, 10)
                         ) {
                             EditProfileRowView(title: "Name", placeholder: "Enter Community Name", text: $fullname)
-                            
-                            
+                                .focused($focusedField, equals: .fullname)
+
                             EditProfileRowView(title: "Enter your email", placeholder: "Enter Community Email", text: $email)
-                                .textInputAutocapitalization(.never).keyboardType(.emailAddress)
-                            
+                                .textInputAutocapitalization(.never)
+                                .keyboardType(.emailAddress)
+                                .focused($focusedField, equals: .email)
+
                             EditProfileMultiLineView(title: "Description", placeholder: "Describe The Community", text: $description)
+                                .focused($focusedField, equals: .description)
                             
 
 
 
-                            
-                            
-                            SectionAndSelectionsView(
-                                title: "Interests",
-                                selections: Binding<[String]>(
-                                    get: { Array(self.interests) },
-                                    set: { self.interests = Set($0) }
+                            VStack{
+                                SectionAndSelectionsView(
+                                    title: "Interests",
+                                    selections: Binding<[String]>(
+                                        get: { Array(self.interests) },
+                                        set: { self.interests = Set($0) }
+                                    )
                                 )
-                            ).padding(.top, 50)
-                            
-                            NavigationLink(destination: InterestSelectionView(selectedInterests: $interests)) {
                                 
-
+                                Button(action: {
+                                    isInterestSelectionViewPresented.toggle()
+                                }) {
                                     HStack {
                                         Image(systemName: "plus.circle.fill")
                                             .imageScale(.large)
@@ -73,7 +83,43 @@ struct CreateCommunityView: View {
                                     .padding()
                                     .frame(width: 220, height: 60)
                                     .cornerRadius(15.0)
+                                    .foregroundColor(.blue)
+                                }
+                                .sheet(isPresented: $isInterestSelectionViewPresented) {
+                                    InterestSelectionView(title: "Interests", selectedInterests: $interests)
+                                }
+
+                                
+
+                                SectionAndSelectionsView(
+                                    title: "For Those Who Wanna",
+                                    selections: Binding<[String]>(
+                                        get: { Array(self.goals) },
+                                        set: { self.goals = Set($0) }
+                                    )
+                                ).padding(.top)
+                                
+                                Button(action: {
+                                    isInterestSelectionViewPresentedGoals.toggle()
+                                }) {
+                                    HStack {
+                                        Image(systemName: "plus.circle.fill")
+                                            .imageScale(.large)
+                                        Text("Select Goals")
+                                            .font(.headline)
+                                    }
+                                    .padding()
+                                    .frame(width: 220, height: 60)
+                                    .cornerRadius(15.0)
+                                    .foregroundColor(.blue)
+                                }
+                                .sheet(isPresented: $isInterestSelectionViewPresentedGoals) {
+                                    InterestSelectionView(title: "Goals", selectedInterests: $goals)
+                                }
+
+                                
                             }
+                            
 
                         
                         
@@ -101,8 +147,11 @@ struct CreateCommunityView: View {
                         }
                         
                     }
-                }
-                .alert("Community created successfully!", isPresented: $showCreationSuccessAlert) {
+                }.alert("Create Event?", isPresented: $showConfirmationAlert) {
+                    Button("cancel", role: .cancel) {}
+                    Button("Create") { confirmationAlertButtonClicked()}
+
+                }.alert("Community created successfully!", isPresented: $showCreationSuccessAlert) {
                     Button("OK") {communityCreationSuccessful()}
                 }
                 .alert("Community creation Failed :(", isPresented: $showCreationFailedAlert) {
@@ -113,18 +162,18 @@ struct CreateCommunityView: View {
     
     func createCommunity() -> Community {
         var imageURL: String? = nil
-        // The imageURL might be populated later, depending on your PhotosPicker implementation
         
         return Community(
             id: UUID().uuidString,
-            fullname: fullname, // Assuming `fullname` is available
-            description: description, // Assuming `description` is available
+            fullname: fullname,
+            description: description,
             profileImageURL: imageURL,
-            membersIDs: [], // Empty array, members can be added later
-            email: email, // Assuming `email` is available
-            organizerIDs: [currentUserViewModel.user.id], // Adding the creator as the first organizer
-            createdEventsIDs: [], // Empty array, events can be added later
-            interests: Array(interests) // The interests array can be populated through the UI
+            membersIDs: [currentUserViewModel.user.id],
+            email: email,
+            organizerIDs: [currentUserViewModel.user.id],
+            createdEventsIDs: [],
+            interests: Array(interests),
+            goals: Array(goals)
         )
     }
 
@@ -147,7 +196,7 @@ struct CreateCommunityView: View {
                 showCreationFailedAlert = true
             }
         }
-        currentUserViewModel.addCommunity(community: createdCommunity)
+        currentUserViewModel.addOrganizingCommunity(community: createdCommunity)
     }
 
     func communityCreationSuccessful() {

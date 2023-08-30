@@ -41,9 +41,9 @@ struct CurrentUserProfile: View {
                     
                     HStack(spacing: 23) {
                         
-                        ProfileStatView(value: currentUserViewModel.user.communitiesIDs.count, title: "Groups")
+                        ProfileStatView(value: currentUserViewModel.getJoinedCommunitiesCount(), title: "Groups")
                         Divider().frame(height: 40)
-                        ProfileStatView(value: currentUserViewModel.user.friendsIDs.count, title: "Friends")
+                        ProfileStatView(value: currentUserViewModel.getFriendsCount(), title: "Friends")
                         Divider().frame(height: 40)
                         ProfileStatView(value: currentUserViewModel.getEventsCount(), title: "Events")
                     }.padding(.trailing)
@@ -76,7 +76,7 @@ struct CurrentUserProfile: View {
                     VStack{
                         //SectionAndSelectionsView(title: "Interests", selections: currentUserViewModel.user.interests).padding(.bottom)
                         
-                        //SectionAndSelectionsView(title: "Looking To", selections: currentUserViewModel.user.lookingTo)
+                        //SectionAndSelectionsView(title: "Looking To", selections: currentUserViewModel.user.goals)
                         
                         VStack {
                             
@@ -89,7 +89,7 @@ struct CurrentUserProfile: View {
                         
                         VStack(alignment: .center) {
                             Text("Communities").font(.title2).bold()
-                            CommunityListView(communities: Community.MOCK)
+                            CommunityListView(communities: .constant(Community.MOCK))
                             
                             
                             

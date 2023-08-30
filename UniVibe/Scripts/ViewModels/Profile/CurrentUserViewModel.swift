@@ -19,9 +19,10 @@ class CurrentUserViewModel: ObservableObject {
     static let shared = CurrentUserViewModel()
     var userListener: ListenerRegistration? // Store the listener instance
     @Published var user: User
-    
+
     private init() {
         // Initialize currentUser here, assuming it's guaranteed to be non-nil
+        //user = User.MOCK_USERS[0]
         user = AuthService.shared.currentUser!
         setupListeners()
     }
@@ -60,15 +61,27 @@ class CurrentUserViewModel: ObservableObject {
         self.user.reservedEventsIDs.append(event.id)
     }
     
-    func addCommunity(community: Community) {
+    func addOrganizingCommunity(community: Community) {
         // upload to db
         Task{
-            await UserDataModel.appendItemToList(userID: self.user.id, propertyName: "communitiesIDs", item: community.id)
+            await UserDataModel.appendItemToList(userID: self.user.id, propertyName: "organizingCommunitiesIDs", item: community.id)
         }
         
         // update disk
-        self.user.communitiesIDs.append(community.id)
+        self.user.organizingCommunitiesIDs.append(community.id)
     }
+    
+    func addJoinedCommunity(community: Community) {
+        // upload to db
+        Task{
+            await UserDataModel.appendItemToList(userID: self.user.id, propertyName: "joinedCommunitiesIDs", item: community.id)
+        }
+        
+        // update disk
+        self.user.joinedCommunitiesIDs.append(community.id)
+    }
+    
+    
     
     
     
@@ -114,12 +127,12 @@ class CurrentUserViewModel: ObservableObject {
     }
     
     
-    func removeCommunity(community: Community) {
-        user.communitiesIDs.removeAll { $0 == community.id }
+    func removeJoinedCommunity(community: Community) {
+        user.joinedCommunitiesIDs.removeAll { $0 == community.id }
         
         // upload to db
         Task{
-            await UserDataModel.updateUserProperty(userID: user.id ,propertyName: "communitiesIDs",newValue: user.communitiesIDs)
+            await UserDataModel.updateUserProperty(userID: user.id ,propertyName: "joinedCommunitiesIDs",newValue: user.joinedCommunitiesIDs)
         }
         
     }
@@ -165,8 +178,12 @@ class CurrentUserViewModel: ObservableObject {
         return DataRepository.getEventsByIDs(ids: self.user.createdEventsIDs)
     }
     
-    func getCommunities() -> [Community] {
-        return DataRepository.getCommunitiesByIDs(ids: self.user.communitiesIDs)
+    func getJoinedCommunities() -> [Community] {
+        return DataRepository.getCommunitiesByIDs(ids: self.user.joinedCommunitiesIDs)
+    }
+    
+    func getOrganizingCommunities() -> [Community] {
+        return DataRepository.getCommunitiesByIDs(ids: self.user.organizingCommunitiesIDs)
     }
     
     func getFriends() -> [User] {
@@ -182,8 +199,8 @@ class CurrentUserViewModel: ObservableObject {
         return user.friendsIDs.count
     }
     
-    func getCommunitiesCount() -> Int {
-        return user.communitiesIDs.count
+    func getJoinedCommunitiesCount() -> Int {
+        return user.joinedCommunitiesIDs.count
     }
     
     

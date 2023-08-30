@@ -13,7 +13,7 @@ struct EventInListView: View {
     @Binding var event: Event
     
     var body: some View {
-        NavigationLink(destination: EventProfileView(event: event, isCurrentUserAttending: CurrentUserViewModel.shared.isAttending(event: event))) {
+        NavigationLink(destination: EventProfileView(event: event)) {
             
             HStack {
                 VStack(alignment: .leading) {
@@ -35,14 +35,14 @@ struct EventInListView: View {
                 Spacer()
                 
                 if let imageUrl = event.imageURL {
-                    Image(imageUrl).resizable().frame(width: 50, height: 50).clipShape(RoundedRectangle(cornerRadius: 10))
+                    Image(imageUrl).resizable().frame(width: 60, height: 60).clipShape(RoundedRectangle(cornerRadius: 10))
                 } else {
-                    Image(systemName:"figure.socialdance").resizable().frame(width: 50, height: 50).padding().background(.purple.opacity(0.2)).clipShape(RoundedRectangle(cornerRadius: 10))
+                    BlankEventPFPView().frame(width: 60, height: 60).clipShape(RoundedRectangle(cornerRadius: 10))
                 }
 
                 
             }.frame(height: 70)//.padding()//.background(.red.opacity(0.1))//.clipShape(RoundedRectangle(cornerRadius: 10))
-                .edgesIgnoringSafeArea(.all)
+                //.edgesIgnoringSafeArea(.horizontal)
             
         }
 

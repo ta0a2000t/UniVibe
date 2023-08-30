@@ -52,8 +52,12 @@ class UserViewModel: ObservableObject {
         return DataRepository.getEventsByIDs(ids: self.user.createdEventsIDs)
     }
     
-    func getCommunities() -> [Community] {
-        return DataRepository.getCommunitiesByIDs(ids: self.user.communitiesIDs)
+    func getJoinedCommunities() -> [Community] {
+        return DataRepository.getCommunitiesByIDs(ids: self.user.joinedCommunitiesIDs)
+    }
+    
+    func getOrganizingCommunities() -> [Community] {
+        return DataRepository.getCommunitiesByIDs(ids: self.user.organizingCommunitiesIDs)
     }
     
     func getFriends() -> [User] {
@@ -69,7 +73,11 @@ class UserViewModel: ObservableObject {
         return user.friendsIDs.count
     }
     
-    func getCommunitiesCount() -> Int {
-        return user.communitiesIDs.count
+    func getJoinedCommunitiesCount() -> Int {
+        return user.joinedCommunitiesIDs.count
+    }
+    
+    func getOrganizingCommunitiesCount() -> Int {
+        return user.organizingCommunitiesIDs.count
     }
 }

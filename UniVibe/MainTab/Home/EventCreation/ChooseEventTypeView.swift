@@ -10,11 +10,16 @@ import SwiftUI
 struct ChooseEventTypeView: View {
     // MARK: - Properties
     @Environment(\.presentationMode) private var presentationMode
+    
+    @EnvironmentObject var homeViewModel : HomeViewModel
+
     let userID: String
     
     // MARK: - Body
     var body: some View {
         VStack {
+
+            
             Spacer()
             
             titleSection
@@ -44,24 +49,25 @@ private extension ChooseEventTypeView {
     }
     
     var personalEventButton: some View {
-        NavigationLink(destination: CreateEventView(creatorID: userID, isCommunityEvent: false)) {
+        NavigationLink(destination: CreateEventView(creatorID: userID, isCommunityEvent: false).environmentObject(homeViewModel)) {
             buttonLabel(text: "Personal Event", textColor: .white, backgroundColor: .purple)
-        }
+        }.environmentObject(homeViewModel)
     }
     
     var organizationEventButton: some View {
-        NavigationLink(destination: ChooseOrganizationView()) {
+        NavigationLink(destination: ChooseOrganizationView().environmentObject(homeViewModel)) {
             buttonLabel(text: "Organization Event", textColor: .purple)
                 .overlay(
                     RoundedRectangle(cornerRadius: 25)
                         .stroke(lineWidth: 2)
                         .foregroundColor(.purple)
                 )
-        }
+        }.environmentObject(homeViewModel)
     }
     
     var cancelButton: some View {
         Button("Cancel") {
+            homeViewModel.isCreatingEvent = false
             presentationMode.wrappedValue.dismiss()
         }
         .foregroundColor(.purple)

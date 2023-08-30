@@ -15,12 +15,12 @@ class RegistrationViewModel: ObservableObject {
     @Published var bio: String = ""
     
     @Published var interests: [String] = []
-    @Published var lookingTo: [String] = []
+    @Published var goals: [String] = []
     
     @Published var createdEventsIDs: [String] = []
     @Published var reservedEventsIDs: [String] = []
     
-    @Published var communitiesIDs: [String] = []
+    @Published var joinedCommunitiesIDs: [String] = []
     @Published var friendsIDs: [String] = []
 
     
@@ -33,10 +33,10 @@ class RegistrationViewModel: ObservableObject {
             "fullname": fullname,
             "bio": bio,
             "interests": interests,
-            "lookingTo": lookingTo,
+            "goals": goals,
             "createdEventsIDs": createdEventsIDs,
             "reservedEventsIDs": reservedEventsIDs,
-            "communitiesIDs": communitiesIDs,
+            "joinedCommunitiesIDs": joinedCommunitiesIDs,
             "friendsIDs": friendsIDs
         ]
         
@@ -56,10 +56,10 @@ class RegistrationViewModel: ObservableObject {
         fullname = ""
         bio = ""
         interests = []
-        lookingTo = []
+        goals = []
         createdEventsIDs = []
         reservedEventsIDs = []
-        communitiesIDs = []
+        joinedCommunitiesIDs = []
         friendsIDs = []
     }
     

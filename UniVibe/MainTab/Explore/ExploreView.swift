@@ -14,7 +14,6 @@ struct ExploreView: View {
     @State private var selectedSearchTypeIdx : Int = 0
     
     @StateObject var exploreViewModel = ExploreViewModel()
-    
 
 
     var body: some View {

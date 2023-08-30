@@ -24,9 +24,9 @@ struct SectionAndSelectionsView: View {
 
                 if selections.isEmpty {
                     Spacer()
-                    Text("No items")
+                    Text("No items").padding(.top)
                         .foregroundColor(.gray)
-                    Image(systemName: "exclamationmark.circle")
+                    Image(systemName: "exclamationmark.circle").padding(.top)
                         .foregroundColor(.gray)
                     Spacer()
                     
@@ -42,7 +42,8 @@ struct SectionAndSelectionsView: View {
             }
             Spacer()
         }
-        .frame(height: totalHeight) // Set the height
+        .frame(height: totalHeight).padding(.top, 50).padding(.bottom, 30)
+// Set the height
     }
     
     private func generateContent(in g: GeometryProxy) -> some View {

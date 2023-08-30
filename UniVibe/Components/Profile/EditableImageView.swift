@@ -18,8 +18,8 @@ struct EditableImageView: View {
                 currImage
                     .resizable()
                     .scaledToFit()
-                    .padding(30)
-                    .frame(height: 150)
+                    .padding(5)
+                    .frame(height: 100)
                     .clipShape(RoundedRectangle(cornerRadius: 25))
                     .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 10)
                     
@@ -39,7 +39,7 @@ struct EditableImageView: View {
                     .bold()
                     .foregroundColor(.blue)
                     .opacity(0.8)
-                    .shadow(radius: 3).padding(.top, -30)
+                    .shadow(radius: 3).padding(.top, -2)
                 
             }
             

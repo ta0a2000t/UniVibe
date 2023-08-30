@@ -11,7 +11,14 @@ struct HomeView: View {
     @State var showCreateEventView: Bool = false
     
     @ObservedObject var currentUserViewModel = CurrentUserViewModel.shared
+    @StateObject var homeViewModel = HomeViewModel()
+    //@State var showChooseEventType = false
+    
     var body: some View {
+        mainBodyView
+    }
+    
+    var mainBodyView: some View {
         //NavigationView{
             VStack {
                 Button {
@@ -44,13 +51,34 @@ struct HomeView: View {
 
                     Spacer()
                     
-                    HStack {
-                        Spacer()
-                        NavigationLink(destination: ChooseEventTypeView(userID: CurrentUserViewModel.shared.user.id)) {
-                            StylishCreateEventButton()
+                    HStack(spacing: 30) {
+                        
+                        Button {
+                            homeViewModel.isCreatingEvent = true
+                        } label : {
+                            StylishAddButton(title: "Event")
+                            
+                        }.fullScreenCover(isPresented: $homeViewModel.isCreatingEvent) {
+                            NavigationView {
+                                ChooseEventTypeView(userID: CurrentUserViewModel.shared.user.id).environmentObject(homeViewModel)
+                            }
+
                         }
+                        
                         Spacer()
+                        
+                        NavigationLink {
+                            CreateCommunityView()
+                        } label: {
+                            StylishAddButton(title: "Community")
+                        }
+
+                        
+                        
                     }.padding()
+                    
+
+
                     
                     
                 }
@@ -91,21 +119,33 @@ struct HomeView: View {
                         
                         
                 }
+                    
             }.linearGradientBackground()
+            
 
             
         //}
-        
+    }
+    
+    func buttonLabel(text: String, textColor: Color, backgroundColor: Color = .clear) -> some View {
+        Text(text)
+            .font(.headline)
+            .foregroundColor(textColor)
+            .frame(width: 200, height: 50)
+            .background(backgroundColor)
+            .cornerRadius(25)
+            .padding()
     }
 }
 
-struct StylishCreateEventButton: View {
+struct StylishAddButton: View {
+    let title : String
     var body: some View {
         HStack(spacing: 8) {
             Image(systemName: "plus")
                 .imageScale(.large)
                 .foregroundColor(Color.primary)
-            Text("Create Event")
+            Text(title)
                 .font(.headline)
                 .foregroundColor(Color.primary)
         }
@@ -126,4 +166,11 @@ struct HomeView_Previews: PreviewProvider {
         //HomeView()
         EmptyView()
     }
+}
+
+
+class HomeViewModel: ObservableObject {
+    @Published var isCreatingEvent: Bool = false
+    
+    
 }

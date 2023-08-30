@@ -34,20 +34,21 @@ struct CreateEventView: View {
     @State var numberOfHours = 1
     @State var locationName = ""
     @State var locationDescription = ""
-    @State var createdEvent: Event? = nil
     @State var coordinates = CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194)
-    @ObservedObject var maxAttendeesInput = NumbersOnly()
+    @StateObject var maxAttendeesInput = NumbersOnly()
     
-    @ObservedObject var currentUserViewModel = CurrentUserViewModel.shared
+    var currentUserViewModel = CurrentUserViewModel.shared
     
+    @EnvironmentObject var homeViewModel : HomeViewModel
+
     var body: some View {
-        
+        NavigationView{
             ScrollView(.vertical){
                 VStack {
                     EditableImageView(selectedImagePickerItem: $selectedImagePickerItem, currImage: defaultImage)
                     
-
-
+                    
+                    
                     
                     VStack(alignment: .center, spacing: 20) {
                         Section(header: Text("Activity Info")
@@ -71,27 +72,27 @@ struct CreateEventView: View {
                                 Spacer()
                                 //TextField("Enter Count", value: $maxAttendeesCount, formatter: NumberFormatter())
                                 TextField("Enter Count", text: $maxAttendeesInput.value).modifier(MyTextFieldModifier(horizontalPadding: 0))
-                                    //.textFieldStyle(RoundedBorderTextFieldStyle())
+                                //.textFieldStyle(RoundedBorderTextFieldStyle())
                                     .focused($focusedField, equals: .activity_maxAttendeesCount).font(.callout).bold()
                                 
                             }
                         }
-
                         
-
-
+                        
+                        
+                        
                         Section(header: Text("Location Info")
                             .font(.title2)
                             .bold()
                             .padding(.top, 10)){
                                 
-                            //Text("Location Info").font(.title2).bold().padding(.top, 30)
-                            EditProfileRowView(title: "Name", placeholder: "Enter Location Name", text: $locationName).focused($focusedField, equals: .location_name)
-                            EditProfileMultiLineView(title: "Description", placeholder: "Describe The Place", text: $locationDescription).focused($focusedField, equals: .location_desc)
-                        }
+                                //Text("Location Info").font(.title2).bold().padding(.top, 30)
+                                EditProfileRowView(title: "Name", placeholder: "Enter Location Name", text: $locationName).focused($focusedField, equals: .location_name)
+                                EditProfileMultiLineView(title: "Description", placeholder: "Describe The Place", text: $locationDescription).focused($focusedField, equals: .location_desc)
+                            }
                         
                         MyLocationPicker(coordinates: $coordinates).frame(height: 200).padding(.top)
-
+                        
                         
                     }.padding(.horizontal, 24)
                     Spacer()
@@ -107,7 +108,7 @@ struct CreateEventView: View {
                         
                     }
                     ToolbarItem(placement: .principal) {
-
+                        
                         HStack {
                             Text("Create Event").bold()
                             Image(systemName: "square.and.pencil")
@@ -125,21 +126,21 @@ struct CreateEventView: View {
                 }.alert("Create Event?", isPresented: $showConfirmationAlert) {
                     Button("cancel", role: .cancel) {}
                     Button("Create") { confirmationAlertButtonClicked()}
-
+                    
                 }.alert("Event created successfully!", isPresented: $showCreationSuccessAlert) {
                     Button("OK") {eventCreationSuccessful()}
                 }.alert("Event creation Failed :(", isPresented: $showCreationFailedAlert) {
                     Button("OK") {eventCreationFailed()}
                 }
-
-                    
-            
-            
+                
+                
+                
+                
             }.linearGradientBackground()
-        
-        
-        
-        
+            
+            
+            
+        }
     }
     
     func createEvent() -> Event {
@@ -171,12 +172,13 @@ struct CreateEventView: View {
     
     
     func confirmationAlertButtonClicked() {
-        createdEvent = createEvent()
+        var createdEvent = createEvent()
         var success = false
         
         // asyncronous task
         Task {
-            success = await EventDataModel.addToDB(event: createdEvent!)
+            // add in cloud
+            success = await EventDataModel.addToDB(event: createdEvent)
 
             if (success) {
                 showCreationSuccessAlert = true
@@ -184,11 +186,21 @@ struct CreateEventView: View {
                 showCreationFailedAlert = true
             }
         }
-        currentUserViewModel.addCreatedEvent(event: createdEvent!)
+        
+        // is created by a community
+        if isCommunityEvent {
+            guard var community = DataRepository.getCommunityByID(id: creatorID) else {print("failed adding created event to community"); return}
+            var communityViewModel = CommunityViewModel(community: community)
+            communityViewModel.addCreatedEvent(event: createdEvent)
+        } else {
+            currentUserViewModel.addCreatedEvent(event: createdEvent)
+        }
     }
     
+    @MainActor
     func eventCreationSuccessful() {
-        dismiss()
+        homeViewModel.isCreatingEvent = false
+        //dismiss()
     }
     
     func eventCreationFailed() {

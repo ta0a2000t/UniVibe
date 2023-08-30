@@ -10,16 +10,26 @@ import SwiftUI
 struct InterestSelectionView: View {
     @Environment(\.colorScheme) private var colorScheme
 
-    let interestsCategories: MyCategories = DataRepository.shared.getGoalsCategories()
-    //DataRepository.shared.getInterestsCategories()
-
+    let myCategories: MyCategories
+    let title: String
 
     @State private var searchText: String = ""
     @Binding var selectedInterests: Set<String>
     
+    init(title: String, selectedInterests: Binding<Set<String>>) {
+        self._selectedInterests = selectedInterests
+        self.title = title
+        if title.lowercased() == "goals" {
+            self.myCategories = DataRepository.shared.getGoalsCategories()
+        } else {
+            self.myCategories = DataRepository.shared.getInterestsCategories()
+
+        }
+        
+    }
     
     var filteredInterests: [String] {
-        let allInterests = interestsCategories.allCategoriesCombined()
+        let allInterests = myCategories.allCategoriesCombined()
         return allInterests.filter {
             searchText.isEmpty || $0.localizedCaseInsensitiveContains(searchText)
         }
@@ -35,17 +45,17 @@ struct InterestSelectionView: View {
                     get: { Array(self.selectedInterests) },
                     set: { self.selectedInterests = Set($0) }
                 )
-            ).padding(.vertical, 50).padding(.horizontal, 24)
+            ).padding(.horizontal, 24).padding(.top, 24)
             
             
-            TextField("Search for interests", text: $searchText)
+            TextField("Search", text: $searchText)
                 .padding(8)
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(8)
                 .padding(.horizontal)
             
             List {
-                ForEach(interestsCategories.getCategoryNames().sorted(), id: \.self) { categoryTitle in
+                ForEach(myCategories.getCategoryNames().sorted(), id: \.self) { categoryTitle in
                     let interests = interestsFor(category: categoryTitle)
                     if !interests.isEmpty {
                         Section(header: Text(categoryTitle)) {
@@ -68,21 +78,16 @@ struct InterestSelectionView: View {
 
             }.listStyle(.plain)
             
-            .navigationBarTitle("Interests")
+            .navigationBarTitle(title)
 
             
         }.linearGradientBackground()
 
         
     }
-    /*
-    var filteredInterests: [String] {
-        predefinedInterests.filter { searchText.isEmpty ? true : $0.lowercased().contains(searchText.lowercased()) }
-    }
-    */
     
     private func interestsFor(category: String) -> [String] {
-        let categoryArray = interestsCategories.getCategoryArrayByName(name: category)
+        let categoryArray = myCategories.getCategoryArrayByName(name: category)
         
         if searchText.isEmpty {
             return categoryArray
@@ -105,7 +110,7 @@ struct InterestSelectionView: View {
 struct InterestSelectionView_Previews0: View {
     @State var lst : Set<String> = []
     var body: some View {
-            InterestSelectionView(selectedInterests: $lst)
+        InterestSelectionView(title: "Interests", selectedInterests: $lst)
         
     }
 }

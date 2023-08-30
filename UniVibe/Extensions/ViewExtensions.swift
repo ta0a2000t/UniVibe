@@ -28,7 +28,7 @@ struct LinearGradientBackground: ViewModifier {
     }
     
     var bottomColor: Color {
-        return Color.purple.opacity(0.7)
+        return Color.gray.opacity(0.7)
     }
     
     var titleColor: Color {

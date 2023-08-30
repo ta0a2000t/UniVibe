@@ -9,7 +9,8 @@ import SwiftUI
 
 struct PlainStyledListView: View {
     let items : [SearchResultItemProtocol]
-    
+    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         List(items, id: \.id) { item in
             
@@ -18,19 +19,19 @@ struct PlainStyledListView: View {
                     let communityBindingIndex = index // Capture the index in a separate variable
                     
                     SearchResultItemProtocolInList(item: Binding.constant(DataRepository.shared.communities[communityBindingIndex]))
-                        .listRowBackground(Color.green.opacity(0.1))
+                        .listRowBackground(ColorUtilities.dynamicBackgroundColor(for: colorScheme).opacity(0.5))
                 }
             } else if let user = item as? User {
                 if let index = DataRepository.shared.users.firstIndex(where: { $0.id == user.id }) {
                     let userBindingIndex = index // Capture the index in a separate variable
                     
                     SearchResultItemProtocolInList(item: Binding.constant(DataRepository.shared.users[userBindingIndex]))
-                        .listRowBackground(Color.gray.opacity(0.1))
+                        .listRowBackground(ColorUtilities.dynamicBackgroundColor(for: colorScheme).opacity(0.5))
                 }
             }
                
         }.listStyle(.plain)
-           
+            
             
     }
 }

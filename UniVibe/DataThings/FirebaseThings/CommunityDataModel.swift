@@ -68,6 +68,22 @@ class CommunityDataModel: ObservableObject {
         return Community(id: id, data: data)
     }
     
+    
+    static func listenForChangesByID(communityID: String, completion: @escaping (Community) -> Void) -> ListenerRegistration {
+        let communityListener = FirestoreManager.shared.db.collection("communities")
+            .document(communityID)
+            .addSnapshotListener { documentSnapshot, error in
+                if let document = documentSnapshot, document.exists {
+                    let data = document.data() ?? [:]
+                    let updatedCommunity = decodeObj(id: document.documentID, data: data)
+                    completion(updatedCommunity)
+                }
+            }
+        
+        return communityListener
+    }
+    
+    
     // Listen for changes to the communities collection
     static func listenForChanges(completion: @escaping ([Community]) -> Void) -> ListenerRegistration {
         let listener = FirestoreManager.shared.db.collection("communities")
@@ -87,5 +103,25 @@ class CommunityDataModel: ObservableObject {
         
         return listener
     }
+    
+    
+    static func updateCommunityProperty(communityID: String, propertyName: String, newValue: Any) async {
+        let communityRef = FirestoreManager.shared.db.collection("communities").document(communityID)
+        
+        do {
+            let document = try await communityRef.getDocument()
+            
+            if var data = document.data() {
+                data[propertyName] = newValue
+                
+                try await communityRef.setData(data)
+            }
+        } catch {
+            // Handle error
+            print("Error updating community property: \(error)")
+        }
+    }
+    
+    
     
 }

@@ -9,13 +9,16 @@ import SwiftUI
 import CoreLocation
 
 struct EventProfileView: View {
-    let event: Event
     @State var showLocationButtonSheet: Bool = false
     @Environment (\.dismiss) var dismiss
     
-    @State var isCurrentUserAttending: Bool
     @ObservedObject var currentUserViewModel = CurrentUserViewModel.shared
-    
+    @ObservedObject var eventViewModel : EventViewModel
+    @State var isCurrentUserAttending: Bool = false
+
+    init(event: Event) {
+        self.eventViewModel = EventViewModel(event: event)
+    }
     
     var body: some View {
         
@@ -24,7 +27,7 @@ struct EventProfileView: View {
             //Text("\(currentUserViewModel.user.fullname)")
             ScrollView{
                 VStack(alignment: .leading) {
-                    if let imageURL = event.imageURL {
+                    if let imageURL = eventViewModel.event.imageURL {
                         Image(imageURL).resizable().frame(width: UIScreen.main.bounds.width, height:200)
                             .padding(.horizontal)
                         
@@ -32,20 +35,20 @@ struct EventProfileView: View {
                         // nothing ?
                     }
                     
-                    Text(event.title).font(.title).bold().padding(.vertical).padding(.horizontal)
+                    Text(eventViewModel.event.title).font(.title).bold().padding(.vertical).padding(.horizontal)
                     
-                    EventDateDetailsView(date: event.date, numberOfHours: event.numberOfHours).padding(.horizontal)
+                    EventDateDetailsView(date: eventViewModel.event.date, numberOfHours: eventViewModel.event.numberOfHours).padding(.horizontal)
                     
                     Button {
                         
                         showLocationButtonSheet.toggle()
                     } label: {
-                        EventLocDetailsView(locationName: event.locationName, locationDescription: event.locationDescription).padding(.horizontal)
+                        EventLocDetailsView(locationName: eventViewModel.event.locationName, locationDescription: eventViewModel.event.locationDescription).padding(.horizontal)
                     }
                     
                     EventChatDetailsView().padding(.horizontal)
                     
-                    AttendeesDetailsView(event: event).padding(.horizontal)
+                    AttendeesDetailsView(event: eventViewModel.event).padding(.horizontal)
                     
                     HStack {
                         Spacer()
@@ -74,10 +77,10 @@ struct EventProfileView: View {
 
 
                     
-                    TitleAndBodyView(title:"Description", textBody: event.description).padding(.horizontal).padding(.vertical)
+                    TitleAndBodyView(title:"Description", textBody: eventViewModel.event.description).padding(.horizontal).padding(.vertical)
                     
                     VStack {
-                        MapWithPinView(coordinates: .constant(CLLocationCoordinate2D(latitude: event.latitude, longitude: event.longitude))).padding()
+                        MapWithPinView(coordinates: .constant(CLLocationCoordinate2D(latitude: eventViewModel.event.latitude, longitude: eventViewModel.event.longitude))).padding()
                             .frame(height: 250)
                     }
                     
@@ -90,7 +93,18 @@ struct EventProfileView: View {
             
             
             Spacer()
-            CommunityInListView(community: .constant(Community.MOCK[0]))
+            //
+            if eventViewModel.event.isCommunityEvent {
+                if let comm = eventViewModel.getCreatingCommunity() {
+                    CommunityInListView(community: .constant(comm))
+                }
+                
+            } else {
+                if let usr = eventViewModel.getCreatingUser() {
+                    UserInListView(user: .constant(usr))
+                }
+            }
+            
             
         }.linearGradientBackground()
         
@@ -103,12 +117,14 @@ struct EventProfileView: View {
             
         }
         .confirmationDialog("Go to Google Maps or copy link.", isPresented: $showLocationButtonSheet) {
-            Button("Open in Maps") { event.launchAppleMaps()}
+            Button("Open in Maps") { eventViewModel.event.launchAppleMaps()}
             Button("Copy Location Link") {
-                event.copyLocationToClipBoard()
+                eventViewModel.event.copyLocationToClipBoard()
             }
             
             Button("Cancel", role: .cancel) { }
+        }.onAppear{
+            self.isCurrentUserAttending = eventViewModel.isUserAttending(id: currentUserViewModel.user.id)
         }
         
     }
@@ -116,10 +132,16 @@ struct EventProfileView: View {
     
     func reserveButtonClicked() {
         if isCurrentUserAttending == false {
-            currentUserViewModel.addReservedEvent(event: event)
+            currentUserViewModel.addReservedEvent(event: eventViewModel.event)
+            eventViewModel.addAttendee(user: currentUserViewModel.user)
         } else {
-            currentUserViewModel.removeReservedEvent(event: event)
+            currentUserViewModel.removeReservedEvent(event: eventViewModel.event)
+            eventViewModel.removeAttendee(user: currentUserViewModel.user)
         }
+        
+        
+        
+        
     }
     
     
@@ -130,7 +152,7 @@ struct EventProfileView: View {
 
 struct EventProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EventProfileView(event: Event.MOCK[0], isCurrentUserAttending: false)
+        EventProfileView(event: Event.MOCK[0])
     }
 }
 

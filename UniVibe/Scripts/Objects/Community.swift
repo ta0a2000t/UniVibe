@@ -18,8 +18,9 @@ class Community: Identifiable, Codable , SearchResultItemProtocol{
     var createdEventsIDs: [String] // the IDs of events created by this community
     
     var interests: [String]
+    var goals: [String]
     
-    init(id: String, fullname: String, description: String, profileImageURL: String?, membersIDs: [String], email: String, organizerIDs: [String], createdEventsIDs: [String] = [], interests: [String]) {
+    init(id: String, fullname: String, description: String, profileImageURL: String?, membersIDs: [String], email: String, organizerIDs: [String], createdEventsIDs: [String] = [], interests: [String], goals: [String]) {
         self.id = id
         self.fullname = fullname
         self.description = description
@@ -29,6 +30,7 @@ class Community: Identifiable, Codable , SearchResultItemProtocol{
         self.organizerIDs = organizerIDs
         self.createdEventsIDs = createdEventsIDs
         self.interests = interests
+        self.goals = goals
     }
     
     init(id: String, data: [String: Any]) {
@@ -41,6 +43,7 @@ class Community: Identifiable, Codable , SearchResultItemProtocol{
         self.organizerIDs = data["organizerIDs"] as? [String] ?? []
         self.createdEventsIDs = data["createdEventsIDs"] as? [String] ?? []
         self.interests = data["interests"] as? [String] ?? []
+        self.goals = data["goals"] as? [String] ?? []
     }
 
     
@@ -89,9 +92,9 @@ extension Community {
                 print("Error decoding Community: \(error)")
             }
         }*/
-        result.append(Community(id: UUID().uuidString, fullname: "Music Lovers", description: "For those who love music.", profileImageURL: "zuckerberg", membersIDs: [UUID().uuidString, UUID().uuidString], email: "musiclovers@example.com", organizerIDs: [], interests: ["Board Games", "Card Games", "Fun Games", "Games"]))
-        result.append(Community(id: UUID().uuidString, fullname: "Music Lovers", description: "For those who love music.", profileImageURL: nil, membersIDs: [UUID().uuidString, UUID().uuidString], email: "musiclovers@example.com", organizerIDs: [], interests: ["Board Games", "Card Games", "Fun Games", "Games"]))
-        result.append(Community(id: UUID().uuidString, fullname: "Music Lovers", description: "For those who love music.", profileImageURL: nil, membersIDs: [UUID().uuidString, UUID().uuidString], email: "musiclovers@example.com", organizerIDs: [], interests: ["Board Games", "Card Games", "Fun Games", "Games"]))
+        result.append(Community(id: UUID().uuidString, fullname: "Music Lovers", description: "For those who love music.", profileImageURL: "zuckerberg", membersIDs: [UUID().uuidString, UUID().uuidString], email: "musiclovers@example.com", organizerIDs: [], interests: ["Board Games", "Card Games", "Fun Games", "Games"], goals: []))
+        result.append(Community(id: UUID().uuidString, fullname: "Music Lovers", description: "For those who love music.", profileImageURL: nil, membersIDs: [UUID().uuidString, UUID().uuidString], email: "musiclovers@example.com", organizerIDs: [], interests: ["Board Games", "Card Games", "Fun Games", "Games"], goals: []))
+        result.append(Community(id: UUID().uuidString, fullname: "Music Lovers", description: "For those who love music.", profileImageURL: nil, membersIDs: [UUID().uuidString, UUID().uuidString], email: "musiclovers@example.com", organizerIDs: [], interests: ["Board Games", "Card Games", "Fun Games", "Games"], goals: []))
 
         return result
     }

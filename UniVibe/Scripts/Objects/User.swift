@@ -18,11 +18,13 @@ class User: Identifiable, Codable, SearchResultItemProtocol {
     var createdEventsIDs: [String]
     var reservedEventsIDs: [String]
     var interests: [String]
-    var lookingTo: [String]
-    var communitiesIDs: [String]
+    var goals: [String]
+    var joinedCommunitiesIDs: [String]
     var friendsIDs: [String]
     
-    init(id: String, username: String, profileImageURL: String?, fullname: String, bio: String?, email: String, createdEventsIDs: [String], reservedEventsIDs: [String], interests: [String], lookingTo: [String], communitiesIDs: [String], friendsIDs: [String]) {
+    var organizingCommunitiesIDs: [String]
+    
+    init(id: String, username: String, profileImageURL: String?, fullname: String, bio: String?, email: String, createdEventsIDs: [String], reservedEventsIDs: [String], interests: [String], goals: [String], joinedCommunitiesIDs: [String], friendsIDs: [String], organizingCommunitiesIDs: [String]) {
         self.id = id
         self.username = username
         self.profileImageURL = profileImageURL
@@ -34,10 +36,14 @@ class User: Identifiable, Codable, SearchResultItemProtocol {
         self.reservedEventsIDs = reservedEventsIDs // events not created by the user, but the user signed up for.
         
         self.interests = interests
-        self.lookingTo = lookingTo
+        self.goals = goals
         
-        self.communitiesIDs = communitiesIDs
+        self.joinedCommunitiesIDs = joinedCommunitiesIDs
+        self.organizingCommunitiesIDs = organizingCommunitiesIDs
+        
         self.friendsIDs = friendsIDs
+        
+    
     }
     
     
@@ -51,8 +57,9 @@ class User: Identifiable, Codable, SearchResultItemProtocol {
         self.createdEventsIDs = data["createdEventsIDs"] as? [String] ?? []
         self.reservedEventsIDs = data["reservedEventsIDs"] as? [String] ?? []
         self.interests = data["interests"] as? [String] ?? []
-        self.lookingTo = data["lookingTo"] as? [String] ?? []
-        self.communitiesIDs = data["communitiesIDs"] as? [String] ?? []
+        self.goals = data["goals"] as? [String] ?? []
+        self.joinedCommunitiesIDs = data["joinedCommunitiesIDs"] as? [String] ?? []
+        self.organizingCommunitiesIDs = data["organizingCommunitiesIDs"] as? [String] ?? []
         self.friendsIDs = data["friendsIDs"] as? [String] ?? []
         
         //super.init() // Call the superclass designated initializer if needed
@@ -124,8 +131,8 @@ class User: Identifiable, Codable, SearchResultItemProtocol {
      
     
     static var MOCK_USERS: [User] = [
-        User(id: NSUUID().uuidString, username: "john_doe", profileImageURL: "zuckerberg", fullname: "John Doe", bio: "A music enthusiast", email: "john@example.com", createdEventsIDs: ["event1", "event2"], reservedEventsIDs: ["event3", "event4"], interests: ["outdoor", "swimming"], lookingTo: ["making friends"], communitiesIDs: [NSUUID().uuidString, NSUUID().uuidString, NSUUID().uuidString], friendsIDs: [NSUUID().uuidString, NSUUID().uuidString, NSUUID().uuidString]),
-        User(id: NSUUID().uuidString, username: "jane_doe2", profileImageURL: "zuckerberg", fullname: "Jane Doe2", bio: "An art lover", email: "jane@example.com", createdEventsIDs: ["event5", "event6"], reservedEventsIDs: ["event7", "event8"], interests: ["art", "painting"], lookingTo: ["finding study partners"], communitiesIDs: [NSUUID().uuidString, NSUUID().uuidString], friendsIDs: [NSUUID().uuidString])
+        User(id: NSUUID().uuidString, username: "john_doe", profileImageURL: "zuckerberg", fullname: "John Doe", bio: "A music enthusiast", email: "john@example.com", createdEventsIDs: ["event1", "event2"], reservedEventsIDs: ["event3", "event4"], interests: ["outdoor", "swimming"], goals: ["making friends"], joinedCommunitiesIDs: [], friendsIDs: [NSUUID().uuidString, NSUUID().uuidString, NSUUID().uuidString], organizingCommunitiesIDs: []),
+        User(id: NSUUID().uuidString, username: "jane_doe2", profileImageURL: "zuckerberg", fullname: "Jane Doe2", bio: "An art lover", email: "jane@example.com", createdEventsIDs: ["event5", "event6"], reservedEventsIDs: ["event7", "event8"], interests: ["art", "painting"], goals: ["finding study partners"], joinedCommunitiesIDs: [], friendsIDs: [NSUUID().uuidString], organizingCommunitiesIDs: [])
     ]
 }
 
@@ -140,46 +147,6 @@ extension User: Hashable{
         return lhs.id == rhs.id
     }
 
-}
-
-extension User {
-    static func initMock() -> [User] {
-        //var result: [User] = []
-        /*
-        for _ in 1...3 {
-            
-            let id = NSUUID().uuidString
-            let userJSON = """
-                {
-                        "id": "\(id)", "username": "zuck999", "profileImageURL": "zuckerberg", "fullname":"Mark Zuckerberg", "bio":"I am a hominoid lizard", "email":"zuckzuck@gmail.com"
-                }
-                """
-            
-            if let jsonData = userJSON.data(using: .utf8) {
-                do {
-                    let decoder = JSONDecoder()
-                    let user = try decoder.decode(User.self, from: jsonData)
-                    
-                    result.append(user)
-                    
-                } catch {
-                    print("Error decoding user: \(error)")
-                }
-            }
-            
-        }
-         */
-        
-        
-        //return result
-        return []
-    }
-
-    
-    
-    //initMock()
-    // .init(id: NSUUID().uuidString, username: "zuck999", profileImageURL: "zuckerberg", fullname:"Mark Zuckerberg", bio:"I am a hominoid lizard", email:"zuckzuck@gmail.com")
-    
 }
 
 
@@ -211,8 +178,9 @@ extension User {
         userDict["createdEventsIDs"] = createdEventsIDs
         userDict["reservedEventsIDs"] = reservedEventsIDs
         userDict["interests"] = interests
-        userDict["lookingTo"] = lookingTo
-        userDict["communitiesIDs"] = communitiesIDs
+        userDict["goals"] = goals
+        userDict["joinedCommunitiesIDs"] = joinedCommunitiesIDs
+        userDict["organizingCommunitiesIDs"] = organizingCommunitiesIDs
         userDict["friendsIDs"] = friendsIDs
         
         return userDict
